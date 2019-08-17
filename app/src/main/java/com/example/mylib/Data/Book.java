@@ -27,6 +27,10 @@ public class Book {
         this.short_description = short_description;
         this.image_url = image_url;
         this.readenByUser = readenByUser;
+
+        if(!this.readenByUser)
+            finish_date = new Date(0,0,0);
+        else
         finish_date = new Date(y,m,d);
     }
 
