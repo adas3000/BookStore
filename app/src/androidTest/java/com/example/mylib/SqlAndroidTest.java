@@ -7,6 +7,7 @@ import androidx.test.InstrumentationRegistry;
 import com.example.mylib.Data.Book;
 import com.example.mylib.sql.SqlManager;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -49,8 +50,10 @@ public class SqlAndroidTest {
         sqlManager.addBookToDb("Harry Potter","Rowling","Story of Big Wizard",
                 "drawable/photos/Harry1.png",1,2019,8,17 );
 
-
         ArrayList<Book> bookArrayList = sqlManager.getValues(false);
+
+        assertEquals(2,bookArrayList.size());
+
         //book 1
         assertEquals("Tolkien",bookArrayList.get(0).getAuthor());
         assertEquals("Hobbit",bookArrayList.get(0).getTitle());
@@ -66,11 +69,12 @@ public class SqlAndroidTest {
         assertEquals(2019,bookArrayList.get(1).getFinish_date().year);
         assertEquals(8,bookArrayList.get(1).getFinish_date().month);
         assertEquals(17,bookArrayList.get(1).getFinish_date().day);
-
-
     }
 
-
+    @After
+    public void deleteDb(){
+        context.deleteDatabase(SqlManager.getDbName());
+    }
 
 
 }

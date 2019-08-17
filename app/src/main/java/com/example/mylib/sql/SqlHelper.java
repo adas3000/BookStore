@@ -21,8 +21,9 @@ public class SqlHelper extends SQLiteOpenHelper {
 
     private static Map<String,String> columnMap = new TreeMap<>();
 
-    public static Map<String,String> getColumnMap(){return columnMap;}
-    public static String getTable_Name(){return table_Name;}
+    public static final Map<String,String> getColumnMap(){return columnMap;}
+    public static final String getTable_Name(){return table_Name;}
+    public static final String getDbName(){return Db_Name;}
 
 
     public SqlHelper(Context context){

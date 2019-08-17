@@ -69,7 +69,5 @@ public class SqlManager {
         db.insert(SqlHelper.getTable_Name(),null,contentValues);
     }
 
-
-
-
+    public static final String getDbName(){return SqlHelper.getDbName();}
 }
