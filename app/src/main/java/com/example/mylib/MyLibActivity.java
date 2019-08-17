@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ public class MyLibActivity extends AppCompatActivity {
     private ArrayList<TextView> book_title = new ArrayList<>();
     private ArrayList<TextView> book_author = new ArrayList<>();
     private ArrayList<TextView> book_description = new ArrayList<>();
-    private SqlManager sqlManager = new SqlManager(getApplicationContext());
+    private SqlManager sqlManager;
     private ArrayList<Book> bookArrayList;
 
     @Override
@@ -39,12 +40,8 @@ public class MyLibActivity extends AppCompatActivity {
             }
         });
 
+        sqlManager = new SqlManager(getApplicationContext());
         bookArrayList = sqlManager.getValues(false); // get all values
-
-
-        
-
-
 
 
 
