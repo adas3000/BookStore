@@ -2,6 +2,7 @@ package com.example.mylib;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,15 +33,6 @@ public class AllBooksFragment extends Fragment {
         context = getContext();
         sqlManager = new SqlManager(context);
         ArrayList<Book> bookArrayList = sqlManager.getValues(false);
-
-      /*  for(Book b : bookArrayList){
-            String title = b.getTitle();
-            String author = b.getAuthor();
-            TextView tv = new TextView(context);
-            tv.setTextSize(18);
-            tv.setText(author+"\n"+title);
-            tv_book.add(tv);
-        }*/
 
 
 

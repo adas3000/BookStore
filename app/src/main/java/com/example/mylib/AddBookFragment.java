@@ -33,6 +33,7 @@ public class AddBookFragment extends Fragment {
         confirm_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Toast.makeText(getContext(),"HI",Toast.LENGTH_LONG);
                 String author = editText_Author.getText().toString();
                 String title = editText_Title.getText().toString();
                 String desc = editText_desc.getText().toString();
@@ -42,10 +43,13 @@ public class AddBookFragment extends Fragment {
                     Toast.makeText(getContext(),"Fill all editTexts",Toast.LENGTH_SHORT);
                     return ;
                 }
-
                 SqlManager sqlManager = new SqlManager(getContext());
                 sqlManager.addBookToDb(title,author,desc,url,0,0,0,0);
                 Toast.makeText(getContext(),"Book added successfully",Toast.LENGTH_SHORT);
+                editText_Author.setText("");
+                editText_Title.setText("");
+                editText_desc.setText("");
+                editText_url.setText("");
             }
         });
 
@@ -53,7 +57,6 @@ public class AddBookFragment extends Fragment {
 
 
 
-        return inflater.inflate(R.layout.allbooks_activity,container,false);
+        return inflater.inflate(R.layout.addbook_activity,container,false);
     }
-
 }
