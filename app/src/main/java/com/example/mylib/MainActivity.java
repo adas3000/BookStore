@@ -88,6 +88,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_gallery:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AllBooksFragment()).commit();
                 break;
+            case R.id.nav_view:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new AddBookFragment()).commit();
+                break;
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

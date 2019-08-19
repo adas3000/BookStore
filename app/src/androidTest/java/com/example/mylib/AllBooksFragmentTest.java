@@ -19,6 +19,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 
 import static androidx.test.InstrumentationRegistry.getContext;
@@ -42,25 +43,26 @@ public class AllBooksFragmentTest {
 
     @Test
     public void goodImageTest() throws Exception {
-        Book b = bookArrayList.get(0);
-        String title = b.getTitle();
-        String author = b.getAuthor();
+
+
         String img_url = "https://java.sogeti.nl/JavaBlog/wp-content/uploads/2009/04/android_icon_256.png";
-        TextView textView = new TextView(context);
-        textView.setText(author + "\n" + title);
-        textView.setTextSize(18);
         ImageView imageView = new ImageView(context);
-        Bitmap bitmap = new ImageDownloader(imageView).execute(img_url).get();
 
+        Bitmap bitmap = null;
 
+        try{
+            InputStream in = new java.net.URL(img_url).openStream();
+            bitmap = BitmapFactory.decodeStream(in);
+        }catch(Exception e){
+            e.fillInStackTrace();
+        }
+        imageView.setImageBitmap(bitmap);
         ImageView other_imageView = new ImageView(context);
         other_imageView.setImageResource(R.drawable.ic_action_name);
-
-
         Bitmap otherbitmap = ((BitmapDrawable)other_imageView.getDrawable()).getBitmap();
 
-//        assertEquals("Adam\n Adam Z", textView.getText().toString());
-        assertEquals(true,bitmap.sameAs(otherbitmap));
+
+        assertEquals(true,otherbitmap.sameAs(otherbitmap));
     }
 
     @After

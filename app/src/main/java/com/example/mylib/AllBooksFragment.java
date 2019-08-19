@@ -40,15 +40,12 @@ public class AllBooksFragment extends Fragment {
         for(Book b : bookArrayList){
             String title = b.getTitle();
             String author = b.getAuthor();
-            String img_url = b.getImage_url();
-            TextView textView = new TextView(context);
-            textView.setText(author+"\n"+title);
-            textView.setTextSize(18);
-            tv_book.add(textView);
-            ImageView imageView = new ImageView(context);
-            new ImageDownloader(imageView).execute(img_url);
-            iv_book.add(imageView);
+            TextView tv = new TextView(context);
+            tv.setTextSize(18);
+            tv.setText(author+"\n"+title);
+            tv_book.add(tv);
         }
+
 
     }
 
