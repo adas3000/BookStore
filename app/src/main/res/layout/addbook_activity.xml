@@ -11,6 +11,7 @@
         android:layout_height="80dp"
         android:gravity="center"
         android:text="@string/newbook_text"
+        android:textColor="#000000"
         android:textSize="20sp" />
 
     <TextView
@@ -19,12 +20,13 @@
         android:layout_height="47dp"
         android:gravity="center"
         android:text="@string/author"
+        android:textColor="#000000"
         android:textSize="20sp" />
 
     <EditText
         android:id="@+id/editText_Author"
         android:layout_width="match_parent"
-        android:layout_height="71dp"
+        android:layout_height="55dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:textSize="20sp" />
@@ -32,15 +34,16 @@
     <TextView
         android:id="@+id/textView4"
         android:layout_width="match_parent"
-        android:layout_height="47dp"
+        android:layout_height="55dp"
         android:gravity="center"
         android:text="@string/title"
+        android:textColor="#000000"
         android:textSize="20sp" />
 
     <EditText
         android:id="@+id/editText_Title"
         android:layout_width="match_parent"
-        android:layout_height="71dp"
+        android:layout_height="55dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:textSize="20sp"
@@ -52,12 +55,13 @@
         android:layout_height="47dp"
         android:gravity="center"
         android:text="@string/short_desc"
+        android:textColor="#000000"
         android:textSize="20sp" />
 
     <EditText
         android:id="@+id/editText_desc"
         android:layout_width="match_parent"
-        android:layout_height="71dp"
+        android:layout_height="55dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:textSize="20sp"
@@ -69,12 +73,13 @@
         android:layout_height="47dp"
         android:gravity="center"
         android:text="@string/img_url"
+        android:textColor="#000000"
         android:textSize="20sp" />
 
     <EditText
         android:id="@+id/editText_url"
         android:layout_width="match_parent"
-        android:layout_height="71dp"
+        android:layout_height="55dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:textSize="20sp" />
