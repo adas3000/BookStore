@@ -1,11 +1,8 @@
 package com.example.mylib;
 
-import android.content.Intent;
 import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
-
-import android.util.Log;
 import android.view.View;
 import androidx.core.view.GravityCompat;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -85,9 +82,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-           //Start new Activity
-           // startActivity(new Intent(this,MyLibActivity.class));
-         //   getSupportFragmentManager().beginTransaction().replace(R.id.ac)
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new MessageFragment()).commit();
         } else if (id == R.id.nav_gallery) {
 
 
