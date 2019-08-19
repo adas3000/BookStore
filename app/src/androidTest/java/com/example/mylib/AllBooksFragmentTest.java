@@ -1,27 +1,22 @@
 package com.example.mylib;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.test.InstrumentationRegistry;
-
 import com.example.mylib.Data.Book;
 import com.example.mylib.Img.ImageDownloader;
 import com.example.mylib.sql.SqlManager;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.InputStream;
 import java.util.ArrayList;
-
-import static androidx.test.InstrumentationRegistry.getContext;
 import static org.junit.Assert.*;
 
 public class AllBooksFragmentTest {
@@ -29,6 +24,7 @@ public class AllBooksFragmentTest {
     private Context context;
     private ArrayList<Book> bookArrayList;
     private SqlManager sqlManager;
+    private Bitmap bitmap;
 
     @Before
     public void setup() {
@@ -50,16 +46,14 @@ public class AllBooksFragmentTest {
         textView.setText(author + "\n" + title);
         textView.setTextSize(18);
         ImageView imageView = new ImageView(context);
-        Bitmap bitmap = new ImageDownloader(imageView).execute(img_url).get();
+
+        new GetImageFromURL(imageView).execute(img_url);
 
 
         ImageView other_imageView = new ImageView(context);
         other_imageView.setImageResource(R.drawable.ic_action_name);
-
-
         Bitmap otherbitmap = ((BitmapDrawable)other_imageView.getDrawable()).getBitmap();
 
-//        assertEquals("Adam\n Adam Z", textView.getText().toString());
         assertEquals(true,bitmap.sameAs(otherbitmap));
     }
 
@@ -67,6 +61,37 @@ public class AllBooksFragmentTest {
     public void clear() {
         context.deleteDatabase(SqlManager.getDbName());
     }
+
+    public class GetImageFromURL extends AsyncTask<String,Void,Bitmap> {
+        ImageView imgV;
+
+        public GetImageFromURL(ImageView imgV){
+            this.imgV = imgV;
+        }
+
+        @Override
+        protected Bitmap doInBackground(String... strings) {
+            String url = strings[0];
+            bitmap = null;
+            try{
+                InputStream in = new java.net.URL(url).openStream();
+                bitmap = BitmapFactory.decodeStream(in);
+            }catch(Exception e){
+                e.fillInStackTrace();
+            }
+            return bitmap;
+        }
+
+        @Override
+        protected  void onPostExecute(Bitmap bitmap){
+            super.onPostExecute(bitmap);
+            imgV.setImageBitmap(bitmap);
+        }
+
+
+    }
+
+
 
 
 }
