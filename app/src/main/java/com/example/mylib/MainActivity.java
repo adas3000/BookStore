@@ -17,8 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,12 +35,17 @@ public class MainActivity extends AppCompatActivity
         });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
             this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
     }
+
+
+
 
     @Override
     public void onBackPressed() {
@@ -82,10 +86,13 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_home) {
            //Start new Activity
-            startActivity(new Intent(this,MyLibActivity.class));
+           // startActivity(new Intent(this,MyLibActivity.class));
+         //   getSupportFragmentManager().beginTransaction().replace(R.id.ac)
         } else if (id == R.id.nav_gallery) {
 
+
         }
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
