@@ -15,4 +15,11 @@
     <string name="menu_send">Send</string>
     <string name="title_activity_mylib_activity">mylib_activity</string>
     <string name="title_activity_mylib">activity_mylib</string>
+
+    <string name="newbook_text">Adding new book to library.</string>
+    <string name="title">Title:</string>
+    <string name="author">Author:</string>
+    <string name="short_desc">Description:</string>
+    <string name="img_url">Image url:(for example qwe.com/photo.png)</string>
+
 </resources>

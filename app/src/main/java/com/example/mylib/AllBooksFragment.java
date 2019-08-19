@@ -28,26 +28,27 @@ public class AllBooksFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.allbooks_activity,container,false);
-    }
 
-
-    public AllBooksFragment(){
         context = getContext();
         sqlManager = new SqlManager(context);
         ArrayList<Book> bookArrayList = sqlManager.getValues(false);
 
-        for(Book b : bookArrayList){
+      /*  for(Book b : bookArrayList){
             String title = b.getTitle();
             String author = b.getAuthor();
             TextView tv = new TextView(context);
             tv.setTextSize(18);
             tv.setText(author+"\n"+title);
             tv_book.add(tv);
-        }
+        }*/
 
 
+
+
+
+        return inflater.inflate(R.layout.allbooks_activity,container,false);
     }
+
 
 
 
