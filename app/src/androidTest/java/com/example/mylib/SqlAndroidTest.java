@@ -1,6 +1,8 @@
 package com.example.mylib;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 
 import androidx.test.InstrumentationRegistry;
 
@@ -32,9 +34,13 @@ public class SqlAndroidTest {
 
     @Test
     public void sqlTest(){
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        Bitmap bmp = BitmapFactory.decodeFile("@drawable/", options);
+
 
         sqlManager.addBookToDb("Hobbit","Tolkien","Two hobbits went somewhere",
-              "drawable/photos/Hobbit1.png",0,2013,10,15 );
+              bmp,0,2013,10,15 );
 
         ArrayList<Book> bookArrayList = sqlManager.getValues(true);
         assertEquals(0,bookArrayList.size());
@@ -45,10 +51,14 @@ public class SqlAndroidTest {
 
     @Test
     public void areValuesGoodTest(){
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        Bitmap bmp = BitmapFactory.decodeFile("@drawable/", options);
+
         sqlManager.addBookToDb("Hobbit","Tolkien","Two hobbits went somewhere",
-                "drawable/photos/Hobbit1.png",0,2013,10,15 );
+                bmp,0,2013,10,15 );
         sqlManager.addBookToDb("Harry Potter","Rowling","Story of Big Wizard",
-                "drawable/photos/Harry1.png",1,2019,8,17 );
+                bmp,1,2019,8,17 );
 
         ArrayList<Book> bookArrayList = sqlManager.getValues(false);
 

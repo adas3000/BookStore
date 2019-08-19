@@ -1,5 +1,7 @@
 package com.example.mylib.Data;
 
+import android.graphics.Bitmap;
+
 public class Book {
 
     public Date getFinish_date() {
@@ -16,16 +18,17 @@ public class Book {
     }
 
 
-   private String title,author,short_description,image_url;
+   private String title,author,short_description;
+   private Bitmap img;
    private boolean readenByUser;
    private Date finish_date;
 
-    public Book(String title,String author,String short_description,String image_url,
+    public Book(String title,String author,String short_description,Bitmap img,
                 boolean readenByUser,int y,int m,int d){
         this.title = title;
         this.author = author;
         this.short_description = short_description;
-        this.image_url = image_url;
+        this.img = img;
         this.readenByUser = readenByUser;
 
         if(!this.readenByUser)
@@ -47,8 +50,8 @@ public class Book {
         return short_description;
     }
 
-    public String getImage_url() {
-        return image_url;
+    public Bitmap getImage_url() {
+        return img;
     }
 
     public boolean isReadenByUser() {

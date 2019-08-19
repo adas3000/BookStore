@@ -42,7 +42,7 @@ public class SqlHelper extends SQLiteOpenHelper {
                 "    author Text,\n" +
                 "    title Text,\n" +
                 "    short_description Text,\n" +
-                "    image_url Text,\n" +
+                "    image_url Blob,\n" +
                 "    readen INTEGER,"+
                 "year INTEGER,"+
                 "month INTEGER,"+

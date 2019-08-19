@@ -4,8 +4,13 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import com.example.mylib.Data.Book;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 
+import com.example.mylib.Data.Book;
+import com.example.mylib.sql.HandleBitmap.BitmapHelper;
+
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -33,7 +38,9 @@ public class SqlManager {
                 String title = cursor.getString(cursor.getColumnIndex(kav.get("title")));
                 String author = cursor.getString(cursor.getColumnIndex(kav.get("author")));
                 String short_desc = cursor.getString(cursor.getColumnIndex(kav.get("short_description")));
-                String image_url = cursor.getString(cursor.getColumnIndex(kav.get("image_url")));
+              //  String image_url = cursor.getString(cursor.getColumnIndex(kav.get("image_url")));
+                byte [] image_url = cursor.getBlob(cursor.getColumnIndex("image_url"));
+                Bitmap img = BitmapFactory.decodeByteArray(image_url,0,image_url.length);
                 int temp_year = cursor.getInt(cursor.getColumnIndex(kav.get("year")));
                 int temp_month = cursor.getInt(cursor.getColumnIndex(kav.get("month")));
                 int temp_day = cursor.getInt(cursor.getColumnIndex(kav.get("day")));
@@ -42,15 +49,19 @@ public class SqlManager {
 
                 if(!_readen && getReadenValues) continue;
 
-                Book book = new Book(title,author,short_desc,image_url,_readen,temp_year,temp_month,temp_day);
+                Book book = new Book(title,author,short_desc,img,_readen,temp_year,temp_month,temp_day);
                 bookArrayList.add(book);
             }while(cursor.moveToNext());
         }
         return bookArrayList;
     }
 
-    public void addBookToDb(String title,String author,String short_desc,String image_url,int readen,
-                            int y,int m,int d){
+    public void addBookToDb(String title, String author, String short_desc, Bitmap image_url, int readen,
+                            int y, int m, int d){
+
+
+        byte [] img_data = BitmapHelper.getBitmapAsByteArray(image_url);
+
 
         SQLiteDatabase db = sqlHelper.getWritableDatabase();
 
@@ -60,7 +71,7 @@ public class SqlManager {
         contentValues.put(kav.get("title"),title);
         contentValues.put(kav.get("author"),author);
         contentValues.put(kav.get("short_description"),short_desc);
-        contentValues.put(kav.get("image_url"),image_url);
+        contentValues.put(kav.get("image_url"),img_data);
         contentValues.put(kav.get("readen"),readen);
         contentValues.put(kav.get("year"),y);
         contentValues.put(kav.get("month"),m);
