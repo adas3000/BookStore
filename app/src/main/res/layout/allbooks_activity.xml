@@ -28,6 +28,40 @@
             android:orientation="vertical" />
     </ScrollView>
 
+    <TextView
+        android:id="@+id/textView_Book"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_width="412dp"
+        android:layout_height="82dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="50dp"
+        android:textSize="18sp" />
+
+    <ImageView
+        android:id="@+id/imageView_Book"
+        android:layout_width="228dp"
+        android:layout_height="226dp"
+        android:layout_below="@+id/textView_Book"
+        android:layout_alignStart="@+id/textView_Book"
+        android:layout_alignLeft="@+id/textView_Book"
+        android:layout_alignEnd="@+id/textView_Book"
+        android:layout_alignRight="@+id/textView_Book"
+        android:layout_marginStart="89dp"
+        android:layout_marginLeft="89dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="94dp"
+        android:layout_marginRight="94dp"
+        tools:srcCompat="@tools:sample/avatars" />
+
+
 </RelativeLayout>
 
 
