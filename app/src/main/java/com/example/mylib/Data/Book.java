@@ -6,7 +6,7 @@ public class Book {
         return finish_date;
     }
 
-    public class Date{
+    static class Date{
         public Date(int y,int m,int d){
             year = y;
             month = m;
@@ -14,6 +14,33 @@ public class Book {
         }
         public int year,month,day;
     }
+
+    public static class Builder{
+
+        private final String title;
+        private final String author;
+        private final String short_description;
+        private final String img_url;
+
+        private Date date = new Date(0,0,0);
+        private boolean readenByUser = false;
+
+        public Builder(String title,String author,String short_description,String img_url){
+            this.title = title;
+            this.author = author;
+            this.short_description = short_description;
+            this.img_url = img_url;
+        }
+        public Builder date(int y,int m,int d){this.date = new Date(y,m,d);return this;}
+        public Builder readenByUser(boolean b){readenByUser = b;return this;}
+
+        public Book build(){
+            return new Book(this);
+        }
+
+
+    }
+
 
 
    private String title,author,short_description,image_url;
@@ -27,13 +54,16 @@ public class Book {
         this.short_description = short_description;
         this.image_url = image_url;
         this.readenByUser = readenByUser;
-
-        if(!this.readenByUser)
-            finish_date = new Date(0,0,0);
-        else
-        finish_date = new Date(y,m,d);
     }
 
+    private Book(Builder builder){
+        title = builder.title;
+        author = builder.author;
+        short_description = builder.short_description;
+        image_url = builder.img_url;
+        finish_date = builder.date;
+        readenByUser = builder.readenByUser;
+    }
 
     public String getTitle() {
         return title;

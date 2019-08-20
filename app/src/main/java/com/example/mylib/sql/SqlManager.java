@@ -40,9 +40,10 @@ public class SqlManager {
                 int readen = cursor.getInt(cursor.getColumnIndex(kav.get("readen")));
                 boolean  _readen = readen > 0 ? true : false;
 
-                if(!_readen && getReadenValues) continue;
 
-                Book book = new Book(title,author,short_desc,image_url,_readen,temp_year,temp_month,temp_day);
+                Book book = new Book.Builder(title,author,short_desc,image_url).readenByUser(_readen).
+                        date(temp_year,temp_month,temp_day).build();
+
                 bookArrayList.add(book);
             }while(cursor.moveToNext());
         }
