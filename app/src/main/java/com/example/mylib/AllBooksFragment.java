@@ -28,16 +28,11 @@ public class AllBooksFragment extends Fragment {
         context = getContext();
         sqlManager = new SqlManager(context);
         ArrayList<Book> bookArrayList = sqlManager.getValues(false);
-
-       // Picasso.with(getContext()).load(URL).into(imageView);
         RelativeLayout MainRL = view.findViewById(R.id.relative_layoutinsidescrollview);
+       // TextAndImageViewHelper.LoadStringAndImages(bookArrayList,MainRL,getContext());
+        new TextAndImageViewHelper().LoadStringAndImages(bookArrayList,MainRL,getContext());
 
-        TextAndImageViewHelper.LoadStringAndImages(bookArrayList,MainRL,getContext());
-
-
-
-
-
+        
         return view;
     }
 }
