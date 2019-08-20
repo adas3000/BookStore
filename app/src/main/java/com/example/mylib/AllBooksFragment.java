@@ -18,6 +18,7 @@ public class AllBooksFragment extends Fragment {
 
     private Context context;
     private SqlManager sqlManager;
+    private boolean onlyReaden = false;
 
     @Nullable
     @Override
@@ -31,12 +32,13 @@ public class AllBooksFragment extends Fragment {
         RelativeLayout MainRL = view.findViewById(R.id.relative_layoutinsidescrollview);
       //  new TextAndImageViewHelper().LoadStringAndImages(bookArrayList,MainRL,getContext());
 
-        boolean onlyReaden = false;
-        if(getResources().getString(R.string.onlyreadenVariable)=="onlyReaden") onlyReaden = true;
+
 
         new TextAndImageViewHelper.Builder(bookArrayList,MainRL,getContext()).onlyReaden(onlyReaden).build().LoadStringAndImages();
 
         return view;
     }
+
+    public void setOnlyReaden(boolean b){onlyReaden = b;}
 }
 
