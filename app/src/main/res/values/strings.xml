@@ -21,5 +21,4 @@
     <string name="author">Author:</string>
     <string name="short_desc">Description:</string>
     <string name="img_url">Image url:(for example qwe.com/photo.png)</string>
-
 </resources>

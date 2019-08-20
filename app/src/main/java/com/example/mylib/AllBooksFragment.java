@@ -29,10 +29,13 @@ public class AllBooksFragment extends Fragment {
         sqlManager = new SqlManager(context);
         ArrayList<Book> bookArrayList = sqlManager.getValues(false);
         RelativeLayout MainRL = view.findViewById(R.id.relative_layoutinsidescrollview);
-       // TextAndImageViewHelper.LoadStringAndImages(bookArrayList,MainRL,getContext());
-        new TextAndImageViewHelper().LoadStringAndImages(bookArrayList,MainRL,getContext());
+      //  new TextAndImageViewHelper().LoadStringAndImages(bookArrayList,MainRL,getContext());
 
-        
+        boolean onlyReaden = false;
+        if(getResources().getString(R.string.onlyreadenVariable)=="onlyReaden") onlyReaden = true;
+
+        new TextAndImageViewHelper.Builder(bookArrayList,MainRL,getContext()).onlyReaden(onlyReaden).build().LoadStringAndImages();
+
         return view;
     }
 }
