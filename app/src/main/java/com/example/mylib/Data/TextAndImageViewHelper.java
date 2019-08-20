@@ -8,7 +8,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.example.mylib.R;
 import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 public class TextAndImageViewHelper {
@@ -16,8 +19,11 @@ public class TextAndImageViewHelper {
 
     public static void LoadStringAndImages(ArrayList<Book> bookArrayList, RelativeLayout MainRL, Context context) {
 
-        String URL = "https://image.ceneostatic.pl/data/products/9367217/49f352e8-fe40-4a0a-b2c5-f38ba07d1d3d_i-harry-potter-i-komnata-tajemnic-harry-potter-and-the-chamber-of-secrets-3dvd.jpg";
+        //String URL = "https://image.ceneostatic.pl/data/products/9367217/49f352e8-fe40-4a0a-b2c5-f38ba07d1d3d_i-harry-potter-i-komnata-tajemnic-harry-potter-and-the-chamber-of-secrets-3dvd.jpg";
 
+        final int image_widthDP = 800;
+        final int image_heightDP = 500;
+        int marginTop = 100;
 
         for (Book b : bookArrayList) {
             TextView text = new TextView(context);
@@ -27,23 +33,24 @@ public class TextAndImageViewHelper {
 
             RelativeLayout.LayoutParams rll = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
                     RelativeLayout.LayoutParams.WRAP_CONTENT);
-            rll.setMargins(0, 100, 0, 0);
-
+            rll.setMargins(0, marginTop, 0, 0);
+            marginTop += 100;
             text.setLayoutParams(rll);
 
             rll = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
                     RelativeLayout.LayoutParams.MATCH_PARENT);
 
-            rll.setMargins(0,200,0,0);
-            rll.height = 500;
-            rll.width = 600;
+            rll.setMargins(0, marginTop, 0, 0);
+            rll.height = image_heightDP;
+            rll.width = image_widthDP;
 
             ImageView imageView = new ImageView(context);
-            rll.setMargins(0, 200+RelativeLayout.LayoutParams.WRAP_CONTENT, 0, 0);
+            rll.setMargins(0, marginTop + RelativeLayout.LayoutParams.WRAP_CONTENT, 0, 0);
             imageView.setLayoutParams(rll);
 
+            marginTop += image_heightDP;
 
-            Picasso.with(context).load(URL).into(imageView);
+            Picasso.with(context).load(b.getImage_url()).placeholder(R.mipmap.ic_launcher).into(imageView);
             MainRL.addView(text);
             MainRL.addView(imageView);
         }

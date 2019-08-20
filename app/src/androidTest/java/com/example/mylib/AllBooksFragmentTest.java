@@ -1,28 +1,18 @@
 package com.example.mylib;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
-import android.widget.TextView;
-
 import androidx.test.InstrumentationRegistry;
-
 import com.example.mylib.Data.Book;
-import com.example.mylib.Img.ImageDownloader;
 import com.example.mylib.sql.SqlManager;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
 import java.io.InputStream;
 import java.util.ArrayList;
-
-import static androidx.test.InstrumentationRegistry.getContext;
 import static org.junit.Assert.*;
 
 public class AllBooksFragmentTest {

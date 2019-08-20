@@ -78,25 +78,24 @@ public class AddBookFragment extends Fragment implements View.OnClickListener {
         final EditText editText_Title = getActivity().findViewById(R.id.editText_Title);
         final EditText editText_desc = getActivity().findViewById(R.id.editText_desc);
         final EditText editText_url = getActivity().findViewById(R.id.editText_url);
-        final Switch bookReaden_Switch = view.findViewById(R.id.switch1);
+
+        final Switch bookReaden_Switch = getActivity().findViewById(R.id.switch1);
 
         int int_readen ;
         boolean readen = bookReaden_Switch.isChecked();
 
-        if(readen){
+        if(readen)
             int_readen = 1;
-        }
-        else{
-            date = new Date(0,0,0);
-            int_readen = -1;
-        }
+        else
+        int_readen = -1;
+
 
         String author = editText_Author.getText().toString();
         String title = editText_Title.getText().toString();
         String desc = editText_desc.getText().toString();
         String url = editText_url.getText().toString();
 
-        if (author.isEmpty() || title.isEmpty() || desc.isEmpty() || url.isEmpty()) {
+        if (author.isEmpty() || title.isEmpty() || url.isEmpty()) {
             Toast.makeText(getActivity(), "Fill all fields.", Toast.LENGTH_SHORT).show();
             return;
         }

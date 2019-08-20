@@ -66,9 +66,6 @@ public class SqlAndroidTest {
         assertEquals("Story of Big Wizard",bookArrayList.get(1).getShort_description());
         assertEquals("drawable/photos/Harry1.png",bookArrayList.get(1).getImage_url());
         assertEquals(true,bookArrayList.get(1).isReadenByUser());
-        assertEquals(2019,bookArrayList.get(1).getFinish_date().year);
-        assertEquals(8,bookArrayList.get(1).getFinish_date().month);
-        assertEquals(17,bookArrayList.get(1).getFinish_date().day);
     }
 
     @After
