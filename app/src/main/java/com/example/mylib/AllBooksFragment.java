@@ -1,32 +1,19 @@
 package com.example.mylib;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.Layout;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
 import com.example.mylib.Data.Book;
-import com.example.mylib.Img.ImageDownloader;
+import com.example.mylib.Data.TextAndImageViewHelper;
 import com.example.mylib.sql.SqlManager;
-import com.squareup.picasso.Picasso;
-
-import java.io.InputStream;
 import java.util.ArrayList;
 
 public class AllBooksFragment extends Fragment {
@@ -46,14 +33,18 @@ public class AllBooksFragment extends Fragment {
         sqlManager = new SqlManager(context);
         ArrayList<Book> bookArrayList = sqlManager.getValues(false);
 
-        TextView textView = view.findViewById(R.id.textView_Book);
-        ImageView imageView = view.findViewById(R.id.imageView_Book);
+      //  TextView textView = view.findViewById(R.id.textView_Book);
+      //  ImageView imageView = view.findViewById(R.id.imageView_Book);
 
-        textView.setText(bookArrayList.get(0).getAuthor() + "\n" + bookArrayList.get(0).getTitle());
+      //  textView.setText(bookArrayList.get(0).getAuthor() + "\n" + bookArrayList.get(0).getTitle());
 
-        String URL = "https://image.ceneostatic.pl/data/products/9367217/49f352e8-fe40-4a0a-b2c5-f38ba07d1d3d_i-harry-potter-i-komnata-tajemnic-harry-potter-and-the-chamber-of-secrets-3dvd.jpg";
+       // Picasso.with(getContext()).load(URL).into(imageView);
+        RelativeLayout MainRL = view.findViewById(R.id.relativelayout);
 
-        Picasso.with(getContext()).load(URL).into(imageView);
+        TextAndImageViewHelper.LoadStringAndImages(bookArrayList,MainRL,getContext());
+
+
+
 
 
         return view;
