@@ -12,17 +12,20 @@ public class Book {
     public String getFinish_date() {
         if(!readenByUser) return "";
 
-        String date = finish_date.day + "-"+finish_date.month +"-"+finish_date.year;
+       // String date = finish_date.day + "-"+finish_date.month +"-"+finish_date.year;
+
+        StringBuilder sb = new StringBuilder(8);
+        sb.append(finish_date.day);
+        sb.append("-");
+        sb.append(finish_date.month);
+        sb.append("-");
+        sb.append(finish_date.year);
 
         if(finish_date.day==0 || finish_date.month ==0 || finish_date.year ==0)
             return "";
-        
-        DateTimeFormatter dtf = DateTimeFormat.forPattern("dd-mm-yyyy");
 
 
-        LocalDate dt = dtf.parseLocalDate(date);
-
-        return dt.toString();
+        return sb.toString();
     }
 
     static class Date{

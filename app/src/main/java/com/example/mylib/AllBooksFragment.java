@@ -28,12 +28,9 @@ public class AllBooksFragment extends Fragment {
         View view = inflater.inflate(R.layout.allbooks_activity, container, false);
 
         context = getContext();
-        sqlManager = new SqlManager(context);
-        ArrayList<Book> bookArrayList = sqlManager.getValues(false);
+        sqlManager = SqlManager.getInstance();
+        ArrayList<Book> bookArrayList = sqlManager.getValues();
         RelativeLayout MainRL = view.findViewById(R.id.relative_layoutinsidescrollview);
-      //  new TextAndImageViewHelper().LoadStringAndImages(bookArrayList,MainRL,getContext());
-
-
 
         new TextAndImageViewHelper.Builder(bookArrayList,MainRL,this).onlyReaden(onlyReaden).build().LoadStringAndImages();
 

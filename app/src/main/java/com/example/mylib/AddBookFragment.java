@@ -101,7 +101,7 @@ public class AddBookFragment extends Fragment implements View.OnClickListener {
         }
 
 
-        SqlManager sqlManager = new SqlManager(getContext());
+        SqlManager sqlManager = SqlManager.getInstance();
         sqlManager.addBookToDb(title, author, desc,url,int_readen,date.getYear(),date.getMonth(),date.getDay());
 
 

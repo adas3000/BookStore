@@ -31,7 +31,7 @@ public class SingleBookFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.singlebook_fragment, container, false);
 
-        sqlManager = new SqlManager(getContext());
+        sqlManager = SqlManager.getInstance();
 
         TextView textView_Book = view.findViewById(R.id.textView_book);
         TextView textView_Description = view.findViewById(R.id.textView_description);
