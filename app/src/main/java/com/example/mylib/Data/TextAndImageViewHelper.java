@@ -1,16 +1,16 @@
 package com.example.mylib.Data;
 
+import android.app.Activity;
 import android.content.Context;
-import android.graphics.Path;
 import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.mylib.AllBooksFragment;
 import com.example.mylib.R;
+import com.example.mylib.SingleBookFragment;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -21,6 +21,7 @@ public class TextAndImageViewHelper implements View.OnClickListener {
     private ArrayList<Book> bookArrayList;
     private RelativeLayout MainRL;
     private Context context;
+    private AllBooksFragment allBooksFragment;
 
     private boolean onlyReaden;
 
@@ -30,13 +31,15 @@ public class TextAndImageViewHelper implements View.OnClickListener {
         private ArrayList<Book> bookArrayList;
         private RelativeLayout MainRL;
         private Context context;
+        private AllBooksFragment allBooksFragment;
 
         private boolean onlyReaden = false;
 
-        public Builder(ArrayList<Book> bookArrayList,RelativeLayout MainRL,Context context){
+        public Builder(ArrayList<Book> bookArrayList,RelativeLayout MainRL,AllBooksFragment allBooksFragment){
             this.bookArrayList = bookArrayList;
             this.MainRL = MainRL;
-            this.context = context;
+            this.context = allBooksFragment.getContext();
+            this.allBooksFragment = allBooksFragment;
         }
 
 
@@ -58,6 +61,7 @@ public class TextAndImageViewHelper implements View.OnClickListener {
         MainRL = builder.MainRL;
         context = builder.context;
         onlyReaden = builder.onlyReaden;
+        allBooksFragment = builder.allBooksFragment;
     }
 
     public void LoadStringAndImages() {
@@ -66,7 +70,7 @@ public class TextAndImageViewHelper implements View.OnClickListener {
 
         final int image_widthDP = 800;
         final int image_heightDP = 500;
-        int marginTop = 100;
+        int marginTop = 100,i=0;
 
         for (Book b : bookArrayList) {
 
@@ -95,7 +99,7 @@ public class TextAndImageViewHelper implements View.OnClickListener {
             imageView.setLayoutParams(rll);
             imageView.setClickable(true);
             imageView.setOnClickListener(this);
-
+            imageView.setId(i++);
             marginTop += image_heightDP;
 
             Picasso.with(context).load(b.getImage_url()).placeholder(R.mipmap.ic_launcher).into(imageView);
@@ -107,6 +111,24 @@ public class TextAndImageViewHelper implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         //TODO add deleting and editing books by clicking on imageview -- add imageView on ClickListener
+
+
+        Book clicked_Book = null;
+
+        for(int i=0 ; i<bookArrayList.size() ; i++){
+            if(view.getId()==i){
+                clicked_Book = bookArrayList.get(i);
+                break;
+            }
+        }
+
+        SingleBookFragment nextFragment = new SingleBookFragment();
+        nextFragment.setBook(clicked_Book);
+
+
+        allBooksFragment.getActivity().getSupportFragmentManager().beginTransaction().
+                replace(R.id.fragment_container,nextFragment).commit();
+
 
     }
 }

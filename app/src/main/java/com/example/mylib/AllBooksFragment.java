@@ -9,6 +9,7 @@ import android.widget.RelativeLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
 import com.example.mylib.Data.Book;
 import com.example.mylib.Data.TextAndImageViewHelper;
 import com.example.mylib.sql.SqlManager;
@@ -34,7 +35,9 @@ public class AllBooksFragment extends Fragment {
 
 
 
-        new TextAndImageViewHelper.Builder(bookArrayList,MainRL,getContext()).onlyReaden(onlyReaden).build().LoadStringAndImages();
+        new TextAndImageViewHelper.Builder(bookArrayList,MainRL,this).onlyReaden(onlyReaden).build().LoadStringAndImages();
+
+
 
         return view;
     }
