@@ -35,6 +35,7 @@ public class SingleBookFragment extends Fragment {
 
         TextView textView_Book = view.findViewById(R.id.textView_book);
         TextView textView_Description = view.findViewById(R.id.textView_description);
+        TextView textView_BookReaden = view.findViewById(R.id.textView_readen);
         ImageView imageView = view.findViewById(R.id.imageView_SingleBook);
         textView_Book.setGravity(Gravity.CENTER);
         textView_Book.setText(clicked_Book.getAuthor() + "\n" + clicked_Book.getTitle());
@@ -42,6 +43,10 @@ public class SingleBookFragment extends Fragment {
 
         Picasso.with(getContext()).load(clicked_Book.getImage_url()).placeholder(R.mipmap.ic_launcher).into(imageView);
 
+
+        String readen = clicked_Book.isReadenByUser() ? "Readen :"+clicked_Book.getFinish_date() : "Not readen.";
+
+        textView_BookReaden.setText(readen);
 
         Button edit_Button = view.findViewById(R.id.button_editBook);
         Button delete_Button = view.findViewById(R.id.button_deleteBook);
@@ -68,15 +73,15 @@ public class SingleBookFragment extends Fragment {
                             case DialogInterface.BUTTON_POSITIVE:
                                 sqlManager.deleteBookFromDb(clicked_Book.getTitle(), clicked_Book.getAuthor());
                                 getActivity().getSupportFragmentManager().beginTransaction()
-                                        .replace(R.id.fragment_container,new AllBooksFragment()).commit();
+                                        .replace(R.id.fragment_container, new AllBooksFragment()).commit();
                                 break;
                         }
                     }
                 };
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                builder.setMessage("Are you sure?").setPositiveButton("Yes",dialogClickListener)
-                        .setNegativeButton("No",dialogClickListener).show();
+                builder.setMessage("Are you sure?").setPositiveButton("Yes", dialogClickListener)
+                        .setNegativeButton("No", dialogClickListener).show();
 
             }
         });

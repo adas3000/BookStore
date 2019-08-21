@@ -110,5 +110,6 @@ public class AddBookFragment extends Fragment implements View.OnClickListener {
         editText_Title.setText("");
         editText_desc.setText("");
         editText_url.setText("");
+        bookReaden_Switch.setChecked(false);
     }
 }

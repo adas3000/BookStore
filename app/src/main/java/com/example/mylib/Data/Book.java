@@ -1,9 +1,28 @@
 package com.example.mylib.Data;
 
+import java.sql.Date;
+
+import org.joda.time.LocalDate;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
+
+
 public class Book {
 
-    public Date getFinish_date() {
-        return finish_date;
+    public String getFinish_date() {
+        if(!readenByUser) return "";
+
+        String date = finish_date.day + "-"+finish_date.month +"-"+finish_date.year;
+
+        if(finish_date.day==0 || finish_date.month ==0 || finish_date.year ==0)
+            return "";
+        
+        DateTimeFormatter dtf = DateTimeFormat.forPattern("dd-mm-yyyy");
+
+
+        LocalDate dt = dtf.parseLocalDate(date);
+
+        return dt.toString();
     }
 
     static class Date{
