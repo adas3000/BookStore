@@ -70,5 +70,19 @@ public class SqlManager {
         db.insert(SqlHelper.getTable_Name(),null,contentValues);
     }
 
+
+    public int deleteBookFromDb(String title,String author){
+
+        SQLiteDatabase db = sqlHelper.getWritableDatabase();
+
+        Map<String,String> columnNames=  SqlHelper.getColumnMap();
+
+        return  db.delete(SqlHelper.getTable_Name(),columnNames.get("title")+"=? and "
+                +columnNames.get("author")+"=?",new String[]{title,author});
+    }
+
+
+
+
     public static final String getDbName(){return SqlHelper.getDbName();}
 }

@@ -1,6 +1,5 @@
 package com.example.mylib.Data;
 
-import android.app.Activity;
 import android.content.Context;
 import android.view.Gravity;
 import android.view.View;
@@ -22,7 +21,6 @@ public class TextAndImageViewHelper implements View.OnClickListener {
     private RelativeLayout MainRL;
     private Context context;
     private AllBooksFragment allBooksFragment;
-
     private boolean onlyReaden;
 
 
@@ -35,7 +33,7 @@ public class TextAndImageViewHelper implements View.OnClickListener {
 
         private boolean onlyReaden = false;
 
-        public Builder(ArrayList<Book> bookArrayList,RelativeLayout MainRL,AllBooksFragment allBooksFragment){
+        public Builder(ArrayList<Book> bookArrayList, RelativeLayout MainRL, AllBooksFragment allBooksFragment) {
             this.bookArrayList = bookArrayList;
             this.MainRL = MainRL;
             this.context = allBooksFragment.getContext();
@@ -43,20 +41,18 @@ public class TextAndImageViewHelper implements View.OnClickListener {
         }
 
 
-
-
-        public Builder onlyReaden(boolean onlyReaden){
-            this.onlyReaden = onlyReaden ;
+        public Builder onlyReaden(boolean onlyReaden) {
+            this.onlyReaden = onlyReaden;
             return this;
         }
 
-        public TextAndImageViewHelper build(){
+        public TextAndImageViewHelper build() {
             return new TextAndImageViewHelper(this);
         }
 
     }
 
-    private TextAndImageViewHelper(Builder builder){
+    private TextAndImageViewHelper(Builder builder) {
         bookArrayList = builder.bookArrayList;
         MainRL = builder.MainRL;
         context = builder.context;
@@ -70,7 +66,7 @@ public class TextAndImageViewHelper implements View.OnClickListener {
 
         final int image_widthDP = 800;
         final int image_heightDP = 500;
-        int marginTop = 100,i=0;
+        int marginTop = 100, i = 0;
 
         for (Book b : bookArrayList) {
 
@@ -114,9 +110,8 @@ public class TextAndImageViewHelper implements View.OnClickListener {
 
 
         Book clicked_Book = null;
-
-        for(int i=0 ; i<bookArrayList.size() ; i++){
-            if(view.getId()==i){
+        for (int i = 0; i < bookArrayList.size(); i++) {
+            if (view.getId() == i) {
                 clicked_Book = bookArrayList.get(i);
                 break;
             }
@@ -127,7 +122,7 @@ public class TextAndImageViewHelper implements View.OnClickListener {
 
 
         allBooksFragment.getActivity().getSupportFragmentManager().beginTransaction().
-                replace(R.id.fragment_container,nextFragment).commit();
+                replace(R.id.fragment_container, nextFragment).commit();
 
 
     }
