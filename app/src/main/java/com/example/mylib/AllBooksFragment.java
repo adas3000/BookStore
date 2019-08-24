@@ -5,14 +5,18 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.mylib.Data.Book;
+import com.example.mylib.Data.ItemAdapter;
 import com.example.mylib.Data.TextAndImageViewHelper;
 import com.example.mylib.sql.SqlManager;
+
 import java.util.ArrayList;
 
 public class AllBooksFragment extends Fragment {
@@ -20,6 +24,9 @@ public class AllBooksFragment extends Fragment {
     private Context context;
     private SqlManager sqlManager;
     private boolean onlyReaden = false;
+
+    ListView listView;
+
 
     @Nullable
     @Override
@@ -31,12 +38,15 @@ public class AllBooksFragment extends Fragment {
         sqlManager = SqlManager.getInstance();
         ArrayList<Book> bookArrayList = sqlManager.getValues();
 
-
-
+        listView = view.findViewById(R.id.myListViewEmails);
+        ItemAdapter itemAdapter = new ItemAdapter(view.getContext(),bookArrayList,onlyReaden);
+        listView.setAdapter(itemAdapter);
 
         return view;
     }
 
-    public void setOnlyReaden(boolean b){onlyReaden = b;}
+    public void setOnlyReaden(boolean b) {
+        onlyReaden = b;
+    }
 }
 
