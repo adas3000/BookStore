@@ -15,12 +15,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.mylib.BackPressed.IOnBackPressed;
 import com.example.mylib.Data.Book;
 import com.example.mylib.sql.SqlManager;
 import com.squareup.picasso.Picasso;
 
 
-public class SingleBookFragment extends Fragment {
+public class SingleBookFragment extends Fragment implements IOnBackPressed {
 
     private Book clicked_Book;
     private SqlManager sqlManager;
@@ -95,4 +96,8 @@ public class SingleBookFragment extends Fragment {
     }
 
 
+    @Override
+    public void onBackPressed() {
+        getActivity().getSupportFragmentManager().popBackStack();
+    }
 }

@@ -18,13 +18,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.mylib.BackPressed.IOnBackPressed;
 import com.example.mylib.sql.SqlManager;
 
 import java.sql.Date;
 import java.util.Calendar;
 
 @TargetApi(Build.VERSION_CODES.N_MR1)
-public class AddBookFragment extends Fragment implements View.OnClickListener {
+public class AddBookFragment extends Fragment implements View.OnClickListener, IOnBackPressed {
 
     private Date date = new Date(0,0,0);
     private DatePickerDialog datePickerDialog;
@@ -111,5 +112,10 @@ public class AddBookFragment extends Fragment implements View.OnClickListener {
         editText_desc.setText("");
         editText_url.setText("");
         bookReaden_Switch.setChecked(false);
+    }
+
+    @Override
+    public void onBackPressed() {
+        getActivity().getSupportFragmentManager().popBackStack();
     }
 }

@@ -49,7 +49,6 @@ public class ItemAdapter extends BaseAdapter {
         View v =layoutInflater.inflate(R.layout.my_listview_detail,null);
 
         TextView textView_AuthorAndTitle =v.findViewById(R.id.textView_AuthorandTitle);
-        TextView textView_Desc = v.findViewById(R.id.textView_desc);
         ImageView imageView_Cover = v.findViewById(R.id.imageView_Cover);
 
 
@@ -57,7 +56,7 @@ public class ItemAdapter extends BaseAdapter {
 
         textView_AuthorAndTitle.setText(book.getAuthor()+"\n"+book.getTitle());
         textView_AuthorAndTitle.setGravity(Gravity.CENTER);
-        textView_Desc.setText(book.getShort_description());
+        textView_AuthorAndTitle.setTextSize(18);
         Picasso.with(v.getContext()).load(book.getImage_url()).placeholder(R.mipmap.ic_launcher).into(imageView_Cover);
 
         return v;
