@@ -43,7 +43,7 @@ public class AllBooksFragment extends Fragment implements IOnBackPressed {
         listView = view.findViewById(R.id.myListViewEmails);
         ItemAdapter itemAdapter = new ItemAdapter(view.getContext(),bookArrayList,onlyReaden);
         listView.setAdapter(itemAdapter);
-
+        
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
