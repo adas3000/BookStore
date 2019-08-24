@@ -24,7 +24,7 @@ public class SingleBookFragment extends Fragment {
 
     private Book clicked_Book;
     private SqlManager sqlManager;
-
+    private int qweqwe;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
