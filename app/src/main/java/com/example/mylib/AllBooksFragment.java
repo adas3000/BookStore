@@ -30,9 +30,7 @@ public class AllBooksFragment extends Fragment {
         context = getContext();
         sqlManager = SqlManager.getInstance();
         ArrayList<Book> bookArrayList = sqlManager.getValues();
-        RelativeLayout MainRL = view.findViewById(R.id.relative_layoutinsidescrollview);
 
-        new TextAndImageViewHelper.Builder(bookArrayList,MainRL,this).onlyReaden(onlyReaden).build().LoadStringAndImages();
 
 
 
