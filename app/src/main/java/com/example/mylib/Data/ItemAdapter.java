@@ -25,6 +25,12 @@ public class ItemAdapter extends BaseAdapter {
         this.layoutInflater =(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.bookArrayList = bookArrayList;
         this.onlyReaden = onlyReaden;
+        if(onlyReaden){
+            for(Book b : bookArrayList){
+                if(!b.isReadenByUser())
+                    bookArrayList.remove(b);
+            }
+        }
     }
 
 
@@ -45,6 +51,7 @@ public class ItemAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
+
 
         View v =layoutInflater.inflate(R.layout.my_listview_detail,null);
 

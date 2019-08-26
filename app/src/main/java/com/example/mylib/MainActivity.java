@@ -50,7 +50,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
-
     @Override
     public void onBackPressed() {
         List<Fragment> fragments = getSupportFragmentManager().getFragments();
@@ -61,10 +60,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     ((AddBookFragment) f).onBackPressed();
                     return;
                 } else if (f instanceof AllBooksFragment) {
-                    ((AllBooksFragment) f).onBackPressed();
-                    return;
+                    finish();
                 } else if (f instanceof SingleBookFragment) {
-                    ((SingleBookFragment)f).onBackPressed();
+                    ((SingleBookFragment) f).onBackPressed();
                     return;
                 }
 
