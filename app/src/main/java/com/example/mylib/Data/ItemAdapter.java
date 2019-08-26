@@ -15,8 +15,6 @@ import com.example.mylib.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.stream.Stream;
-
 
 @TargetApi(Build.VERSION_CODES.N)
 public class ItemAdapter extends BaseAdapter {

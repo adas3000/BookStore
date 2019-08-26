@@ -53,38 +53,29 @@ public class SingleBookFragment extends Fragment implements IOnBackPressed {
         Button delete_Button = view.findViewById(R.id.button_deleteBook);
 
 
-        edit_Button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        edit_Button.setOnClickListener(view1 -> {
 
 
-            }
         });
 
 
-        delete_Button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        delete_Button.setOnClickListener(view12 -> {
 
-                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
+            DialogInterface.OnClickListener dialogClickListener = (dialogInterface, i) -> {
 
-                        switch (i) {
-                            case DialogInterface.BUTTON_POSITIVE:
-                                sqlManager.deleteBookFromDb(clicked_Book.getTitle(), clicked_Book.getAuthor());
-                                getActivity().getSupportFragmentManager().beginTransaction()
-                                        .replace(R.id.fragment_container, new AllBooksFragment()).commit();
-                                break;
-                        }
-                    }
-                };
+                switch (i) {
+                    case DialogInterface.BUTTON_POSITIVE:
+                        sqlManager.deleteBookFromDb(clicked_Book.getTitle(), clicked_Book.getAuthor());
+                        getActivity().getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.fragment_container, new AllBooksFragment()).commit();
+                        break;
+                }
+            };
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                builder.setMessage("Are you sure?").setPositiveButton("Yes", dialogClickListener)
-                        .setNegativeButton("No", dialogClickListener).show();
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+            builder.setMessage("Are you sure?").setPositiveButton("Yes", dialogClickListener)
+                    .setNegativeButton("No", dialogClickListener).show();
 
-            }
         });
 
 

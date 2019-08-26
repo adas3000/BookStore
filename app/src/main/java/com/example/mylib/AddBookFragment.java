@@ -27,8 +27,10 @@ import java.util.Calendar;
 @TargetApi(Build.VERSION_CODES.N_MR1)
 public class AddBookFragment extends Fragment implements View.OnClickListener, IOnBackPressed {
 
-    private Date date = new Date(0,0,0);
+    private Date date = new Date(0, 0, 0);
     private DatePickerDialog datePickerDialog;
+    private boolean editBook;
+
 
     @Nullable
     @Override
@@ -42,30 +44,23 @@ public class AddBookFragment extends Fragment implements View.OnClickListener, I
         final Switch bookReaden_Switch = view.findViewById(R.id.switch1);
 
 
-        bookReaden_Switch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                Calendar calendar = Calendar.getInstance();
-                int day = calendar.get(Calendar.DAY_OF_MONTH);
-                int month = calendar.get(Calendar.MONTH);
-                int year = calendar.get(Calendar.YEAR);
+        bookReaden_Switch.setOnCheckedChangeListener((compoundButton, b) -> {
+            Calendar calendar = Calendar.getInstance();
+            int day = calendar.get(Calendar.DAY_OF_MONTH);
+            int month = calendar.get(Calendar.MONTH);
+            int year = calendar.get(Calendar.YEAR);
 
-                if(compoundButton.isChecked()){
-                    datePickerDialog = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
-                        @Override
-                        public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                            bookReaden_Switch.setText("Readen:"+day + "/"+month+1+"/"+year);
-                            date = new Date(year,month+1,day);
-                        }
-                    },day,month,year);
-                    datePickerDialog.show();
-                } else{
-                  bookReaden_Switch.setText("Not readen");
-                  date = new Date(0,0,0);
-                }
+            if (compoundButton.isChecked()) {
+                datePickerDialog = new DatePickerDialog(getContext(), (datePicker, year1, month1, day1) -> {
+                    bookReaden_Switch.setText("Readen:" + day1 + "/" + month1 + 1 + "/" + year1);
+                    date = new Date(year1, month1 + 1, day1);
+                }, day, month, year);
+                datePickerDialog.show();
+            } else {
+                bookReaden_Switch.setText("Not readen");
+                date = new Date(0, 0, 0);
             }
         });
-
 
 
         return view;
@@ -82,13 +77,13 @@ public class AddBookFragment extends Fragment implements View.OnClickListener, I
 
         final Switch bookReaden_Switch = getActivity().findViewById(R.id.switch1);
 
-        int int_readen ;
+        int int_readen;
         boolean readen = bookReaden_Switch.isChecked();
 
-        if(readen)
+        if (readen)
             int_readen = 1;
         else
-        int_readen = -1;
+            int_readen = -1;
 
 
         String author = editText_Author.getText().toString();
@@ -103,7 +98,7 @@ public class AddBookFragment extends Fragment implements View.OnClickListener, I
 
 
         SqlManager sqlManager = SqlManager.getInstance();
-        sqlManager.addBookToDb(title, author, desc,url,int_readen,date.getYear(),date.getMonth(),date.getDay());
+        sqlManager.addBookToDb(title, author, desc, url, int_readen, date.getYear(), date.getMonth(), date.getDay());
 
 
         Toast.makeText(getActivity(), "Book added successfully", Toast.LENGTH_SHORT).show();
@@ -118,4 +113,9 @@ public class AddBookFragment extends Fragment implements View.OnClickListener, I
     public void onBackPressed() {
         getActivity().getSupportFragmentManager().popBackStack();
     }
+
+    public void setEditBook(boolean b) {
+        this.editBook = b;
+    }
+
 }
