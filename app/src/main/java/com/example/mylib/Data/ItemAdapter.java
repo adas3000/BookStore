@@ -1,6 +1,8 @@
 package com.example.mylib.Data;
 
+import android.annotation.TargetApi;
 import android.content.Context;
+import android.os.Build;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +15,10 @@ import com.example.mylib.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.stream.Stream;
 
+
+@TargetApi(Build.VERSION_CODES.N)
 public class ItemAdapter extends BaseAdapter {
 
     private LayoutInflater layoutInflater;
@@ -25,11 +30,10 @@ public class ItemAdapter extends BaseAdapter {
         this.layoutInflater =(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.bookArrayList = bookArrayList;
         this.onlyReaden = onlyReaden;
+
+
         if(onlyReaden){
-            for(Book b : bookArrayList){
-                if(!b.isReadenByUser())
-                    bookArrayList.remove(b);
-            }
+            bookArrayList.removeIf(b->!b.isReadenByUser());
         }
     }
 
