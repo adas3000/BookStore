@@ -1,5 +1,6 @@
 package com.example.mylib;
 
+import android.annotation.TargetApi;
 import android.os.Bundle;
 
 import androidx.core.view.GravityCompat;
@@ -51,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-
+    @TargetApi(21)
     @Override
     public void onBackPressed() {
         List<Fragment> fragments = getSupportFragmentManager().getFragments();
@@ -62,7 +63,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     ((AddBookFragment) f).onBackPressed();
                     return;
                 } else if (f instanceof AllBooksFragment) {
-                    finish();
+                    finishAndRemoveTask();
                 } else if (f instanceof SingleBookFragment) {
                     ((SingleBookFragment) f).onBackPressed();
                     return;
