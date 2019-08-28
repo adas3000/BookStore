@@ -1,18 +1,15 @@
 package com.example.mylib.Data;
 
-import java.sql.Date;
 
-import org.joda.time.LocalDate;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
+import android.annotation.TargetApi;
 
+import java.util.Objects;
 
 public class Book {
 
     public String getFinish_date() {
         if(!readenByUser) return "";
 
-       // String date = finish_date.day + "-"+finish_date.month +"-"+finish_date.year;
 
         StringBuilder sb = new StringBuilder(8);
         sb.append(finish_date.day);
@@ -105,5 +102,24 @@ public class Book {
 
     public boolean isReadenByUser() {
         return readenByUser;
+    }
+
+    @TargetApi(19)
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Book book = (Book) o;
+        return readenByUser == book.readenByUser &&
+                Objects.equals(title, book.title) &&
+                Objects.equals(author, book.author) &&
+                Objects.equals(short_description, book.short_description) &&
+                Objects.equals(image_url, book.image_url) &&
+                Objects.equals(finish_date, book.finish_date);
+    }
+    @TargetApi(19)
+    @Override
+    public int hashCode() {
+        return Objects.hash(title, author, short_description, image_url, readenByUser, finish_date);
     }
 }
