@@ -1,22 +1,15 @@
 package com.example.mylib.Data;
 
-<<<<<<< HEAD
-import android.graphics.Bitmap;
-=======
-import java.sql.Date;
 
-import org.joda.time.LocalDate;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
+import android.annotation.TargetApi;
 
->>>>>>> itemadapter_Branch
+import java.util.Objects;
 
 public class Book {
 
     public String getFinish_date() {
         if(!readenByUser) return "";
 
-       // String date = finish_date.day + "-"+finish_date.month +"-"+finish_date.year;
 
         StringBuilder sb = new StringBuilder(8);
         sb.append(finish_date.day);
@@ -69,17 +62,16 @@ public class Book {
 
 
 
-   private String title,author,short_description;
-   private Bitmap img;
-   private boolean readenByUser;
-   private Date finish_date;
+    private String title,author,short_description,image_url;
+    private boolean readenByUser;
+    private Date finish_date;
 
-    public Book(String title,String author,String short_description,Bitmap img,
+    public Book(String title,String author,String short_description,String image_url,
                 boolean readenByUser,int y,int m,int d){
         this.title = title;
         this.author = author;
         this.short_description = short_description;
-        this.img = img;
+        this.image_url = image_url;
         this.readenByUser = readenByUser;
     }
 
@@ -104,11 +96,30 @@ public class Book {
         return short_description;
     }
 
-    public Bitmap getImage_url() {
-        return img;
+    public String getImage_url() {
+        return image_url;
     }
 
     public boolean isReadenByUser() {
         return readenByUser;
+    }
+
+    @TargetApi(19)
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Book book = (Book) o;
+        return readenByUser == book.readenByUser &&
+                Objects.equals(title, book.title) &&
+                Objects.equals(author, book.author) &&
+                Objects.equals(short_description, book.short_description) &&
+                Objects.equals(image_url, book.image_url) &&
+                Objects.equals(finish_date, book.finish_date);
+    }
+    @TargetApi(19)
+    @Override
+    public int hashCode() {
+        return Objects.hash(title, author, short_description, image_url, readenByUser, finish_date);
     }
 }
