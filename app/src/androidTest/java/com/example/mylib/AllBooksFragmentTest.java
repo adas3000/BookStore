@@ -24,10 +24,11 @@ public class AllBooksFragmentTest {
     @Before
     public void setup() {
         context = InstrumentationRegistry.getTargetContext();
-        sqlManager = new SqlManager(context);
+        SqlManager.init(context);
+        sqlManager = SqlManager.getInstance();
         sqlManager.addBookToDb("Adam", "Adam Z", "One day...",
                 "https://java.sogeti.nl/JavaBlog/wp-content/uploads/2009/04/android_icon_256.png", 1, 1, 1, 1);
-        bookArrayList = sqlManager.getValues(false);
+        bookArrayList = sqlManager.getValues();
     }
 
 
