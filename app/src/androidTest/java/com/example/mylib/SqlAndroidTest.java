@@ -8,7 +8,9 @@ import com.example.mylib.Data.Book;
 import com.example.mylib.sql.SqlManager;
 
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -17,13 +19,18 @@ import static org.junit.Assert.assertEquals;
 
 public class SqlAndroidTest {
 
-    private Context context;
-    private SqlManager sqlManager;
+    private static Context context;
+    private static SqlManager sqlManager;
 
-    @Before
-    public void setup() {
+    @BeforeClass
+    public static void setup() {
         context = InstrumentationRegistry.getTargetContext();
-        sqlManager = new SqlManager(context);
+        SqlManager.init(context);
+        sqlManager = SqlManager.getInstance();
+    }
+    @Before
+    public void clearDb(){
+        
     }
 
     @Test
@@ -37,9 +44,9 @@ public class SqlAndroidTest {
         sqlManager.addBookToDb("Hobbit", "Tolkien", "Two hobbits went somewhere",
                 "drawable/photos/Hobbit1.png", 0, 2013, 10, 15);
 
-        ArrayList<Book> bookArrayList = sqlManager.getValues(true);
+        ArrayList<Book> bookArrayList = sqlManager.getValues();
         assertEquals(0, bookArrayList.size());
-        bookArrayList = sqlManager.getValues(false);
+        bookArrayList = sqlManager.getValues();
         assertEquals(1, bookArrayList.size());
     }
 
@@ -51,7 +58,7 @@ public class SqlAndroidTest {
         sqlManager.addBookToDb("Harry Potter", "Rowling", "Story of Big Wizard",
                 "drawable/photos/Harry1.png", 1, 2019, 8, 17);
 
-        ArrayList<Book> bookArrayList = sqlManager.getValues(false);
+        ArrayList<Book> bookArrayList = sqlManager.getValues();
 
         assertEquals(2, bookArrayList.size());
 
@@ -71,12 +78,12 @@ public class SqlAndroidTest {
 
     @Test
     public void deleteFromDbTest() {
-        ArrayList<Book> bookArrayList = sqlManager.getValues(false);
+        ArrayList<Book> bookArrayList = sqlManager.getValues();
         String deleteTitle = bookArrayList.get(0).getTitle();
         String deleteAuthor = bookArrayList.get(0).getAuthor();
 
         int how = sqlManager.deleteBookFromDb(deleteTitle,deleteAuthor);
-        bookArrayList = sqlManager.getValues(false);
+        bookArrayList = sqlManager.getValues();
         for(Book b : bookArrayList){
             String title = b.getTitle();
             String author = b.getAuthor();
@@ -89,10 +96,10 @@ public class SqlAndroidTest {
     }
 
 
-  /*  @After
-    public void deleteDb(){
+    @AfterClass
+    public static void deleteDb(){
         context.deleteDatabase(SqlManager.getDbName());
     }
-*/
+
 
 }

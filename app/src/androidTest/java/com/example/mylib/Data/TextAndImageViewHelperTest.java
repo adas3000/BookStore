@@ -29,8 +29,9 @@ public class TextAndImageViewHelperTest {
     public void setup(){
         
         context = InstrumentationRegistry.getTargetContext();
-        sqlManager = new SqlManager(context);
-        bookArrayList = sqlManager.getValues(false);
+        SqlManager.init(context);
+        sqlManager = SqlManager.getInstance();
+        bookArrayList = sqlManager.getValues();
         int i=0;
         for(Book b : bookArrayList){
             ImageView imageView = new ImageView(context);
