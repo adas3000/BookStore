@@ -133,8 +133,13 @@ public class SqlManager {
     }
 
 
-
     public static final String getDbName() {
         return SqlHelper.getDbName();
     }
+
+    public void onClose(){
+        sqlHelper = null;
+        context = null;
+    }
+
 }

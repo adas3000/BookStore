@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -41,7 +42,24 @@ public class AddBookFragment extends Fragment implements View.OnClickListener, I
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.addbook_activity, container, false);
+        LinearLayout view = (LinearLayout)inflater.inflate(R.layout.addbook_activity, container, false);
+
+
+        setEditTexts(view);
+
+
+        if(editBook) {
+            editText_Author.setText(book_toEdit.getAuthor());
+            editText_Title.setText(book_toEdit.getTitle());
+            editText_desc.setText(book_toEdit.getShort_description());
+            editText_url.setText(book_toEdit.getImage_url());
+
+            if (book_toEdit.isReadenByUser()) {
+                bookReaden_Switch.setChecked(true);
+                bookReaden_Switch.setText(book_toEdit.getFinish_date());
+            }
+        }
+
 
         final Button confirm_Button = view.findViewById(R.id.button);
         confirm_Button.setOnClickListener(this);
@@ -74,7 +92,6 @@ public class AddBookFragment extends Fragment implements View.OnClickListener, I
 
     @Override
     public void onClick(View view) {
-        if(editText_Author == null) setEditTexts();
 
         int int_readen;
         boolean readen = bookReaden_Switch.isChecked();
@@ -120,30 +137,17 @@ public class AddBookFragment extends Fragment implements View.OnClickListener, I
 
 
     public void setEditBook(Book book) {
-        if(editText_Author == null) setEditTexts();
-
         this.book_toEdit = book;
         this.editBook = true;
-
-        editText_Author.setText(book.getAuthor());
-        editText_Title.setText(book.getTitle());
-        editText_desc.setText(book.getShort_description());
-        editText_url.setText(book.getImage_url());
-
-        if (book.isReadenByUser()) {
-            bookReaden_Switch.setChecked(true);
-            bookReaden_Switch.setText(book.getFinish_date());
-        }
-
     }
 
 
-    private void setEditTexts() {
-        editText_Author = getActivity().findViewById(R.id.editText_Author);
-        editText_Title = getActivity().findViewById(R.id.editText_Title);
-        editText_desc = getActivity().findViewById(R.id.editText_desc);
-        editText_url = getActivity().findViewById(R.id.editText_url);
-        bookReaden_Switch = getActivity().findViewById(R.id.switch1);
+    private void setEditTexts(LinearLayout view) {
+        editText_Author = view.findViewById(R.id.editText_Author);
+        editText_Title = view.findViewById(R.id.editText_Title);
+        editText_desc = view.findViewById(R.id.editText_desc);
+        editText_url = view.findViewById(R.id.editText_url);
+        bookReaden_Switch = view.findViewById(R.id.switch1);
     }
 
 }

@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     ((AddBookFragment) f).onBackPressed();
                     return;
                 } else if (f instanceof AllBooksFragment) {
+                    SqlManager.getInstance().onClose();
                     finishAndRemoveTask();
                 } else if (f instanceof SingleBookFragment) {
                     ((SingleBookFragment) f).onBackPressed();
