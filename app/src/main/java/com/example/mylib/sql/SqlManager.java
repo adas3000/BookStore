@@ -48,17 +48,17 @@ public class SqlManager {
         ArrayList<Book> bookArrayList = new ArrayList<>();
 
         if (cursor.moveToFirst()) {
-            Map<String, String> kav = SqlHelper.getColumnMap();
 
             do {
-                String title = cursor.getString(cursor.getColumnIndex(kav.get("title")));
-                String author = cursor.getString(cursor.getColumnIndex(kav.get("author")));
-                String short_desc = cursor.getString(cursor.getColumnIndex(kav.get("short_description")));
-                String image_url = cursor.getString(cursor.getColumnIndex(kav.get("image_url")));
-                int temp_year = cursor.getInt(cursor.getColumnIndex(kav.get("year")));
-                int temp_month = cursor.getInt(cursor.getColumnIndex(kav.get("month")));
-                int temp_day = cursor.getInt(cursor.getColumnIndex(kav.get("day")));
-                int readen = cursor.getInt(cursor.getColumnIndex(kav.get("readen")));
+                String author = cursor.getString(cursor.getColumnIndex(SqlHelper.columnssNames[1]));
+                String title = cursor.getString(cursor.getColumnIndex(SqlHelper.columnssNames[2]));
+                String short_desc = cursor.getString(cursor.getColumnIndex(SqlHelper.columnssNames[3]));
+                String image_url = cursor.getString(cursor.getColumnIndex(SqlHelper.columnssNames[4]));
+                int readen = cursor.getInt(cursor.getColumnIndex(SqlHelper.columnssNames[5]));
+                int temp_year = cursor.getInt(cursor.getColumnIndex(SqlHelper.columnssNames[6]));
+                int temp_month = cursor.getInt(cursor.getColumnIndex(SqlHelper.columnssNames[7]));
+                int temp_day = cursor.getInt(cursor.getColumnIndex(SqlHelper.columnssNames[8]));
+
                 boolean _readen = readen > 0 ? true : false;
 
 
@@ -74,34 +74,66 @@ public class SqlManager {
     public void addBookToDb(String title, String author, String short_desc, String image_url, int readen,
                             int y, int m, int d) {
         if(context==null) throw new IllegalStateException("No context detected");
-        SQLiteDatabase db = sqlHelper.getWritableDatabase();
+        try(SQLiteDatabase db = sqlHelper.getWritableDatabase()) {
+            ContentValues contentValues = new ContentValues();
 
-        Map<String, String> kav = SqlHelper.getColumnMap();
-        ContentValues contentValues = new ContentValues();
+            contentValues.put(SqlHelper.columnssNames[1], author);
+            contentValues.put(SqlHelper.columnssNames[2], title);
+            contentValues.put(SqlHelper.columnssNames[3], short_desc);
+            contentValues.put(SqlHelper.columnssNames[4], image_url);
+            contentValues.put(SqlHelper.columnssNames[5], readen);
+            contentValues.put(SqlHelper.columnssNames[6], y);
+            contentValues.put(SqlHelper.columnssNames[7], m);
+            contentValues.put(SqlHelper.columnssNames[8], d);
 
-        contentValues.put(kav.get("title"), title);
-        contentValues.put(kav.get("author"), author);
-        contentValues.put(kav.get("short_description"), short_desc);
-        contentValues.put(kav.get("image_url"), image_url);
-        contentValues.put(kav.get("readen"), readen);
-        contentValues.put(kav.get("year"), y);
-        contentValues.put(kav.get("month"), m);
-        contentValues.put(kav.get("day"), d);
-
-        db.insert(SqlHelper.getTable_Name(), null, contentValues);
+            db.insert(SqlHelper.getTable_Name(), null, contentValues);
+        }
     }
 
 
     public int deleteBookFromDb(String title, String author) {
         if(context==null) throw new IllegalStateException("No context detected");
 
-        SQLiteDatabase db = sqlHelper.getWritableDatabase();
+        try(SQLiteDatabase db = sqlHelper.getWritableDatabase()) {
 
-        Map<String, String> columnNames = SqlHelper.getColumnMap();
 
-        return db.delete(SqlHelper.getTable_Name(), columnNames.get("title") + "=? and "
-                + columnNames.get("author") + "=?", new String[]{title, author});
+            return db.delete(SqlHelper.getTable_Name(), SqlHelper.columnssNames[2] + "=? and "
+                    + SqlHelper.columnssNames[1] + "=?", new String[]{title, author});
+        }
     }
+
+
+
+    public void editBookFromDb(String oldTitle,String oldAuthor,String newTitle,String newAuthor,
+                               String newDesc,String newImageUrl,int readen,int y,int m,int d){
+
+
+        try(SQLiteDatabase db = sqlHelper.getWritableDatabase()){
+
+            db.execSQL("UPDATE "+SqlHelper.getTable_Name() + " SET "+SqlHelper.columnssNames[1] + " = '"
+            +newAuthor +"',"+ SqlHelper.columnssNames[2]+" = '" + newTitle
+                    +"'," + SqlHelper.columnssNames[3]+" = '" + newDesc
+                    +"'," + SqlHelper.columnssNames[4]+" = '" + newImageUrl
+                    +"'," + SqlHelper.columnssNames[5]+" = '" + readen
+                    +"'," + SqlHelper.columnssNames[6]+" = '" + y
+                    +"'," + SqlHelper.columnssNames[7]+" = '" + m
+                    +"'," + SqlHelper.columnssNames[8]+" = '" + d
+                    +"' WHERE " +SqlHelper.columnssNames[1]+" = '"+oldAuthor + "' AND "
+                    + SqlHelper.columnssNames[2] + " = '"+ oldTitle+"'");
+
+
+        }
+
+    }
+
+
+    public void deleteAllRecordsFromDb(){
+
+        try(SQLiteDatabase db = sqlHelper.getWritableDatabase()){
+            db.execSQL("DELETE  FROM "+SqlHelper.getTable_Name());
+        }
+    }
+
 
 
     public static final String getDbName() {

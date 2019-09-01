@@ -8,8 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.Toast;
@@ -19,6 +17,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.mylib.BackPressed.IOnBackPressed;
+import com.example.mylib.Data.Book;
 import com.example.mylib.sql.SqlManager;
 
 import java.sql.Date;
@@ -30,7 +29,12 @@ public class AddBookFragment extends Fragment implements View.OnClickListener, I
     private Date date = new Date(0, 0, 0);
     private DatePickerDialog datePickerDialog;
     private boolean editBook;
-
+    private Book book_toEdit;
+    private EditText editText_Author = getActivity().findViewById(R.id.editText_Author);
+    private EditText editText_Title = getActivity().findViewById(R.id.editText_Title);
+    private EditText editText_desc = getActivity().findViewById(R.id.editText_desc);
+    private EditText editText_url = getActivity().findViewById(R.id.editText_url);
+    private Switch bookReaden_Switch = getActivity().findViewById(R.id.switch1);
 
     @Nullable
     @Override
@@ -70,13 +74,6 @@ public class AddBookFragment extends Fragment implements View.OnClickListener, I
     @Override
     public void onClick(View view) {
 
-        final EditText editText_Author = getActivity().findViewById(R.id.editText_Author);
-        final EditText editText_Title = getActivity().findViewById(R.id.editText_Title);
-        final EditText editText_desc = getActivity().findViewById(R.id.editText_desc);
-        final EditText editText_url = getActivity().findViewById(R.id.editText_url);
-
-        final Switch bookReaden_Switch = getActivity().findViewById(R.id.switch1);
-
         int int_readen;
         boolean readen = bookReaden_Switch.isChecked();
 
@@ -98,8 +95,12 @@ public class AddBookFragment extends Fragment implements View.OnClickListener, I
 
 
         SqlManager sqlManager = SqlManager.getInstance();
-        sqlManager.addBookToDb(title, author, desc, url, int_readen, date.getYear(), date.getMonth(), date.getDay());
 
+        if(!editBook)
+        sqlManager.addBookToDb(title, author, desc, url, int_readen, date.getYear(), date.getMonth(), date.getDay());
+        else {
+
+        }
 
         Toast.makeText(getActivity(), "Book added successfully", Toast.LENGTH_SHORT).show();
         editText_Author.setText("");
@@ -114,8 +115,21 @@ public class AddBookFragment extends Fragment implements View.OnClickListener, I
         getActivity().getSupportFragmentManager().popBackStack();
     }
 
-    public void setEditBook(boolean b) {
-        this.editBook = b;
+
+    public void setEditBook(Book book) {
+        this.book_toEdit = book;
+        this.editBook = true;
+
+        editText_Author.setText(book.getAuthor());
+        editText_Title.setText(book.getTitle());
+        editText_desc.setText(book.getShort_description());
+        editText_url.setText(book.getImage_url());
+
+        if(book.isReadenByUser()){
+            bookReaden_Switch.setChecked(true);
+            bookReaden_Switch.setText(book.getFinish_date());
+        }
+
     }
 
 }

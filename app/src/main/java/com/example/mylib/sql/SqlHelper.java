@@ -15,22 +15,16 @@ public class SqlHelper extends SQLiteOpenHelper {
 
 
     private static final String table_Name = "book";
-    private static final String columnssNames[] = {"id","author","title","short_description","image_url",
+    public static final String columnssNames[] = {"id","author","title","short_description","image_url",
             "readen", "year", "month","day"};
 
 
-    private static Map<String,String> columnMap = new TreeMap<>();
-
-    public static final Map<String,String> getColumnMap(){return columnMap;}
     public static final String getTable_Name(){return table_Name;}
     public static final String getDbName(){return Db_Name;}
 
 
     public SqlHelper(Context context){
         super(context,Db_Name,null,Db_Version);
-
-        for(int i=0 ; i<columnssNames.length ; i++)
-            columnMap.put(columnssNames[i],columnssNames[i]);
     }
 
 

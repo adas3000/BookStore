@@ -28,10 +28,7 @@ public class SqlAndroidTest {
         SqlManager.init(context);
         sqlManager = SqlManager.getInstance();
     }
-    @Before
-    public void clearDb(){
 
-    }
 
     @Test
     public void packageTest() {
@@ -45,9 +42,9 @@ public class SqlAndroidTest {
                 "drawable/photos/Hobbit1.png", 0, 2013, 10, 15);
 
         ArrayList<Book> bookArrayList = sqlManager.getValues();
-        assertEquals(0, bookArrayList.size());
-        bookArrayList = sqlManager.getValues();
         assertEquals(1, bookArrayList.size());
+        assertEquals("Hobbit",bookArrayList.get(0).getTitle());
+        assertEquals("Tolkien",bookArrayList.get(0).getAuthor());
     }
 
 
@@ -78,6 +75,11 @@ public class SqlAndroidTest {
 
     @Test
     public void deleteFromDbTest() {
+        sqlManager.addBookToDb("Hobbit", "Tolkien", "Two hobbits went somewhere",
+                "drawable/photos/Hobbit1.png", 0, 2013, 10, 15);
+        sqlManager.addBookToDb("Harry Potter", "Rowling", "Story of Big Wizard",
+                "drawable/photos/Harry1.png", 1, 2019, 8, 17);
+
         ArrayList<Book> bookArrayList = sqlManager.getValues();
         String deleteTitle = bookArrayList.get(0).getTitle();
         String deleteAuthor = bookArrayList.get(0).getAuthor();
@@ -95,6 +97,10 @@ public class SqlAndroidTest {
         assertEquals(1,how);
     }
 
+    @After
+    public void afterEveryTest(){
+        sqlManager.deleteAllRecordsFromDb();
+    }
 
     @AfterClass
     public static void deleteDb(){
