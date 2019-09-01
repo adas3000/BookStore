@@ -10,7 +10,7 @@ import java.util.TreeMap;
 
 public class SqlHelper extends SQLiteOpenHelper {
 
-    private static final int Db_Version = 1;
+    private static final int Db_Version = 2;
     private static final String Db_Name = "Library.db";
 
 

@@ -29,6 +29,13 @@ public class SqlAndroidTest {
         sqlManager = SqlManager.getInstance();
     }
 
+    @Before
+    public void putData(){
+        sqlManager.addBookToDb("Hobbit", "Tolkien", "Two hobbits went somewhere",
+                "drawable/photos/Hobbit1.png", 0, 2013, 10, 15);
+        sqlManager.addBookToDb("Harry Potter", "Rowling", "Story of Big Wizard",
+                "drawable/photos/Harry1.png", 1, 2019, 8, 17);
+    }
 
     @Test
     public void packageTest() {
@@ -38,11 +45,9 @@ public class SqlAndroidTest {
     @Test
     public void sqlTest() {
 
-        sqlManager.addBookToDb("Hobbit", "Tolkien", "Two hobbits went somewhere",
-                "drawable/photos/Hobbit1.png", 0, 2013, 10, 15);
 
         ArrayList<Book> bookArrayList = sqlManager.getValues();
-        assertEquals(1, bookArrayList.size());
+        assertEquals(2, bookArrayList.size());
         assertEquals("Hobbit",bookArrayList.get(0).getTitle());
         assertEquals("Tolkien",bookArrayList.get(0).getAuthor());
     }
@@ -50,10 +55,7 @@ public class SqlAndroidTest {
 
     @Test
     public void areValuesGoodTest() {
-        sqlManager.addBookToDb("Hobbit", "Tolkien", "Two hobbits went somewhere",
-                "drawable/photos/Hobbit1.png", 0, 2013, 10, 15);
-        sqlManager.addBookToDb("Harry Potter", "Rowling", "Story of Big Wizard",
-                "drawable/photos/Harry1.png", 1, 2019, 8, 17);
+
 
         ArrayList<Book> bookArrayList = sqlManager.getValues();
 
@@ -75,11 +77,6 @@ public class SqlAndroidTest {
 
     @Test
     public void deleteFromDbTest() {
-        sqlManager.addBookToDb("Hobbit", "Tolkien", "Two hobbits went somewhere",
-                "drawable/photos/Hobbit1.png", 0, 2013, 10, 15);
-        sqlManager.addBookToDb("Harry Potter", "Rowling", "Story of Big Wizard",
-                "drawable/photos/Harry1.png", 1, 2019, 8, 17);
-
         ArrayList<Book> bookArrayList = sqlManager.getValues();
         String deleteTitle = bookArrayList.get(0).getTitle();
         String deleteAuthor = bookArrayList.get(0).getAuthor();
@@ -96,6 +93,20 @@ public class SqlAndroidTest {
 
         assertEquals(1,how);
     }
+
+
+    @Test
+    public void editRecordsInDbIfEqualsThenOk(){
+        ArrayList<Book> bookArrayList = sqlManager.getValues();
+
+        sqlManager.editBookFromDb("Hobbit","Tolkien","Lord of the Rings","Son of Tolkien"
+        ,"LORDS OF THE RINGS ","url",-1,0,0,0);
+
+        assertEquals("Lord of the Rings",bookArrayList.get(0).getTitle());
+        assertEquals("Son of Tolkien",bookArrayList.get(0).getAuthor());
+
+    }
+
 
     @After
     public void afterEveryTest(){

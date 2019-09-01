@@ -120,8 +120,6 @@ public class SqlManager {
                     +"'," + SqlHelper.columnssNames[8]+" = '" + d
                     +"' WHERE " +SqlHelper.columnssNames[1]+" = '"+oldAuthor + "' AND "
                     + SqlHelper.columnssNames[2] + " = '"+ oldTitle+"'");
-
-
         }
 
     }

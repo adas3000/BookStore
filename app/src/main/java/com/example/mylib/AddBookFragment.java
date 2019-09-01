@@ -26,15 +26,16 @@ import java.util.Calendar;
 @TargetApi(Build.VERSION_CODES.N_MR1)
 public class AddBookFragment extends Fragment implements View.OnClickListener, IOnBackPressed {
 
+
     private Date date = new Date(0, 0, 0);
     private DatePickerDialog datePickerDialog;
     private boolean editBook;
     private Book book_toEdit;
-    private EditText editText_Author = getActivity().findViewById(R.id.editText_Author);
-    private EditText editText_Title = getActivity().findViewById(R.id.editText_Title);
-    private EditText editText_desc = getActivity().findViewById(R.id.editText_desc);
-    private EditText editText_url = getActivity().findViewById(R.id.editText_url);
-    private Switch bookReaden_Switch = getActivity().findViewById(R.id.switch1);
+    private EditText editText_Author;
+    private EditText editText_Title;
+    private EditText editText_desc;
+    private EditText editText_url;
+    private Switch bookReaden_Switch;
 
     @Nullable
     @Override
@@ -73,6 +74,7 @@ public class AddBookFragment extends Fragment implements View.OnClickListener, I
 
     @Override
     public void onClick(View view) {
+        if(editText_Author == null) setEditTexts();
 
         int int_readen;
         boolean readen = bookReaden_Switch.isChecked();
@@ -96,10 +98,11 @@ public class AddBookFragment extends Fragment implements View.OnClickListener, I
 
         SqlManager sqlManager = SqlManager.getInstance();
 
-        if(!editBook)
-        sqlManager.addBookToDb(title, author, desc, url, int_readen, date.getYear(), date.getMonth(), date.getDay());
+        if (!editBook)
+            sqlManager.addBookToDb(title, author, desc, url, int_readen, date.getYear(), date.getMonth(), date.getDay());
         else {
-
+            sqlManager.editBookFromDb(book_toEdit.getTitle(),book_toEdit.getAuthor(),
+                    title,author,desc,url,int_readen,date.getYear(), date.getMonth(),date.getDay());
         }
 
         Toast.makeText(getActivity(), "Book added successfully", Toast.LENGTH_SHORT).show();
@@ -117,6 +120,8 @@ public class AddBookFragment extends Fragment implements View.OnClickListener, I
 
 
     public void setEditBook(Book book) {
+        if(editText_Author == null) setEditTexts();
+
         this.book_toEdit = book;
         this.editBook = true;
 
@@ -125,11 +130,20 @@ public class AddBookFragment extends Fragment implements View.OnClickListener, I
         editText_desc.setText(book.getShort_description());
         editText_url.setText(book.getImage_url());
 
-        if(book.isReadenByUser()){
+        if (book.isReadenByUser()) {
             bookReaden_Switch.setChecked(true);
             bookReaden_Switch.setText(book.getFinish_date());
         }
 
+    }
+
+
+    private void setEditTexts() {
+        editText_Author = getActivity().findViewById(R.id.editText_Author);
+        editText_Title = getActivity().findViewById(R.id.editText_Title);
+        editText_desc = getActivity().findViewById(R.id.editText_desc);
+        editText_url = getActivity().findViewById(R.id.editText_url);
+        bookReaden_Switch = getActivity().findViewById(R.id.switch1);
     }
 
 }
