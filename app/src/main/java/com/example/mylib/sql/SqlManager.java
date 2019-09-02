@@ -40,7 +40,7 @@ public class SqlManager {
 
 
     public ArrayList<Book> getValues() {
-        if(context==null) throw new IllegalStateException("No context detected");
+        if(context==null) return new ArrayList<>();// throw new IllegalStateException("No context detected");
 
         SQLiteDatabase db = sqlHelper.getReadableDatabase();
         Cursor cursor = sqlHelper.getValues(db);
