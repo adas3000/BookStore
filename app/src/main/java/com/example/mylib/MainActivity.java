@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment;
 
 import android.view.Menu;
 import android.view.Window;
+import android.view.animation.AccelerateInterpolator;
 
 import java.util.List;
 
@@ -32,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        
+
 
         SqlManager.init(getApplicationContext());
 

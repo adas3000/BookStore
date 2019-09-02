@@ -4,60 +4,65 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.util.Log;
 import android.widget.ImageView;
+
 import androidx.test.InstrumentationRegistry;
+
 import com.example.mylib.Data.Book;
 import com.example.mylib.sql.SqlManager;
+
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
+
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import static org.junit.Assert.*;
 
 public class AllBooksFragmentTest {
 
-    private Context context;
-    private ArrayList<Book> bookArrayList;
-    private SqlManager sqlManager;
+    private static Context context;
+    private static ArrayList<Book> bookArrayList;
+    private static SqlManager sqlManager;
 
-    @Before
-    public void setup() {
+    @BeforeClass
+    public static void setup() {
         context = InstrumentationRegistry.getTargetContext();
         SqlManager.init(context);
         sqlManager = SqlManager.getInstance();
-        sqlManager.addBookToDb("Adam", "Adam Z", "One day...",
-                "https://java.sogeti.nl/JavaBlog/wp-content/uploads/2009/04/android_icon_256.png", 1, 1, 1, 1);
+        sqlManager.addBookToDb("Hobbit", "Tolkien", "Two hobbits went somewhere",
+                "drawable/photos/Hobbit1.png", 0, 2013, 10, 15);
+        sqlManager.addBookToDb("Harry Potter", "Rowling", "Story of Big Wizard",
+                "drawable/photos/Harry1.png", 1, 2019, 8, 17);
         bookArrayList = sqlManager.getValues();
     }
 
 
     @Test
-    public void goodImageTest() throws Exception {
+    public void filterBooks() {
+
+        final String str = "tol";
+
+        Stream<Book> bookStreamFilter = bookArrayList.stream();
 
 
-        String img_url = "https://java.sogeti.nl/JavaBlog/wp-content/uploads/2009/04/android_icon_256.png";
-        ImageView imageView = new ImageView(context);
-
-        Bitmap bitmap = null;
-
-        try{
-            InputStream in = new java.net.URL(img_url).openStream();
-            bitmap = BitmapFactory.decodeStream(in);
-        }catch(Exception e){
-            e.fillInStackTrace();
-        }
-        imageView.setImageBitmap(bitmap);
-        ImageView other_imageView = new ImageView(context);
-        other_imageView.setImageResource(R.drawable.ic_action_name);
-        Bitmap otherbitmap = ((BitmapDrawable)other_imageView.getDrawable()).getBitmap();
+        List<Book> result = bookStreamFilter.filter(g -> g.getTitle().toLowerCase().contains(str) || g.getAuthor().toLowerCase().contains(str))
+                .collect(Collectors.toCollection(ArrayList::new));
 
 
-        assertEquals(true,otherbitmap.sameAs(otherbitmap));
+        assertEquals(1, result.size());
+
     }
 
-    @After
-    public void clear() {
+    @AfterClass
+    public static void clear() {
         context.deleteDatabase(SqlManager.getDbName());
     }
 
