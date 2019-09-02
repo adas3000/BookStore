@@ -2,7 +2,6 @@ package com.example.mylib;
 
 import android.annotation.TargetApi;
 import android.app.DatePickerDialog;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,7 +23,7 @@ import com.example.mylib.sql.SqlManager;
 import java.sql.Date;
 import java.util.Calendar;
 
-@TargetApi(Build.VERSION_CODES.N_MR1)
+@TargetApi(25)
 public class AddBookFragment extends Fragment implements View.OnClickListener, IOnBackPressed {
 
 
@@ -42,13 +41,13 @@ public class AddBookFragment extends Fragment implements View.OnClickListener, I
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        LinearLayout view = (LinearLayout)inflater.inflate(R.layout.addbook_activity, container, false);
+        LinearLayout view = (LinearLayout) inflater.inflate(R.layout.addbook_activity, container, false);
 
 
         setEditTexts(view);
 
 
-        if(editBook) {
+        if (editBook) {
             editText_Author.setText(book_toEdit.getAuthor());
             editText_Title.setText(book_toEdit.getTitle());
             editText_desc.setText(book_toEdit.getShort_description());
@@ -115,14 +114,17 @@ public class AddBookFragment extends Fragment implements View.OnClickListener, I
 
         SqlManager sqlManager = SqlManager.getInstance();
 
+        String text_to_Show = "Book added successfully";
         if (!editBook)
             sqlManager.addBookToDb(title, author, desc, url, int_readen, date.getYear(), date.getMonth(), date.getDay());
+
         else {
-            sqlManager.editBookFromDb(book_toEdit.getTitle(),book_toEdit.getAuthor(),
-                    title,author,desc,url,int_readen,date.getYear(), date.getMonth(),date.getDay());
+            sqlManager.editBookFromDb(book_toEdit.getTitle(), book_toEdit.getAuthor(),
+                    title, author, desc, url, int_readen, date.getYear(), date.getMonth(), date.getDay());
+            text_to_Show = text_to_Show.replace("added", "edited");
         }
 
-        Toast.makeText(getActivity(), "Book added successfully", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), text_to_Show, Toast.LENGTH_SHORT).show();
         editText_Author.setText("");
         editText_Title.setText("");
         editText_desc.setText("");
