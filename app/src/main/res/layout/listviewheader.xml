@@ -11,10 +11,14 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="30dp"
-        android:background="@color/colorAccent"
-        android:ems="10"
+        android:background="#C0C0C0"
+        android:focusable="true"
         android:hint="Search..."
         android:inputType="text"
-        android:padding="10dp" />
+        android:padding="10dp"
+        android:textColor="@color/colorMain"
+        android:textColorLink="@color/colorMain" />
+
+
 
 </LinearLayout>
