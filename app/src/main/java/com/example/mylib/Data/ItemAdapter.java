@@ -24,14 +24,14 @@ public class ItemAdapter extends BaseAdapter {
     private boolean onlyReaden;
 
 
-    public ItemAdapter(Context context,ArrayList<Book> bookArrayList,boolean onlyReaden){
-        this.layoutInflater =(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    public ItemAdapter(Context context, ArrayList<Book> bookArrayList, boolean onlyReaden) {
+        this.layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.bookArrayList = bookArrayList;
         this.onlyReaden = onlyReaden;
 
 
-        if(onlyReaden){
-            bookArrayList.removeIf(b->!b.isReadenByUser());
+        if (onlyReaden) {
+            bookArrayList.removeIf(b -> !b.isReadenByUser());
         }
     }
 
@@ -54,16 +54,15 @@ public class ItemAdapter extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
 
+        View v = layoutInflater.inflate(R.layout.my_listview_detail, null);
 
-        View v =layoutInflater.inflate(R.layout.my_listview_detail,null);
-
-        TextView textView_AuthorAndTitle =v.findViewById(R.id.textView_AuthorandTitle);
+        TextView textView_AuthorAndTitle = v.findViewById(R.id.textView_AuthorandTitle);
         ImageView imageView_Cover = v.findViewById(R.id.imageView_Cover);
 
 
         Book book = bookArrayList.get(i);
 
-        textView_AuthorAndTitle.setText(book.getAuthor()+"\n"+book.getTitle());
+        textView_AuthorAndTitle.setText(book.getAuthor() + "\n" + book.getTitle());
         textView_AuthorAndTitle.setGravity(Gravity.CENTER);
         textView_AuthorAndTitle.setTextSize(18);
         Picasso.with(v.getContext()).load(book.getImage_url()).placeholder(R.mipmap.ic_launcher).into(imageView_Cover);

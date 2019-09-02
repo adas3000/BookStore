@@ -1,8 +1,6 @@
 package com.example.mylib;
 
 import android.content.Context;
-import android.util.Log;
-
 import androidx.test.InstrumentationRegistry;
 
 import com.example.mylib.Data.Book;
@@ -29,6 +27,7 @@ public class SqlAndroidTest {
         context = InstrumentationRegistry.getTargetContext();
         SqlManager.init(context);
         sqlManager = SqlManager.getInstance();
+        sqlManager.deleteAllRecordsFromDb();
     }
 
     @Before

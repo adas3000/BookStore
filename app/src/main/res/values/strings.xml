@@ -9,10 +9,6 @@
 
     <string name="menu_lib">My Library</string>
     <string name="menu_books">Books</string>
-    <string name="menu_slideshow">Slideshow</string>
-    <string name="menu_tools">Tools</string>
-    <string name="menu_share">Share</string>
-    <string name="menu_send">Send</string>
     <string name="title_activity_mylib_activity">mylib_activity</string>
     <string name="title_activity_mylib">activity_mylib</string>
 
