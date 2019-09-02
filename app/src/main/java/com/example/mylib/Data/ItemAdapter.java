@@ -1,6 +1,7 @@
 package com.example.mylib.Data;
 
 import android.annotation.TargetApi;
+import android.app.Application;
 import android.content.Context;
 import android.os.Build;
 import android.view.Gravity;
@@ -12,6 +13,7 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.mylib.R;
 import com.squareup.picasso.Picasso;
@@ -29,11 +31,13 @@ public class ItemAdapter extends BaseAdapter implements Filterable {
     private boolean onlyReaden;
     private ItemFilter itemFilter = new ItemFilter();
 
+
     public ItemAdapter(Context context, ArrayList<Book> bookArrayList, boolean onlyReaden) {
         this.layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.bookArrayList_originalData = bookArrayList;
         this.bookArrayList_filteredData = bookArrayList;
         this.onlyReaden = onlyReaden;
+
 
 
         if (onlyReaden) {
@@ -95,6 +99,12 @@ public class ItemAdapter extends BaseAdapter implements Filterable {
             bookArrayList_filteredData = bookStreamFilter.filter(g -> g.getTitle().toLowerCase().contains(find) || g.getAuthor().toLowerCase().contains(find))
                     .collect(Collectors.toCollection(ArrayList::new));
 
+
+            if (bookArrayList_filteredData.isEmpty()) {
+                bookArrayList_filteredData = bookArrayList_originalData;
+            }
+
+
             results.values = bookArrayList_filteredData;
             results.count = bookArrayList_filteredData.size();
 
@@ -103,7 +113,7 @@ public class ItemAdapter extends BaseAdapter implements Filterable {
 
         @Override
         protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-
+            notifyDataSetChanged();
         }
     }
 

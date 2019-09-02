@@ -9,8 +9,17 @@
         android:id="@+id/editText_Search"
         android:layout_width="match_parent"
         android:layout_height="63dp"
+        android:layout_marginLeft="15dp"
         android:background="#3D4956"
         android:hint="Search..."
         android:inputType="text"
         android:padding="10dp" />
+
+    <TextView
+        android:id="@+id/textViewNoMatches"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:layout_marginLeft="15dp"
+        android:visibility="invisible"
+        android:text="@string/tv_nomatches" />
 </LinearLayout>

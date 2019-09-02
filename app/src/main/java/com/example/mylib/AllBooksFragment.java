@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,9 +22,6 @@ import com.example.mylib.Data.ItemAdapter;
 import com.example.mylib.sql.SqlManager;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class AllBooksFragment extends Fragment implements IOnBackPressed {
 
@@ -32,6 +30,7 @@ public class AllBooksFragment extends Fragment implements IOnBackPressed {
     private boolean onlyReaden = false;
     private ArrayList<Book> bookArrayList;
     private ListView listView;
+
 
     @TargetApi(25)
     @Nullable
@@ -57,7 +56,7 @@ public class AllBooksFragment extends Fragment implements IOnBackPressed {
 
 
         listView.setOnItemClickListener((adapterView, view1, i, l) -> {
-            Book clicked_Book = bookArrayList.get(i);
+            Book clicked_Book = bookArrayList.get(i-1);
 
             SingleBookFragment nextFragment = new SingleBookFragment();
             nextFragment.setBook(clicked_Book);
