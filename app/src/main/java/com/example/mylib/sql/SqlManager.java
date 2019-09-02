@@ -104,13 +104,13 @@ public class SqlManager {
 
 
 
-    public void editBookFromDb(String oldTitle,String oldAuthor,String newTitle,String newAuthor,
+    public int editBookFromDb(String oldTitle,String oldAuthor,String newTitle,String newAuthor,
                                String newDesc,String newImageUrl,int readen,int y,int m,int d){
 
 
         try(SQLiteDatabase db = sqlHelper.getWritableDatabase()){
 
-            db.execSQL("UPDATE "+SqlHelper.getTable_Name() + " SET "+SqlHelper.columnssNames[1] + " = '"
+          /*  db.execSQL("UPDATE "+SqlHelper.getTable_Name() + " SET "+SqlHelper.columnssNames[1] + " = '"
             +newAuthor +"',"+ SqlHelper.columnssNames[2]+" = '" + newTitle
                     +"'," + SqlHelper.columnssNames[3]+" = '" + newDesc
                     +"'," + SqlHelper.columnssNames[4]+" = '" + newImageUrl
@@ -120,6 +120,22 @@ public class SqlManager {
                     +"'," + SqlHelper.columnssNames[8]+" = '" + d
                     +"' WHERE " +SqlHelper.columnssNames[1]+" = '"+oldAuthor + "' AND "
                     + SqlHelper.columnssNames[2] + " = '"+ oldTitle+"'");
+*/
+
+            ContentValues cv = new ContentValues();
+            cv.put(SqlHelper.columnssNames[1],newAuthor);
+            cv.put(SqlHelper.columnssNames[2],newTitle);
+            cv.put(SqlHelper.columnssNames[3],newDesc);
+            cv.put(SqlHelper.columnssNames[4],newImageUrl);
+            cv.put(SqlHelper.columnssNames[5],readen);
+            cv.put(SqlHelper.columnssNames[6],y);
+            cv.put(SqlHelper.columnssNames[7],m);
+            cv.put(SqlHelper.columnssNames[8],d);
+
+
+            return db.update(SqlHelper.getTable_Name(),cv,SqlHelper.columnssNames[1]+" =?"
+            +" AND "+SqlHelper.columnssNames[2] + " =?",new String[]{oldAuthor,oldTitle});
+
         }
 
     }

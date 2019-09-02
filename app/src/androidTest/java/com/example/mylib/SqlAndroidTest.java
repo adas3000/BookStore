@@ -1,6 +1,7 @@
 package com.example.mylib;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.test.InstrumentationRegistry;
 
@@ -15,6 +16,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
+import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
 
 public class SqlAndroidTest {
@@ -99,12 +101,16 @@ public class SqlAndroidTest {
     public void editRecordsInDbIfEqualsThenOk(){
         ArrayList<Book> bookArrayList = sqlManager.getValues();
 
-        sqlManager.editBookFromDb("Hobbit","Tolkien","Lord of the Rings","Son of Tolkien"
+
+        int result = sqlManager.editBookFromDb("Hobbit","Tolkien","Lord of the Rings","Son of Tolkien"
         ,"LORDS OF THE RINGS ","url",-1,0,0,0);
 
-        assertEquals("Lord of the Rings",bookArrayList.get(0).getTitle());
-        assertEquals("Son of Tolkien",bookArrayList.get(0).getAuthor());
+        bookArrayList = sqlManager.getValues();
 
+        assertTrue(result>0);
+
+        assertEquals("Son of Tolkien",bookArrayList.get(0).getAuthor());
+        assertEquals("Lord of the Rings",bookArrayList.get(0).getTitle());
     }
 
 
