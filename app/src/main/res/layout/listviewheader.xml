@@ -8,10 +8,10 @@
     <EditText
         android:id="@+id/editText_Search"
         android:layout_width="match_parent"
-        android:layout_height="63dp"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="30dp"
-        android:background="#3D4956"
+        android:background="@color/colorAccent"
         android:ems="10"
         android:hint="Search..."
         android:inputType="text"

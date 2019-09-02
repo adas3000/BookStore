@@ -3,6 +3,7 @@ package com.example.mylib.Data;
 import android.annotation.TargetApi;
 import android.app.Application;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Build;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -14,6 +15,8 @@ import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.core.content.ContextCompat;
 
 import com.example.mylib.R;
 import com.squareup.picasso.Picasso;
@@ -30,7 +33,6 @@ public class ItemAdapter extends BaseAdapter implements Filterable {
     private ArrayList<Book> bookArrayList_filteredData;
     private boolean onlyReaden;
     private ItemFilter itemFilter = new ItemFilter();
-
 
     public ItemAdapter(Context context, ArrayList<Book> bookArrayList, boolean onlyReaden) {
         this.layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -66,15 +68,21 @@ public class ItemAdapter extends BaseAdapter implements Filterable {
 
         View v = layoutInflater.inflate(R.layout.my_listview_detail, null);
 
-        TextView textView_AuthorAndTitle = v.findViewById(R.id.textView_AuthorandTitle);
+
         ImageView imageView_Cover = v.findViewById(R.id.imageView_Cover);
+
+        TextView textView_Author = v.findViewById(R.id.textViewAuthor);
+        TextView textView_Title = v.findViewById(R.id.textViewTitle);
 
 
         Book book = bookArrayList_filteredData.get(i);
 
-        textView_AuthorAndTitle.setText(book.getAuthor() + "\n" + book.getTitle());
-        textView_AuthorAndTitle.setGravity(Gravity.CENTER);
-        textView_AuthorAndTitle.setTextSize(18);
+        textView_Title.setText(book.getTitle());
+        textView_Author.setText(book.getAuthor());
+
+
+
+
         Picasso.with(v.getContext()).load(book.getImage_url()).placeholder(R.mipmap.ic_launcher).into(imageView_Cover);
 
         return v;
