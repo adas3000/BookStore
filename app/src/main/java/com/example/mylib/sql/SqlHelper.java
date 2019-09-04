@@ -10,13 +10,13 @@ import java.util.TreeMap;
 
 public class SqlHelper extends SQLiteOpenHelper {
 
-    private static final int Db_Version = 2;
+    private static final int Db_Version = 3;
     private static final String Db_Name = "Library.db";
 
 
     private static final String table_Name = "book";
     public static final String columnssNames[] = {"id","author","title","short_description","image_url",
-            "readen", "year", "month","day"};
+            "readen", "date"};
 
 
     public static final String getTable_Name(){return table_Name;}
@@ -38,10 +38,7 @@ public class SqlHelper extends SQLiteOpenHelper {
                 "    short_description Text,\n" +
                 "    image_url Text,\n" +
                 "    readen INTEGER,"+
-                "year INTEGER,"+
-                "month INTEGER,"+
-                "day INTEGER"+
-                ");");
+                "date Text)");
     }
 
     @Override

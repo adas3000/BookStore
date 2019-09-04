@@ -27,7 +27,6 @@ import com.example.mylib.BackPressed.IOnBackPressed;
 
 import com.example.mylib.Data.Book;
 import com.example.mylib.Data.ItemAdapter;
-import com.example.mylib.Helpers.SetSpinnerHelper;
 import com.example.mylib.sql.SqlManager;
 
 import java.util.ArrayList;

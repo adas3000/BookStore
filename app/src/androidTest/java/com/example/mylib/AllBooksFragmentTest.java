@@ -19,7 +19,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.io.InputStream;
+import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -38,9 +40,9 @@ public class AllBooksFragmentTest {
         SqlManager.init(context);
         sqlManager = SqlManager.getInstance();
         sqlManager.addBookToDb("Hobbit", "Tolkien", "Two hobbits went somewhere",
-                "drawable/photos/Hobbit1.png", 0, 2013, 10, 15);
+                "drawable/photos/Hobbit1.png", 0, new Date(Calendar.getInstance().getTimeInMillis()));
         sqlManager.addBookToDb("Harry Potter", "Rowling", "Story of Big Wizard",
-                "drawable/photos/Harry1.png", 1, 2019, 8, 17);
+                "drawable/photos/Harry1.png", 1,new Date(Calendar.getInstance().getTimeInMillis()));
         bookArrayList = sqlManager.getValues();
     }
 

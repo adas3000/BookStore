@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.example.mylib.Data.Book;
 
+import java.sql.Date;
 import java.util.ArrayList;
 
 public class SqlManager {
@@ -54,15 +55,14 @@ public class SqlManager {
                 String short_desc = cursor.getString(cursor.getColumnIndex(SqlHelper.columnssNames[3]));
                 String image_url = cursor.getString(cursor.getColumnIndex(SqlHelper.columnssNames[4]));
                 int readen = cursor.getInt(cursor.getColumnIndex(SqlHelper.columnssNames[5]));
-                int temp_year = cursor.getInt(cursor.getColumnIndex(SqlHelper.columnssNames[6]));
-                int temp_month = cursor.getInt(cursor.getColumnIndex(SqlHelper.columnssNames[7]));
-                int temp_day = cursor.getInt(cursor.getColumnIndex(SqlHelper.columnssNames[8]));
+                Date date = Date.valueOf(cursor.getString(cursor.getColumnIndex(SqlHelper.columnssNames[6])));
+
 
                 boolean _readen = readen > 0 ? true : false;
 
 
                 Book book = new Book.Builder(title, author, short_desc, image_url).readenByUser(_readen).
-                        date(temp_year, temp_month, temp_day).build();
+                        date(date).build();
 
                 bookArrayList.add(book);
             } while (cursor.moveToNext());
@@ -71,7 +71,7 @@ public class SqlManager {
     }
 
     public void addBookToDb(String title, String author, String short_desc, String image_url, int readen,
-                            int y, int m, int d) {
+                          Date date) {
         if(context==null) throw new IllegalStateException("No context detected");
         try(SQLiteDatabase db = sqlHelper.getWritableDatabase()) {
             ContentValues contentValues = new ContentValues();
@@ -81,9 +81,7 @@ public class SqlManager {
             contentValues.put(SqlHelper.columnssNames[3], short_desc);
             contentValues.put(SqlHelper.columnssNames[4], image_url);
             contentValues.put(SqlHelper.columnssNames[5], readen);
-            contentValues.put(SqlHelper.columnssNames[6], y);
-            contentValues.put(SqlHelper.columnssNames[7], m);
-            contentValues.put(SqlHelper.columnssNames[8], d);
+            contentValues.put(SqlHelper.columnssNames[6], date.toString());
 
             db.insert(SqlHelper.getTable_Name(), null, contentValues);
         }
@@ -104,7 +102,7 @@ public class SqlManager {
 
 
     public int editBookFromDb(String oldTitle,String oldAuthor,String newTitle,String newAuthor,
-                               String newDesc,String newImageUrl,int readen,int y,int m,int d){
+                               String newDesc,String newImageUrl,int readen,Date date){
 
 
         try(SQLiteDatabase db = sqlHelper.getWritableDatabase()){
@@ -115,9 +113,8 @@ public class SqlManager {
             cv.put(SqlHelper.columnssNames[3],newDesc);
             cv.put(SqlHelper.columnssNames[4],newImageUrl);
             cv.put(SqlHelper.columnssNames[5],readen);
-            cv.put(SqlHelper.columnssNames[6],y);
-            cv.put(SqlHelper.columnssNames[7],m);
-            cv.put(SqlHelper.columnssNames[8],d);
+            cv.put(SqlHelper.columnssNames[6],date.toString());
+
 
 
             return db.update(SqlHelper.getTable_Name(),cv,SqlHelper.columnssNames[1]+" =?"

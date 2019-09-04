@@ -12,7 +12,9 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
@@ -33,9 +35,9 @@ public class SqlAndroidTest {
     @Before
     public void putData(){
         sqlManager.addBookToDb("Hobbit", "Tolkien", "Two hobbits went somewhere",
-                "drawable/photos/Hobbit1.png", 0, 2013, 10, 15);
+                "drawable/photos/Hobbit1.png", 0, new Date(Calendar.getInstance().getTimeInMillis()));
         sqlManager.addBookToDb("Harry Potter", "Rowling", "Story of Big Wizard",
-                "drawable/photos/Harry1.png", 1, 2019, 8, 17);
+                "drawable/photos/Harry1.png", 1,new Date(Calendar.getInstance().getTimeInMillis()));
     }
 
     @Test
@@ -102,7 +104,7 @@ public class SqlAndroidTest {
 
 
         int result = sqlManager.editBookFromDb("Hobbit","Tolkien","Lord of the Rings","Son of Tolkien"
-        ,"LORDS OF THE RINGS ","url",-1,0,0,0);
+        ,"LORDS OF THE RINGS ","url",-1,new Date(Calendar.getInstance().getTimeInMillis()));
 
         bookArrayList = sqlManager.getValues();
 

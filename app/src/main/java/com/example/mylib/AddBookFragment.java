@@ -2,6 +2,7 @@ package com.example.mylib;
 
 import android.annotation.TargetApi;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,7 +28,7 @@ import java.util.Calendar;
 public class AddBookFragment extends Fragment implements View.OnClickListener, IOnBackPressed {
 
 
-    private Date date = new Date(0, 0, 0);
+    private Date date = new Date(Calendar.getInstance().getTimeInMillis());
     private DatePickerDialog datePickerDialog;
     private boolean editBook;
     private Book book_toEdit;
@@ -55,7 +56,7 @@ public class AddBookFragment extends Fragment implements View.OnClickListener, I
 
             if (book_toEdit.isReadenByUser()) {
                 bookReaden_Switch.setChecked(true);
-                bookReaden_Switch.setText(book_toEdit.getFinish_date());
+                bookReaden_Switch.setText(book_toEdit.getFinish_date().toString());
             }
         }
 
@@ -72,16 +73,26 @@ public class AddBookFragment extends Fragment implements View.OnClickListener, I
             int month = calendar.get(Calendar.MONTH);
             int year = calendar.get(Calendar.YEAR);
 
+
+
             if (compoundButton.isChecked()) {
                 datePickerDialog = new DatePickerDialog(getContext(), (datePicker, year1, month1, day1) -> {
-                    bookReaden_Switch.setText("Readen:" + day1 + "/" + month1 + 1 + "/" + year1);
-                    date = new Date(year1, month1 + 1, day1);
-                }, day, month, year);
+                    bookReaden_Switch.setText("Readen:" + day1 + "/" + month1  + "/" + year1);
+                    date = new Date(year1-1900, month1 , day1);
+                    },year,month,day);
                 datePickerDialog.show();
+
+                datePickerDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", (dialogInterface, i) -> {
+                    compoundButton.setChecked(false);
+                });
+
             } else {
+
                 bookReaden_Switch.setText("Not readen");
-                date = new Date(0, 0, 0);
+               // date = new Date(0, 0, 0);
             }
+
+
         });
 
 
@@ -116,11 +127,11 @@ public class AddBookFragment extends Fragment implements View.OnClickListener, I
 
         String text_to_Show = "Book added successfully";
         if (!editBook)
-            sqlManager.addBookToDb(title, author, desc, url, int_readen, date.getYear(), date.getMonth(), date.getDay());
+            sqlManager.addBookToDb(title, author, desc, url, int_readen, date);
 
         else {
             sqlManager.editBookFromDb(book_toEdit.getTitle(), book_toEdit.getAuthor(),
-                    title, author, desc, url, int_readen, date.getYear(), date.getMonth(), date.getDay());
+                    title, author, desc, url, int_readen,date);
             text_to_Show = text_to_Show.replace("added", "edited");
         }
 
