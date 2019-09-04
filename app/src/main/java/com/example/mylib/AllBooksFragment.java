@@ -44,10 +44,6 @@ public class AllBooksFragment extends Fragment implements IOnBackPressed {
         ItemAdapter itemAdapter = new ItemAdapter(view.getContext(), bookArrayList);
 
 
-        LayoutInflater layoutInflater = getLayoutInflater();
-        ViewGroup header = (ViewGroup) layoutInflater.inflate(R.layout.listviewheader, listView, false);
-        listView.addHeaderView(header);
-
 
         listView.setAdapter(itemAdapter);
 
