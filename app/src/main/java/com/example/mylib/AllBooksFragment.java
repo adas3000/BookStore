@@ -92,28 +92,6 @@ public class AllBooksFragment extends Fragment implements IOnBackPressed {
         });
 
 
-     /*   EditText editText_Search = view.findViewById(R.id.editText_Search);
-        editText_Search.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-                itemAdapter.getFilter().filter(charSequence);
-
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-
-            }
-        });
-*/
 
 
         return view;
