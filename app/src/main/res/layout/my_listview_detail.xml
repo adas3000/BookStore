@@ -45,7 +45,7 @@
         android:layout_alignParentRight="true"
         android:layout_marginStart="2dp"
         android:layout_marginLeft="2dp"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="73dp"
         android:layout_marginEnd="2dp"
         android:layout_marginRight="2dp"
         android:layout_toEndOf="@+id/textView_AuthorText"
@@ -53,10 +53,11 @@
         android:textColor="@color/colorMain"
         android:textSize="18sp" />
 
+
     <TextView
         android:id="@+id/textView_AuthorText"
         android:layout_width="wrap_content"
-        android:layout_height="35dp"
+        android:layout_height="40dp"
         android:layout_below="@+id/textViewTitle"
         android:layout_marginStart="7dp"
         android:layout_marginLeft="7dp"
@@ -66,5 +67,55 @@
         android:text="Author:"
         android:textColor="@color/colorBlack"
         android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/textView_book_status_Text"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_below="@+id/textView_AuthorText"
+        android:layout_marginStart="1dp"
+        android:layout_marginLeft="1dp"
+        android:layout_marginTop="70dp"
+        android:layout_toEndOf="@+id/imageView_Cover"
+        android:layout_toRightOf="@+id/imageView_Cover"
+        android:text="@string/book_status_Text"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp" />
+
+
+    <TextView
+        android:id="@+id/textView_book_status"
+        android:layout_width="126dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/textViewAuthor"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="27dp"
+        android:layout_marginLeft="27dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_toEndOf="@+id/textView_AuthorText"
+        android:layout_toRightOf="@+id/textView_AuthorText"
+        android:textColor="@color/colorMain"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/textViewFinishDate"
+        android:text="@string/book_finishDate"
+        android:layout_width="214dp"
+        android:layout_height="46dp"
+        android:layout_below="@+id/textView_book_status_Text"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="-61dp"
+        android:layout_marginLeft="-61dp"
+        android:layout_marginTop="22dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_toEndOf="@+id/textView_AuthorText"
+        android:layout_toRightOf="@+id/textView_AuthorText"
+        android:textColor="@color/colorBlack"
+        android:textSize="16sp" />
 
 </RelativeLayout>

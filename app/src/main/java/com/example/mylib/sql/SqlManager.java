@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteDatabase;
 import com.example.mylib.Data.Book;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 public class SqlManager {
 
@@ -22,7 +21,7 @@ public class SqlManager {
     public static SqlManager getInstance(){return instance;}
     private SqlManager()  {
         if(instance!=null){
-            throw new IllegalStateException("Trying to create another object of singleton class.");
+            throw new RuntimeException ("Trying to create another object of singleton class.");
         }
     }
 
@@ -33,7 +32,7 @@ public class SqlManager {
             sqlHelper = new SqlHelper(context);
         }
         else
-            throw new IllegalStateException("Data was initalized");
+            throw new RuntimeException ("Data was initalized");
     }
 
 
@@ -110,18 +109,6 @@ public class SqlManager {
 
         try(SQLiteDatabase db = sqlHelper.getWritableDatabase()){
 
-          /*  db.execSQL("UPDATE "+SqlHelper.getTable_Name() + " SET "+SqlHelper.columnssNames[1] + " = '"
-            +newAuthor +"',"+ SqlHelper.columnssNames[2]+" = '" + newTitle
-                    +"'," + SqlHelper.columnssNames[3]+" = '" + newDesc
-                    +"'," + SqlHelper.columnssNames[4]+" = '" + newImageUrl
-                    +"'," + SqlHelper.columnssNames[5]+" = '" + readen
-                    +"'," + SqlHelper.columnssNames[6]+" = '" + y
-                    +"'," + SqlHelper.columnssNames[7]+" = '" + m
-                    +"'," + SqlHelper.columnssNames[8]+" = '" + d
-                    +"' WHERE " +SqlHelper.columnssNames[1]+" = '"+oldAuthor + "' AND "
-                    + SqlHelper.columnssNames[2] + " = '"+ oldTitle+"'");
-*/
-
             ContentValues cv = new ContentValues();
             cv.put(SqlHelper.columnssNames[1],newAuthor);
             cv.put(SqlHelper.columnssNames[2],newTitle);
@@ -135,7 +122,6 @@ public class SqlManager {
 
             return db.update(SqlHelper.getTable_Name(),cv,SqlHelper.columnssNames[1]+" =?"
             +" AND "+SqlHelper.columnssNames[2] + " =?",new String[]{oldAuthor,oldTitle});
-
         }
 
     }

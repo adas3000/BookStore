@@ -35,7 +35,6 @@ public class ItemAdapter extends BaseAdapter implements Filterable {
         this.onlyReaden = onlyReaden;
 
 
-
         if (onlyReaden) {
             bookArrayList.removeIf(b -> !b.isReadenByUser());
         }

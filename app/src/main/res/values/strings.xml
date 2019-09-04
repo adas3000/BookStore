@@ -25,4 +25,14 @@
     <string name="tv_nomatches">Any Matches</string>
 
 
+
+    <string name="book_status_Text">On the self:</string>
+    <string name="book_status_Unread">Unread</string>
+    <string name="book_status_WannaRead">I want to read</string>
+    <string name="book_status_ReadingNow">Im reading now</string>
+    <string name="book_status_alreadyRead">I have read</string>
+
+
+    <string name="book_finishDate">I finished:</string>
+
 </resources>
