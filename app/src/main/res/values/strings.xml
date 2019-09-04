@@ -7,8 +7,7 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
-    <string name="menu_lib">My Library</string>
-    <string name="menu_books">Books</string>
+    <string name="menu_books">Library</string>
     <string name="title_activity_mylib_activity">mylib_activity</string>
     <string name="title_activity_mylib">activity_mylib</string>
 

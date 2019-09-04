@@ -8,6 +8,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 
 import android.view.MenuItem;
 
+import com.example.mylib.Data.AppData;
 import com.example.mylib.sql.SqlManager;
 import com.google.android.material.navigation.NavigationView;
 
@@ -18,15 +19,14 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import android.view.Menu;
-import android.view.Window;
-import android.view.animation.AccelerateInterpolator;
+import android.widget.SearchView;
+
 
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     NavigationView navigationView;
-
 
 
     @Override
@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AllBooksFragment()).commit();
-            navigationView.setCheckedItem(R.id.mylib_books);
+            navigationView.setCheckedItem(R.id.mylib_allbooks);
         }
     }
 
@@ -80,8 +80,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+
+        MenuItem item = menu.findItem(R.id.action_search);
+        SearchView searchView =(SearchView) menu.findItem(R.id.action_search);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+
+                return false;
+            }
+        });
+
         return true;
     }
 
@@ -101,12 +117,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.mylib_books:
-                AllBooksFragment fragment = new AllBooksFragment();
-                fragment.setOnlyReaden(true);
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
-                navigationView.setCheckedItem(R.id.mylib_books);
-                break;
             case R.id.mylib_allbooks:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AllBooksFragment()).addToBackStack(null).commit();
                 navigationView.setCheckedItem(R.id.mylib_allbooks);
@@ -123,6 +133,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
+    @TargetApi(21)
     @Override
     protected void onDestroy() {
         SqlManager.getInstance().onClose();
