@@ -92,20 +92,20 @@ public class AllBooksFragment extends Fragment implements IOnBackPressed {
 
 
         listView.setOnItemClickListener((adapterView, view1, i, l) -> {
-            Book clicked_Book = bookArrayList.get(i);
+            Book clicked_Book = bookArrayList.get(i-1);
 
             SingleBookFragment nextFragment = new SingleBookFragment();
             nextFragment.setBook(clicked_Book);
             getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, nextFragment).addToBackStack(null).commit();
         });
 
-        spinner_Show = view.findViewById(R.id.spinner_Show);
-        spinner_sortBy = view.findViewById(R.id.spinner_Sort);
-        spinner_onshelvesFrom = view.findViewById(R.id.onshelvesFrom);
+      //  spinner_Show = view.findViewById(R.id.spinner_Show);
+       // spinner_sortBy = view.findViewById(R.id.spinner_Sort);
+     //   spinner_onshelvesFrom = view.findViewById(R.id.spinner_onshelvesText);
 
-        SetSpinnerHelper.SetSpinner(spinner_Show,R.array.showArgs);
-        SetSpinnerHelper.SetSpinner(spinner_sortBy,R.array.sortByArgs);
-        SetSpinnerHelper.SetSpinner(spinner_onshelvesFrom,R.array.onshelvesFromArgs);
+      //  SetSpinnerHelper.SetSpinner(spinner_Show,R.array.showArgs);
+     //   SetSpinnerHelper.SetSpinner(spinner_sortBy,R.array.sortByArgs);
+    //    SetSpinnerHelper.SetSpinner(spinner_onshelvesFrom,R.array.onshelvesFromArgs);
 
         return view;
     }

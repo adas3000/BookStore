@@ -16,6 +16,8 @@ public class SetSpinnerHelper {
 
         spinner_ShowAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         spinner.setAdapter(spinner_ShowAdapter);
+        
+
     }
 
 
