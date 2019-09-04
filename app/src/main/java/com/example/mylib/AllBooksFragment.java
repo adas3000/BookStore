@@ -13,7 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import android.widget.ArrayAdapter;
+
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Spinner;
@@ -24,9 +24,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.mylib.BackPressed.IOnBackPressed;
-import com.example.mylib.Data.AppData;
+
 import com.example.mylib.Data.Book;
 import com.example.mylib.Data.ItemAdapter;
+import com.example.mylib.Helpers.SetSpinnerHelper;
 import com.example.mylib.sql.SqlManager;
 
 import java.util.ArrayList;
@@ -76,7 +77,6 @@ public class AllBooksFragment extends Fragment implements IOnBackPressed {
         View view = inflater.inflate(R.layout.allbooks_activity, container, false);
 
 
-
         sqlManager = SqlManager.getInstance();
         bookArrayList = sqlManager.getValues();
 
@@ -92,7 +92,7 @@ public class AllBooksFragment extends Fragment implements IOnBackPressed {
 
 
         listView.setOnItemClickListener((adapterView, view1, i, l) -> {
-            Book clicked_Book = bookArrayList.get(i-1);
+            Book clicked_Book = bookArrayList.get(i);
 
             SingleBookFragment nextFragment = new SingleBookFragment();
             nextFragment.setBook(clicked_Book);
@@ -103,8 +103,9 @@ public class AllBooksFragment extends Fragment implements IOnBackPressed {
         spinner_sortBy = view.findViewById(R.id.spinner_Sort);
         spinner_onshelvesFrom = view.findViewById(R.id.onshelvesFrom);
 
-
-
+        SetSpinnerHelper.SetSpinner(spinner_Show,R.array.showArgs);
+        SetSpinnerHelper.SetSpinner(spinner_sortBy,R.array.sortByArgs);
+        SetSpinnerHelper.SetSpinner(spinner_onshelvesFrom,R.array.onshelvesFromArgs);
 
         return view;
     }

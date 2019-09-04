@@ -52,7 +52,6 @@
     </string-array>
 
     <string-array name="sortByArgs">
-        <item>Sort</item>
         <item>Date read</item>
         <item>Alphabetical title</item>
         <item>Alphabetical author</item>
@@ -61,7 +60,6 @@
     
 
     <string-array name="onshelvesFromArgs">
-        <item>On shelve from</item>
         <item>All days</item>
         <item>7 days</item>
         <item>14 days</item>
