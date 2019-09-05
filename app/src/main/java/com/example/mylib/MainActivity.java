@@ -115,22 +115,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 navigationView.setCheckedItem(R.id.mylib_addbook);
                 break;
             case R.id.AllUserBooks:
-
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AllBooksFragment(Shelv_Type.All)).addToBackStack(null).commit();
                 navigationView.setCheckedItem(R.id.AllUserBooks);
                 break;
             case R.id.FinishedBooks:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AllBooksFragment(Shelv_Type.Finished)).addToBackStack(null).commit();
                 navigationView.setCheckedItem(R.id.FinishedBooks);
                 break;
             case R.id.NowReadingBooks:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AllBooksFragment(Shelv_Type.Now_Reading)).addToBackStack(null).commit();
                 navigationView.setCheckedItem(R.id.NowReadingBooks);
                 break;
             case R.id.WantToReadBooks:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AllBooksFragment(Shelv_Type.Want_To_Read)).addToBackStack(null).commit();
                 navigationView.setCheckedItem(R.id.WantToReadBooks);
                 break;
             case R.id.HaveBooks:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AllBooksFragment(Shelv_Type.Have)).addToBackStack(null).commit();
                 navigationView.setCheckedItem(R.id.HaveBooks);
                 break;
             case R.id.FavorBooks:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AllBooksFragment(Shelv_Type.Favors)).addToBackStack(null).commit();
                 navigationView.setCheckedItem(R.id.FavorBooks);
                 break;
         }

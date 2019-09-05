@@ -67,6 +67,9 @@ public class Book {
     private int book_reading_state ;
     private boolean user_has_book;
     private boolean book_is_favorite;
+
+
+
     private int mark;
 
     private Book(Builder builder) {
@@ -107,6 +110,8 @@ public class Book {
     public boolean isUser_has_book() { return user_has_book; }
 
     public int getBook_reading_state() { return book_reading_state; }
+
+    public int getMark() { return mark; }
 
 
     @Override

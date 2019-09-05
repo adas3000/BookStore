@@ -20,6 +20,7 @@ import org.junit.Test;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNull;
@@ -36,7 +37,12 @@ public class SqlTestAfterDbChanges {
         SqlManager.init(context);
         sqlManager = SqlManager.getInstance();
 
-        sqlManager.addBookToDb("Hp1","Row","...","...");
+        sqlManager.addBookToDb("Hp1","Row","...","...",5,0,1,0,
+                new Date(Calendar.getInstance().getTimeInMillis()));
+        sqlManager.addBookToDb("Hp2","Row","...","...",5,1,0,1,
+                new Date(Calendar.getInstance().getTimeInMillis()));
+        sqlManager.addBookToDb("Hp1","Row","...","...",5,1,0,1,
+                new Date(Calendar.getInstance().getTimeInMillis()));
 
     }
 
@@ -50,12 +56,20 @@ public class SqlTestAfterDbChanges {
         assertEquals("Hp1",bookArrayList.get(0).getTitle());
         assertEquals("Row",bookArrayList.get(0).getAuthor());
 
+        assertEquals(5,bookArrayList.get(0).getMark());
+        assertEquals(0,bookArrayList.get(0).getBook_reading_state());
+
     }
 
     @Test
-    public void ifcostamthenOk(){
+    public void checkOnlyReadenBooks(){
 
+        ArrayList<Book> bookArrayList = sqlManager.getValues(Shelv_Type.Finished);
+
+        assertEquals(2,bookArrayList.size());
+        assertEquals("Hp2",bookArrayList.get(0).getTitle());
     }
+
 
 
 

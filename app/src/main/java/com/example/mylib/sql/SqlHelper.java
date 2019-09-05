@@ -10,7 +10,7 @@ import com.example.mylib.Data.Shelv_Type;
 
 public class SqlHelper extends SQLiteOpenHelper {
 
-    private static final int Db_Version = 3;
+    private static final int Db_Version = 4;
     private static final String Db_Name = "Library.db";
 
 
