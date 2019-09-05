@@ -4,8 +4,6 @@
     tools:showIn="navigation_view">
 
 
-
-
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/mylib_allbooks"
@@ -14,8 +12,37 @@
         <item
             android:id="@+id/mylib_addbook"
             android:icon="@drawable/ic_menu_send"
-            android:title="Add Book"
-            />
+            android:title="Add Book" />
     </group>
+
+    <item android:title="Shelves">
+        <menu>
+            <item
+                android:id="@+id/AllUserBooks"
+                android:icon="@drawable/ic_border"
+                android:title="@string/shelvesAll" />
+            <item
+                android:id="@+id/FinishedBooks"
+                android:icon="@drawable/ic_finished"
+                android:title="@string/shelvesFinished" />
+            <item
+                android:id="@+id/NowReadingBooks"
+                android:icon="@drawable/ic_current"
+                android:title="@string/shelvesReadingNow" />
+            <item
+                android:id="@+id/WantToReadBooks"
+                android:icon="@drawable/ic_wantread"
+                android:title="@string/shelvesWantsToRead" />
+            <item
+                android:id="@+id/HaveBooks"
+                android:icon="@drawable/ic_store"
+                android:title="@string/shelvesHas" />
+            <item
+                android:id="@+id/FavorBooks"
+                android:icon="@drawable/ic_star"
+                android:title="@string/shelvesFavors" />
+        </menu>
+    </item>
+
 
 </menu>

@@ -69,6 +69,15 @@
         <item>30 days</item>
         <item>Last year</item>
     </string-array>
+    
+    
+    <string name="shelvesAll">All</string>
+    <string name="shelvesFinished">Finished</string>
+    <string name="shelvesReadingNow">Now reading</string>
+    <string name="shelvesWantsToRead">Want to read</string>
+    <string name="shelvesHas">I have</string>
+    <string name="shelvesFavors">Favorites</string>
+
 
 
 </resources>
