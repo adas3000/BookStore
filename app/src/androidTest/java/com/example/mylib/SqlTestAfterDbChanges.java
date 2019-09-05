@@ -1,20 +1,14 @@
 package com.example.mylib;
 
-import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-
 import androidx.test.InstrumentationRegistry;
 
 import com.example.mylib.Data.Book;
 import com.example.mylib.Data.Shelv_Type;
-import com.example.mylib.sql.SqlHelper;
 import com.example.mylib.sql.SqlManager;
 
 import org.junit.After;
 import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -23,7 +17,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import static junit.framework.TestCase.assertEquals;
-import static junit.framework.TestCase.assertNull;
 
 public class SqlTestAfterDbChanges {
 
@@ -43,7 +36,6 @@ public class SqlTestAfterDbChanges {
                 new Date(Calendar.getInstance().getTimeInMillis()));
         sqlManager.addBookToDb("Hp1","Row","...","...",5,1,0,1,
                 new Date(Calendar.getInstance().getTimeInMillis()));
-
     }
 
 

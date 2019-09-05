@@ -30,8 +30,6 @@ public class PutDataIntoDb {
         sqlManager.addBookToDb("harry potter i czara ognia","J.K Rowling","..",
                 "        https://image.ceneostatic.pl/data/products/11477021/i-harry-potter-i-czara-ognia-harry-potter-and-the-goblet-of-fire-2dvd.jpg\n",
                 5,3,0,0,new Date(Calendar.getInstance().getTimeInMillis()));
-
-
         //
 
     }
