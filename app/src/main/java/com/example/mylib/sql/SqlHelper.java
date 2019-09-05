@@ -17,7 +17,7 @@ public class SqlHelper extends SQLiteOpenHelper {
 
 
     /** ColumnsNames
-     *  NOTICE if boook is not added to user every value of below is null!
+     *  NOTICE if boook is not added to user every value of below is null or smaller than 0 !
      *  Book_reading_state contains a current state of book
      *  1 - Book is finished by user , 2 - Book is reading by user , 3 - User wants to read book in the future
      *  Has_book contains a value whether user has book on his own
@@ -27,7 +27,7 @@ public class SqlHelper extends SQLiteOpenHelper {
      *  Date contains a user finished book date if user not finished yet is null
      */
 
-    public static final String columnssNames[] = {"id","author","title","short_description","image_url",
+    public static final String columnssNames[] = {"id","author","title","short_description","image_url","mark",
             "book_reading_state","has_book","book_is_favorite", "date"};
 
 
@@ -54,6 +54,7 @@ public class SqlHelper extends SQLiteOpenHelper {
                 "    title Text,\n" +
                 "    short_description Text,\n" +
                 "    image_url Text,\n" +
+                "    mark INTEGER,\n" +
                 "    book_reading_state INTEGER,"+
                     "has_book Text,"+
                     "book_is_favorite Text,"+

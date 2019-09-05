@@ -4,9 +4,9 @@ package com.example.mylib.Data;
 import android.annotation.TargetApi;
 
 import java.sql.Date;
-import java.util.Calendar;
 import java.util.Objects;
 
+@TargetApi(19)
 public class Book {
 
     public static class Builder {
@@ -16,8 +16,11 @@ public class Book {
         private final String short_description;
         private final String img_url;
 
-        private Date date = new Date(Calendar.getInstance().getTimeInMillis());
-        private boolean readenByUser = false;
+        private Date date = null;
+        private int book_reading_state = -1;
+        private boolean user_has_book = false;
+        private boolean book_is_favorite = false;
+        private int mark = 0;
 
         public Builder(String title, String author, String short_description, String img_url) {
             this.title = title;
@@ -31,8 +34,23 @@ public class Book {
             return this;
         }
 
-        public Builder readenByUser(boolean b) {
-            readenByUser = b;
+        public Builder book_Reading_State(int i){
+            this.book_reading_state = i;
+            return this;
+        }
+
+        public Builder user_Has_Book(boolean b){
+            this.user_has_book = b;
+            return this;
+        }
+
+        public Builder book_Is_Favorite(boolean b){
+            this.book_is_favorite = b;
+            return this;
+        }
+
+        public Builder Mark(int mark){
+            this.mark = mark;
             return this;
         }
 
@@ -42,12 +60,13 @@ public class Book {
 
     }
 
-    private int mark; // TODO implement marks notice that have to change sql class..
 
     private String title, author, short_description, image_url;
-    private boolean readenByUser;
     private Date finish_date;
-
+    private int book_reading_state ;
+    private boolean user_has_book;
+    private boolean book_is_favorite;
+    private int mark;
 
     private Book(Builder builder) {
         title = builder.title;
@@ -55,7 +74,10 @@ public class Book {
         short_description = builder.short_description;
         image_url = builder.img_url;
         finish_date = builder.date;
-        readenByUser = builder.readenByUser;
+        book_reading_state = builder.book_reading_state;
+        user_has_book = builder.user_has_book;
+        book_is_favorite = builder.book_is_favorite;
+        mark = builder.mark;
     }
 
 
@@ -79,17 +101,22 @@ public class Book {
         return image_url;
     }
 
-    public boolean isReadenByUser() {
-        return readenByUser;
-    }
+    public boolean isBook_is_favorite() { return book_is_favorite; }
 
-    @TargetApi(19)
+    public boolean isUser_has_book() { return user_has_book; }
+
+    public int getBook_reading_state() { return book_reading_state; }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Book book = (Book) o;
-        return readenByUser == book.readenByUser &&
+        return book_reading_state == book.book_reading_state &&
+                user_has_book == book.user_has_book &&
+                book_is_favorite == book.book_is_favorite &&
+                mark == book.mark &&
                 Objects.equals(title, book.title) &&
                 Objects.equals(author, book.author) &&
                 Objects.equals(short_description, book.short_description) &&
@@ -97,9 +124,8 @@ public class Book {
                 Objects.equals(finish_date, book.finish_date);
     }
 
-    @TargetApi(19)
     @Override
     public int hashCode() {
-        return Objects.hash(title, author, short_description, image_url, readenByUser, finish_date);
+        return Objects.hash(title, author, short_description, image_url, finish_date, book_reading_state, user_has_book, book_is_favorite, mark);
     }
 }
