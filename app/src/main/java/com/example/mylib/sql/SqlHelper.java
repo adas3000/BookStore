@@ -14,8 +14,21 @@ public class SqlHelper extends SQLiteOpenHelper {
 
 
     private static final String table_Name = "book";
+
+
+    /** ColumnsNames
+     *  NOTICE if boook is not added to user every value of below is null!
+     *  Book_reading_state contains a current state of book
+     *  1 - Book is finished by user , 2 - Book is reading by user , 3 - User wants to read book in the future
+     *  Has_book contains a value whether user has book on his own
+     *  1 - Yes else No
+     *  Book_is_favorite contains a value whether book is one of user favorite books
+     *  1 - Yes else No
+     *  Date contains a user finished book date if user not finished yet is null
+     */
+
     public static final String columnssNames[] = {"id","author","title","short_description","image_url",
-            "readen", "date"};
+            "book_reading_state","has_book","book_is_favorite", "date"};
 
 
     public static final String getTable_Name(){return table_Name;}
@@ -41,8 +54,12 @@ public class SqlHelper extends SQLiteOpenHelper {
                 "    title Text,\n" +
                 "    short_description Text,\n" +
                 "    image_url Text,\n" +
-                "    readen INTEGER,"+
-                "date Text)");
+                "    book_reading_state INTEGER,"+
+                    "has_book Text,"+
+                    "book_is_favorite Text,"+
+                    "iduser INTEGER,"+
+                "date Text,"+
+                "foreign key(iduser) references _user(id)" + ")");
     }
 
     @Override

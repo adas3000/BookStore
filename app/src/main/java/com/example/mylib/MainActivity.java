@@ -1,17 +1,15 @@
 package com.example.mylib;
 
 import android.annotation.TargetApi;
-import android.app.SearchManager;
-import android.content.Context;
+
+
 import android.os.Bundle;
 
-import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 
 import android.view.MenuItem;
 
-import com.example.mylib.Data.AppData;
 import com.example.mylib.sql.SqlManager;
 import com.google.android.material.navigation.NavigationView;
 
@@ -22,7 +20,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import android.view.Menu;
-import android.widget.SearchView;
 
 
 import java.util.List;
@@ -39,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        // TODO add user nickname functionality
 
         SqlManager.init(getApplicationContext());
 

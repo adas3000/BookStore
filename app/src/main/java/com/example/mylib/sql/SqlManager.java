@@ -87,6 +87,21 @@ public class SqlManager {
         }
     }
 
+    public void addBookToDb(String title, String author, String short_desc, String image_url) {
+        if(context==null) throw new IllegalStateException("No context detected");
+        try(SQLiteDatabase db = sqlHelper.getWritableDatabase()) {
+            ContentValues contentValues = new ContentValues();
+
+            contentValues.put(SqlHelper.columnssNames[1], author);
+            contentValues.put(SqlHelper.columnssNames[2], title);
+            contentValues.put(SqlHelper.columnssNames[3], short_desc);
+            contentValues.put(SqlHelper.columnssNames[4], image_url);
+
+
+            db.insert(SqlHelper.getTable_Name(), null, contentValues);
+        }
+    }
+
 
     public int deleteBookFromDb(String title, String author) {
         if(context==null) throw new IllegalStateException("No context detected");
