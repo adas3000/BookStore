@@ -39,6 +39,7 @@
     
     <string-array name="showArgs">
         <item>Show</item>
+        <item>All</item>
         <item>1 star</item>
         <item>2 stars</item>
         <item>3 stars</item>
@@ -52,6 +53,7 @@
     </string-array>
 
     <string-array name="sortByArgs">
+        <item>Sort By</item>
         <item>Date read</item>
         <item>Alphabetical title</item>
         <item>Alphabetical author</item>
@@ -60,6 +62,7 @@
     
 
     <string-array name="onshelvesFromArgs">
+        <item>On shelves from</item>
         <item>All days</item>
         <item>7 days</item>
         <item>14 days</item>

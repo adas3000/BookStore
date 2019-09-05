@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Spinner;
@@ -27,6 +28,7 @@ import com.example.mylib.BackPressed.IOnBackPressed;
 
 import com.example.mylib.Data.Book;
 import com.example.mylib.Data.ItemAdapter;
+import com.example.mylib.Helpers.SetSpinnerHelper;
 import com.example.mylib.sql.SqlManager;
 
 import java.util.ArrayList;
@@ -37,13 +39,13 @@ public class AllBooksFragment extends Fragment implements IOnBackPressed {
     private ArrayList<Book> bookArrayList;
     private ListView listView;
     private ItemAdapter itemAdapter;
-    private Spinner spinner_Show,spinner_sortBy,spinner_onshelvesFrom;
+    private Spinner spinner_Show, spinner_sortBy, spinner_onshelvesFrom;
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 
         MenuItem menuItem = menu.findItem(R.id.action_search);
-        SearchManager searchManager =(SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
+        SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
         SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
 
 
@@ -82,29 +84,33 @@ public class AllBooksFragment extends Fragment implements IOnBackPressed {
         listView = view.findViewById(R.id.myListViewEmails);
         itemAdapter = new ItemAdapter(view.getContext(), bookArrayList);
 
-        LayoutInflater layoutInflater= getLayoutInflater();
-        ViewGroup header = (ViewGroup) layoutInflater.inflate(R.layout.listviewheader,listView,false);
-        listView.addHeaderView(header);
+        LayoutInflater layoutInflater = getLayoutInflater();
+        View header = layoutInflater.inflate(R.layout.listviewheader, listView, false);
+        listView.addHeaderView(header, null, false);
 
 
         listView.setAdapter(itemAdapter);
 
 
         listView.setOnItemClickListener((adapterView, view1, i, l) -> {
-            Book clicked_Book = bookArrayList.get(i-1);
+
+
+            Book clicked_Book = bookArrayList.get(i - 1);
 
             SingleBookFragment nextFragment = new SingleBookFragment();
             nextFragment.setBook(clicked_Book);
             getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, nextFragment).addToBackStack(null).commit();
         });
 
-      //  spinner_Show = view.findViewById(R.id.spinner_Show);
-       // spinner_sortBy = view.findViewById(R.id.spinner_Sort);
-     //   spinner_onshelvesFrom = view.findViewById(R.id.spinner_onshelvesText);
 
-      //  SetSpinnerHelper.SetSpinner(spinner_Show,R.array.showArgs);
-     //   SetSpinnerHelper.SetSpinner(spinner_sortBy,R.array.sortByArgs);
-    //    SetSpinnerHelper.SetSpinner(spinner_onshelvesFrom,R.array.onshelvesFromArgs);
+
+        spinner_Show = view.findViewById(R.id.spinner_Show);
+        spinner_sortBy = view.findViewById(R.id.spinner_Sort);
+        spinner_onshelvesFrom = view.findViewById(R.id.spinner_onshelvesText);
+
+        SetSpinnerHelper.SetSpinner(spinner_Show, R.array.showArgs);
+        SetSpinnerHelper.SetSpinner(spinner_sortBy, R.array.sortByArgs);
+        SetSpinnerHelper.SetSpinner(spinner_onshelvesFrom, R.array.onshelvesFromArgs);
 
         return view;
     }
