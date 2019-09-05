@@ -87,9 +87,7 @@ public class AddBookFragment extends Fragment implements View.OnClickListener, I
                 });
 
             } else {
-
                 bookReaden_Switch.setText("Not readen");
-               // date = new Date(0, 0, 0);
             }
 
 

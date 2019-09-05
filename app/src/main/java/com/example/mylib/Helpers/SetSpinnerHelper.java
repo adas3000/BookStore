@@ -26,6 +26,7 @@ public class SetSpinnerHelper {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+               // TODO implement item selected action
                // TextView textView = (TextView) parent.getChildAt(0);
                // textView.setTextColor(AppData.getContext().getColor(R.color.colorMain));
             }
