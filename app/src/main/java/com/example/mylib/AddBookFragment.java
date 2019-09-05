@@ -4,12 +4,17 @@ import android.annotation.TargetApi;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -18,6 +23,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.mylib.BackPressed.IOnBackPressed;
+import com.example.mylib.Data.AppData;
 import com.example.mylib.Data.Book;
 import com.example.mylib.sql.SqlManager;
 
@@ -31,6 +37,7 @@ public class AddBookFragment extends Fragment implements View.OnClickListener, I
     private Date date = new Date(Calendar.getInstance().getTimeInMillis());
     private DatePickerDialog datePickerDialog;
     private boolean editBook;
+    private int haveBook,BookisFavor,book_reading_state;
     private Book book_toEdit;
     private EditText editText_Author;
     private EditText editText_Title;
@@ -44,6 +51,7 @@ public class AddBookFragment extends Fragment implements View.OnClickListener, I
 
         LinearLayout view = (LinearLayout) inflater.inflate(R.layout.addbook_activity, container, false);
 
+        BookisFavor = haveBook = 0;
 
         setEditTexts(view);
 
@@ -58,11 +66,13 @@ public class AddBookFragment extends Fragment implements View.OnClickListener, I
         }
 
 
-        final Button confirm_Button = view.findViewById(R.id.button);
+        Button confirm_Button = view.findViewById(R.id.button);
         confirm_Button.setOnClickListener(this);
 
-        final Switch bookReaden_Switch = view.findViewById(R.id.switch1);
-
+        Switch bookReaden_Switch = view.findViewById(R.id.switch1);
+        Switch haveBook_Switch = view.findViewById(R.id.switch_Have);
+        Switch favorBook_Switch = view.findViewById(R.id.switch_Favor);
+        Spinner book_State_Spinner = view.findViewById(R.id.spinner_BookState);
 
         bookReaden_Switch.setOnCheckedChangeListener((compoundButton, b) -> {
             Calendar calendar = Calendar.getInstance();
@@ -71,12 +81,11 @@ public class AddBookFragment extends Fragment implements View.OnClickListener, I
             int year = calendar.get(Calendar.YEAR);
 
 
-
             if (compoundButton.isChecked()) {
                 datePickerDialog = new DatePickerDialog(getContext(), (datePicker, year1, month1, day1) -> {
-                    bookReaden_Switch.setText("Readen:" + day1 + "/" + month1  + "/" + year1);
-                    date = new Date(year1-1900, month1 , day1);
-                    },year,month,day);
+                    bookReaden_Switch.setText("Readen:" + day1 + "/" + month1 + "/" + year1);
+                    date = new Date(year1 - 1900, month1, day1);
+                }, year, month, day);
                 datePickerDialog.show();
 
                 datePickerDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", (dialogInterface, i) -> {
@@ -90,6 +99,48 @@ public class AddBookFragment extends Fragment implements View.OnClickListener, I
 
         });
 
+
+        haveBook_Switch.setOnCheckedChangeListener((compoundButton, b) -> {
+            if(compoundButton.isChecked())
+                haveBook = 1;
+                else
+                    haveBook = 0;
+        });
+
+        favorBook_Switch.setOnCheckedChangeListener(((compoundButton, b) ->{
+            if(compoundButton.isChecked())
+                BookisFavor = 1;
+            else
+                BookisFavor = 0;
+        }));
+
+
+        ArrayAdapter<CharSequence> spinner_ShowAdapter = ArrayAdapter.createFromResource(AppData.getContext(), R.array.Book_State,
+                android.R.layout.simple_spinner_item);
+
+        spinner_ShowAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        book_State_Spinner.setAdapter(spinner_ShowAdapter);
+
+        book_State_Spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                book_reading_state = i;
+                if(i==2){
+                    Calendar calendar = Calendar.getInstance();
+                    int day = calendar.get(Calendar.DAY_OF_MONTH);
+                    int month = calendar.get(Calendar.MONTH);
+                    int year = calendar.get(Calendar.YEAR);
+                    datePickerDialog = new DatePickerDialog(getContext(), (datePicker, year1, month1, day1) -> {
+                        date = new Date(year1 - 1900, month1, day1);
+                    }, year, month, day);
+                    datePickerDialog.show();
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
         return view;
     }
@@ -121,12 +172,12 @@ public class AddBookFragment extends Fragment implements View.OnClickListener, I
         SqlManager sqlManager = SqlManager.getInstance();
 
         String text_to_Show = "Book added successfully";
-        if (!editBook);
-           // sqlManager.addBookToDb(title, author, desc, url, int_readen, date);
+        if (!editBook) ;
+            // sqlManager.addBookToDb(title, author, desc, url, int_readen, date);
 
         else {
             sqlManager.editBookFromDb(book_toEdit.getTitle(), book_toEdit.getAuthor(),
-                    title, author, desc, url, int_readen,date);
+                    title, author, desc, url, int_readen, date);
             text_to_Show = text_to_Show.replace("added", "edited");
         }
 
