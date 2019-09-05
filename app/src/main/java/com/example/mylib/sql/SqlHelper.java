@@ -30,8 +30,13 @@ public class SqlHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
 
+        sqLiteDatabase.execSQL("create table _user(" +
+                "id INTEGER primary key AUTOINCREMENT ," +
+                "nickname Text" + ")");
+
+
         sqLiteDatabase.execSQL("create table book(\n" +
-                "\tid INTEGER primary key,\n" +
+                "\tid INTEGER primary key AUTOINCREMENT ,\n" +
                 "    author Text,\n" +
                 "    title Text,\n" +
                 "    short_description Text,\n" +
@@ -49,6 +54,15 @@ public class SqlHelper extends SQLiteOpenHelper {
     public Cursor getValues(SQLiteDatabase sqLiteDatabase){
         Cursor c = sqLiteDatabase.query(table_Name,columnssNames,null,null,
                 null,null,null);
+        return c;
+    }
+
+    public Cursor getValues(SQLiteDatabase sqLiteDatabase,String table_Name,String [] columns){
+
+        Cursor c = sqLiteDatabase.query(table_Name,columns,null,null,
+                null,null,null);
+
+
         return c;
     }
 
