@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.example.mylib.Data.Shelv_Type;
 
 
 public class SqlHelper extends SQLiteOpenHelper {
@@ -75,10 +76,39 @@ public class SqlHelper extends SQLiteOpenHelper {
         return c;
     }
 
-    public Cursor getValues(SQLiteDatabase sqLiteDatabase,String table_Name,String [] columns){
+    public Cursor getValues(SQLiteDatabase sqLiteDatabase, Shelv_Type shelv_type){
 
-        Cursor c = sqLiteDatabase.query(table_Name,columns,null,null,
-                null,null,null);
+        String selection = null;
+        String selectionargs[] = null;
+        String groupBy = null;
+        String having = null;
+        String orderBy = null;
+
+
+        if(shelv_type.equals(Shelv_Type.Finished)){
+            selection = columnssNames[6]+" =?";
+            selectionargs = new String[]{"1"};
+        }
+        else if(shelv_type.equals(Shelv_Type.Now_Reading)){
+            selection = columnssNames[6]+" =?";
+            selectionargs = new String[]{"2"};
+        }
+        else if(shelv_type.equals(Shelv_Type.Want_To_Read)){
+            selection = columnssNames[6]+" =?";
+            selectionargs = new String[]{"3"};
+        }
+        else if(shelv_type.equals(Shelv_Type.Favors)){
+            selection = columnssNames[8] + "=?";
+            selectionargs = new String[]{"1"};
+        }
+        else if(shelv_type.equals(Shelv_Type.Have)){
+            selection = columnssNames[7] + "=?";
+            selectionargs = new String[]{"1"};
+        }
+
+
+        Cursor c = sqLiteDatabase.query(table_Name,columnssNames,selection,selectionargs,
+                groupBy,having,orderBy);
 
 
         return c;

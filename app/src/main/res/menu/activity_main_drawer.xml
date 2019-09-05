@@ -15,7 +15,7 @@
             android:title="Add Book" />
     </group>
 
-    <item android:title="Shelves">
+    <item android:title="Bookcase">
         <menu>
             <item
                 android:id="@+id/AllUserBooks"

@@ -9,6 +9,7 @@ import java.util.Objects;
 @TargetApi(19)
 public class Book {
 
+
     public static class Builder {
 
         private final String title;

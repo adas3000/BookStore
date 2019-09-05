@@ -10,6 +10,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 
 import android.view.MenuItem;
 
+import com.example.mylib.Data.Shelv_Type;
 import com.example.mylib.sql.SqlManager;
 import com.google.android.material.navigation.NavigationView;
 
@@ -113,8 +114,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AddBookFragment()).addToBackStack(null).commit();
                 navigationView.setCheckedItem(R.id.mylib_addbook);
                 break;
-        }
+            case R.id.AllUserBooks:
 
+                navigationView.setCheckedItem(R.id.AllUserBooks);
+                break;
+            case R.id.FinishedBooks:
+                navigationView.setCheckedItem(R.id.FinishedBooks);
+                break;
+            case R.id.NowReadingBooks:
+                navigationView.setCheckedItem(R.id.NowReadingBooks);
+                break;
+            case R.id.WantToReadBooks:
+                navigationView.setCheckedItem(R.id.WantToReadBooks);
+                break;
+            case R.id.HaveBooks:
+                navigationView.setCheckedItem(R.id.HaveBooks);
+                break;
+            case R.id.FavorBooks:
+                navigationView.setCheckedItem(R.id.FavorBooks);
+                break;
+        }
+        //TODO navigation view not checking different items than mylib_allbooks and mylib_addbook ;fix it
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

@@ -6,6 +6,7 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.os.Bundle;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -14,7 +15,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Spinner;
@@ -28,6 +28,7 @@ import com.example.mylib.BackPressed.IOnBackPressed;
 
 import com.example.mylib.Data.Book;
 import com.example.mylib.Data.ItemAdapter;
+import com.example.mylib.Data.Shelv_Type;
 import com.example.mylib.Helpers.SetSpinnerHelper;
 import com.example.mylib.sql.SqlManager;
 
@@ -40,6 +41,15 @@ public class AllBooksFragment extends Fragment implements IOnBackPressed {
     private ListView listView;
     private ItemAdapter itemAdapter;
     private Spinner spinner_Show, spinner_sortBy, spinner_onshelvesFrom;
+    private Shelv_Type shelv_type;
+
+    public AllBooksFragment(Shelv_Type shelv_type){
+        this.shelv_type = shelv_type;
+    }
+
+    public AllBooksFragment(){
+        this.shelv_type = Shelv_Type.All;
+    }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -74,12 +84,11 @@ public class AllBooksFragment extends Fragment implements IOnBackPressed {
 
         setHasOptionsMenu(true);
 
-
         View view = inflater.inflate(R.layout.allbooks_activity, container, false);
 
 
         sqlManager = SqlManager.getInstance();
-        bookArrayList = sqlManager.getValues();
+        bookArrayList = sqlManager.getValues(shelv_type);
 
         listView = view.findViewById(R.id.myListViewEmails);
         itemAdapter = new ItemAdapter(view.getContext(), bookArrayList);

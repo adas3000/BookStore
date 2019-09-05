@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.mylib.Data.Book;
+import com.example.mylib.Data.Shelv_Type;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -39,11 +40,11 @@ public class SqlManager {
 
 
 
-    public ArrayList<Book> getValues() {
+    public ArrayList<Book> getValues(Shelv_Type shelv_type) {
         if(context==null) return new ArrayList<>();// throw new IllegalStateException("No context detected");
 
         SQLiteDatabase db = sqlHelper.getReadableDatabase();
-        Cursor cursor = sqlHelper.getValues(db);
+        Cursor cursor = sqlHelper.getValues(db,shelv_type);
 
         ArrayList<Book> bookArrayList = new ArrayList<>();
 

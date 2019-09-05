@@ -31,11 +31,6 @@ public class ItemAdapter extends BaseAdapter implements Filterable {
         this.layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.bookArrayList_originalData = bookArrayList;
         this.bookArrayList_filteredData = bookArrayList;
-
-
-
-        //    bookArrayList.removeIf(b -> !b.isReadenByUser());
-
     }
 
 
