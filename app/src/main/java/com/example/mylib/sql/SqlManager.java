@@ -54,15 +54,24 @@ public class SqlManager {
                 String title = cursor.getString(cursor.getColumnIndex(SqlHelper.columnssNames[2]));
                 String short_desc = cursor.getString(cursor.getColumnIndex(SqlHelper.columnssNames[3]));
                 String image_url = cursor.getString(cursor.getColumnIndex(SqlHelper.columnssNames[4]));
-                int readen = cursor.getInt(cursor.getColumnIndex(SqlHelper.columnssNames[5]));
-                Date date = Date.valueOf(cursor.getString(cursor.getColumnIndex(SqlHelper.columnssNames[6])));
+                int mark = cursor.getInt(cursor.getColumnIndex(SqlHelper.columnssNames[5]));
+                int book_reading_state = cursor.getInt(cursor.getColumnIndex(SqlHelper.columnssNames[6]));
+                int has_book = cursor.getInt(cursor.getColumnIndex(SqlHelper.columnssNames[7]));
+                int book_is_favorite = cursor.getInt(cursor.getColumnIndex(SqlHelper.columnssNames[8]));
+                String date = cursor.getString(cursor.getColumnIndex(SqlHelper.columnssNames[9]));
 
 
-                boolean _readen = readen > 0 ? true : false;
+                boolean _has_book = has_book > 0 ;
+                boolean _book_is_favor = book_is_favorite > 0;
+                Book book;
 
+                if(book_reading_state==1)
+                    book = new Book.Builder(title,author,short_desc,image_url).Mark(mark).user_Has_Book(_has_book).date(Date.valueOf(date))
+                            .book_Is_Favorite(_book_is_favor).book_Reading_State(book_reading_state).build();
 
-                Book book = new Book.Builder(title, author, short_desc, image_url).readenByUser(_readen).
-                        date(date).build();
+                else
+                    book = new Book.Builder(title,author,short_desc,image_url).Mark(mark).user_Has_Book(_has_book)
+                        .book_Is_Favorite(_book_is_favor).book_Reading_State(book_reading_state).build();
 
                 bookArrayList.add(book);
             } while (cursor.moveToNext());
@@ -70,9 +79,12 @@ public class SqlManager {
         return bookArrayList;
     }
 
-    public void addBookToDb(String title, String author, String short_desc, String image_url, int readen,
-                          Date date) {
+    public void addBookToDb(String title, String author, String short_desc, String image_url ,int mark,
+                            int book_reading_state,int has_book, int book_is_favorite, Date date) {
+
         if(context==null) throw new IllegalStateException("No context detected");
+
+
         try(SQLiteDatabase db = sqlHelper.getWritableDatabase()) {
             ContentValues contentValues = new ContentValues();
 
@@ -80,8 +92,11 @@ public class SqlManager {
             contentValues.put(SqlHelper.columnssNames[2], title);
             contentValues.put(SqlHelper.columnssNames[3], short_desc);
             contentValues.put(SqlHelper.columnssNames[4], image_url);
-            contentValues.put(SqlHelper.columnssNames[5], readen);
-            contentValues.put(SqlHelper.columnssNames[6], date.toString());
+            contentValues.put(SqlHelper.columnssNames[5],mark);
+            contentValues.put(SqlHelper.columnssNames[6],book_reading_state);
+            contentValues.put(SqlHelper.columnssNames[7],has_book);
+            contentValues.put(SqlHelper.columnssNames[8],book_is_favorite);
+            contentValues.put(SqlHelper.columnssNames[9],date.toString());
 
             db.insert(SqlHelper.getTable_Name(), null, contentValues);
         }

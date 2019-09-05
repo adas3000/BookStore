@@ -45,7 +45,7 @@ public class SingleBookFragment extends Fragment implements IOnBackPressed {
         Picasso.with(getContext()).load(clicked_Book.getImage_url()).placeholder(R.mipmap.ic_launcher).into(imageView);
 
 
-        String readen = clicked_Book.isReadenByUser() ? "Readen :"+clicked_Book.getFinish_date() : "Not readen.";
+        String readen = "Not readen.";
 
         textView_BookReaden.setText(readen);
 

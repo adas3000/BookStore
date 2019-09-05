@@ -54,10 +54,7 @@ public class AddBookFragment extends Fragment implements View.OnClickListener, I
             editText_desc.setText(book_toEdit.getShort_description());
             editText_url.setText(book_toEdit.getImage_url());
 
-            if (book_toEdit.isReadenByUser()) {
-                bookReaden_Switch.setChecked(true);
-                bookReaden_Switch.setText(book_toEdit.getFinish_date().toString());
-            }
+
         }
 
 
@@ -124,8 +121,8 @@ public class AddBookFragment extends Fragment implements View.OnClickListener, I
         SqlManager sqlManager = SqlManager.getInstance();
 
         String text_to_Show = "Book added successfully";
-        if (!editBook)
-            sqlManager.addBookToDb(title, author, desc, url, int_readen, date);
+        if (!editBook);
+           // sqlManager.addBookToDb(title, author, desc, url, int_readen, date);
 
         else {
             sqlManager.editBookFromDb(book_toEdit.getTitle(), book_toEdit.getAuthor(),

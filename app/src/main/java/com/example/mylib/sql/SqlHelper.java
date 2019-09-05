@@ -17,7 +17,7 @@ public class SqlHelper extends SQLiteOpenHelper {
 
 
     /** ColumnsNames
-     *  NOTICE if boook is not added to user every value of below is null or smaller than 0 !
+     *  NOTICE if boook is not added to user every value of below is null or less than or equal 0 !
      *  Book_reading_state contains a current state of book
      *  1 - Book is finished by user , 2 - Book is reading by user , 3 - User wants to read book in the future
      *  Has_book contains a value whether user has book on his own
