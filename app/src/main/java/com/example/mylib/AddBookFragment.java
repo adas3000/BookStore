@@ -78,8 +78,6 @@ public class AddBookFragment extends Fragment implements View.OnClickListener, I
     public void onClick(View view) {
 
 
-
-
         String author = editText_Author.getText().toString();
         String title = editText_Title.getText().toString();
         String desc = editText_desc.getText().toString();
@@ -94,7 +92,7 @@ public class AddBookFragment extends Fragment implements View.OnClickListener, I
         SqlManager sqlManager = SqlManager.getInstance();
 
         String text_to_Show = "Book added successfully";
-        if (!editBook) 
+        if (!editBook)
              sqlManager.addBookToDb(title, author, desc, url);
 
         else {

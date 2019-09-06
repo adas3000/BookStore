@@ -87,4 +87,25 @@
 
 
 
+
+
+
+    <string-array name="user_book_state">
+        <item>Finished</item>
+        <item>Reading now</item>
+        <item>Wants to read</item>
+    </string-array>
+
+    <string-array name="user_book_shelfs">
+        <item>Favorites</item>
+        <item>I have</item>
+    </string-array>
+
+    <string name="rateText">Rate</string>
+    <string name="Shelf">Shelf:</string>
+    <string name="mShelfs">My shelfs:</string>
+
+
+
+
 </resources>

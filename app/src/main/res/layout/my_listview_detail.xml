@@ -80,7 +80,8 @@
         android:layout_toRightOf="@+id/imageView_Cover"
         android:text="@string/book_status_Text"
         android:textColor="@color/colorBlack"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:visibility="invisible" />
 
 
     <TextView
@@ -102,7 +103,6 @@
 
     <TextView
         android:id="@+id/textViewFinishDate"
-        android:text="@string/book_finishDate"
         android:layout_width="214dp"
         android:layout_height="46dp"
         android:layout_below="@+id/textView_book_status_Text"
@@ -115,7 +115,9 @@
         android:layout_marginRight="5dp"
         android:layout_toEndOf="@+id/textView_AuthorText"
         android:layout_toRightOf="@+id/textView_AuthorText"
+        android:text="@string/book_finishDate"
         android:textColor="@color/colorBlack"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        android:visibility="invisible" />
 
 </RelativeLayout>

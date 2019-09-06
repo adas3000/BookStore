@@ -1,6 +1,7 @@
 package com.example.mylib;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -8,7 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,6 +20,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.mylib.BackPressed.IOnBackPressed;
 import com.example.mylib.Data.Book;
+import com.example.mylib.Helpers.EditButtonEvent;
 import com.example.mylib.sql.SqlManager;
 import com.squareup.picasso.Picasso;
 
@@ -55,10 +59,9 @@ public class SingleBookFragment extends Fragment implements IOnBackPressed {
 
         edit_Button.setOnClickListener(view1 -> {
 
-            AddBookFragment editBook = new AddBookFragment();
-            editBook.setEditBook(clicked_Book);
+            EditButtonEvent.HandleEditButtonClicked(view.getContext(),clicked_Book);
 
-         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,editBook).addToBackStack(null).commit();
+        // getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,editBook).addToBackStack(null).commit();
         });
 
 
