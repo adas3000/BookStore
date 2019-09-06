@@ -21,7 +21,7 @@ public class Book {
         private int book_reading_state = -1;
         private boolean user_has_book = false;
         private boolean book_is_favorite = false;
-        private int mark = 0;
+        private float mark = 0;
 
         public Builder(String title, String author, String short_description, String img_url) {
             this.title = title;
@@ -50,7 +50,7 @@ public class Book {
             return this;
         }
 
-        public Builder Mark(int mark){
+        public Builder Mark(float mark){
             this.mark = mark;
             return this;
         }
@@ -70,7 +70,7 @@ public class Book {
 
 
 
-    private int mark;
+    private float mark;
 
     private Book(Builder builder) {
         title = builder.title;
@@ -111,7 +111,7 @@ public class Book {
 
     public int getBook_reading_state() { return book_reading_state; }
 
-    public int getMark() { return mark; }
+    public float getMark() { return mark; }
 
 
     @Override

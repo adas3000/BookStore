@@ -55,7 +55,7 @@ public class SqlManager {
                 String title = cursor.getString(cursor.getColumnIndex(SqlHelper.columnssNames[2]));
                 String short_desc = cursor.getString(cursor.getColumnIndex(SqlHelper.columnssNames[3]));
                 String image_url = cursor.getString(cursor.getColumnIndex(SqlHelper.columnssNames[4]));
-                int mark = cursor.getInt(cursor.getColumnIndex(SqlHelper.columnssNames[5]));
+                float mark = cursor.getInt(cursor.getColumnIndex(SqlHelper.columnssNames[5]));
                 int book_reading_state = cursor.getInt(cursor.getColumnIndex(SqlHelper.columnssNames[6]));
                 int has_book = cursor.getInt(cursor.getColumnIndex(SqlHelper.columnssNames[7]));
                 int book_is_favorite = cursor.getInt(cursor.getColumnIndex(SqlHelper.columnssNames[8]));
@@ -80,7 +80,7 @@ public class SqlManager {
         return bookArrayList;
     }
 
-    public void addBookToDb(String title, String author, String short_desc, String image_url ,int mark,
+    public void addBookToDb(String title, String author, String short_desc, String image_url ,float mark,
                             int book_reading_state,int has_book, int book_is_favorite, Date date) {
 
         if(context==null) throw new IllegalStateException("No context detected");

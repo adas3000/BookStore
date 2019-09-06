@@ -55,7 +55,7 @@ public class SqlHelper extends SQLiteOpenHelper {
                 "    title Text,\n" +
                 "    short_description Text,\n" +
                 "    image_url Text,\n" +
-                "    mark INTEGER,\n" +
+                "    mark REAL,\n" +
                 "    book_reading_state INTEGER,"+
                     "has_book Text,"+
                     "book_is_favorite Text,"+
