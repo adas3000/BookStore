@@ -43,7 +43,7 @@ public class AddBookFragment extends Fragment implements View.OnClickListener, I
     private EditText editText_Title;
     private EditText editText_desc;
     private EditText editText_url;
-    private Switch bookReaden_Switch;
+
 
     @Nullable
     @Override
@@ -69,78 +69,6 @@ public class AddBookFragment extends Fragment implements View.OnClickListener, I
         Button confirm_Button = view.findViewById(R.id.button);
         confirm_Button.setOnClickListener(this);
 
-        Switch bookReaden_Switch = view.findViewById(R.id.switch1);
-        Switch haveBook_Switch = view.findViewById(R.id.switch_Have);
-        Switch favorBook_Switch = view.findViewById(R.id.switch_Favor);
-        Spinner book_State_Spinner = view.findViewById(R.id.spinner_BookState);
-
-        bookReaden_Switch.setOnCheckedChangeListener((compoundButton, b) -> {
-            Calendar calendar = Calendar.getInstance();
-            int day = calendar.get(Calendar.DAY_OF_MONTH);
-            int month = calendar.get(Calendar.MONTH);
-            int year = calendar.get(Calendar.YEAR);
-
-
-            if (compoundButton.isChecked()) {
-                datePickerDialog = new DatePickerDialog(getContext(), (datePicker, year1, month1, day1) -> {
-                    bookReaden_Switch.setText("Readen:" + day1 + "/" + month1 + "/" + year1);
-                    date = new Date(year1 - 1900, month1, day1);
-                }, year, month, day);
-                datePickerDialog.show();
-
-                datePickerDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", (dialogInterface, i) -> {
-                    compoundButton.setChecked(false);
-                });
-
-            } else {
-                bookReaden_Switch.setText("Not readen");
-            }
-
-
-        });
-
-
-        haveBook_Switch.setOnCheckedChangeListener((compoundButton, b) -> {
-            if(compoundButton.isChecked())
-                haveBook = 1;
-                else
-                    haveBook = 0;
-        });
-
-        favorBook_Switch.setOnCheckedChangeListener(((compoundButton, b) ->{
-            if(compoundButton.isChecked())
-                BookisFavor = 1;
-            else
-                BookisFavor = 0;
-        }));
-
-
-        ArrayAdapter<CharSequence> spinner_ShowAdapter = ArrayAdapter.createFromResource(AppData.getContext(), R.array.Book_State,
-                android.R.layout.simple_spinner_item);
-
-        spinner_ShowAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-        book_State_Spinner.setAdapter(spinner_ShowAdapter);
-
-        book_State_Spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                book_reading_state = i;
-                if(i==2){
-                    Calendar calendar = Calendar.getInstance();
-                    int day = calendar.get(Calendar.DAY_OF_MONTH);
-                    int month = calendar.get(Calendar.MONTH);
-                    int year = calendar.get(Calendar.YEAR);
-                    datePickerDialog = new DatePickerDialog(getContext(), (datePicker, year1, month1, day1) -> {
-                        date = new Date(year1 - 1900, month1, day1);
-                    }, year, month, day);
-                    datePickerDialog.show();
-                }
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
 
         return view;
     }
@@ -149,13 +77,7 @@ public class AddBookFragment extends Fragment implements View.OnClickListener, I
     @Override
     public void onClick(View view) {
 
-        int int_readen;
-        boolean readen = bookReaden_Switch.isChecked();
 
-        if (readen)
-            int_readen = 1;
-        else
-            int_readen = -1;
 
 
         String author = editText_Author.getText().toString();
@@ -163,8 +85,8 @@ public class AddBookFragment extends Fragment implements View.OnClickListener, I
         String desc = editText_desc.getText().toString();
         String url = editText_url.getText().toString();
 
-        if (author.isEmpty() || title.isEmpty() || url.isEmpty()) {
-            Toast.makeText(getActivity(), "Fill all fields.", Toast.LENGTH_SHORT).show();
+        if (author.isEmpty() || title.isEmpty()) {
+            Toast.makeText(getActivity(), "Fill fields author and title.", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -172,13 +94,13 @@ public class AddBookFragment extends Fragment implements View.OnClickListener, I
         SqlManager sqlManager = SqlManager.getInstance();
 
         String text_to_Show = "Book added successfully";
-        if (!editBook) ;
-            // sqlManager.addBookToDb(title, author, desc, url, int_readen, date);
+        if (!editBook) 
+             sqlManager.addBookToDb(title, author, desc, url);
 
         else {
-            sqlManager.editBookFromDb(book_toEdit.getTitle(), book_toEdit.getAuthor(),
-                    title, author, desc, url, int_readen, date);
-            text_to_Show = text_to_Show.replace("added", "edited");
+          //  sqlManager.editBookFromDb(book_toEdit.getTitle(), book_toEdit.getAuthor(),
+        //            title, author, desc, url, int_readen, date);
+        //    text_to_Show = text_to_Show.replace("added", "edited");
         }
 
         Toast.makeText(getActivity(), text_to_Show, Toast.LENGTH_SHORT).show();
@@ -186,7 +108,6 @@ public class AddBookFragment extends Fragment implements View.OnClickListener, I
         editText_Title.setText("");
         editText_desc.setText("");
         editText_url.setText("");
-        bookReaden_Switch.setChecked(false);
     }
 
     @Override
@@ -206,7 +127,6 @@ public class AddBookFragment extends Fragment implements View.OnClickListener, I
         editText_Title = view.findViewById(R.id.editText_Title);
         editText_desc = view.findViewById(R.id.editText_desc);
         editText_url = view.findViewById(R.id.editText_url);
-        bookReaden_Switch = view.findViewById(R.id.switch1);
     }
 
 }
