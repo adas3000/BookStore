@@ -34,10 +34,7 @@ import java.util.Calendar;
 public class AddBookFragment extends Fragment implements View.OnClickListener, IOnBackPressed {
 
 
-    private Date date = new Date(Calendar.getInstance().getTimeInMillis());
-    private DatePickerDialog datePickerDialog;
     private boolean editBook;
-    private int haveBook,BookisFavor,book_reading_state;
     private Book book_toEdit;
     private EditText editText_Author;
     private EditText editText_Title;
@@ -51,7 +48,6 @@ public class AddBookFragment extends Fragment implements View.OnClickListener, I
 
         LinearLayout view = (LinearLayout) inflater.inflate(R.layout.addbook_activity, container, false);
 
-        BookisFavor = haveBook = 0;
 
         setEditTexts(view);
 
@@ -95,11 +91,6 @@ public class AddBookFragment extends Fragment implements View.OnClickListener, I
         if (!editBook)
              sqlManager.addBookToDb(title, author, desc, url);
 
-        else {
-          //  sqlManager.editBookFromDb(book_toEdit.getTitle(), book_toEdit.getAuthor(),
-        //            title, author, desc, url, int_readen, date);
-        //    text_to_Show = text_to_Show.replace("added", "edited");
-        }
 
         Toast.makeText(getActivity(), text_to_Show, Toast.LENGTH_SHORT).show();
         editText_Author.setText("");

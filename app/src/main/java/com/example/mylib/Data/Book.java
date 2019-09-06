@@ -102,9 +102,7 @@ public class Book {
         return author;
     }
 
-    public String getShort_description() {
-        return short_description;
-    }
+    public String getShort_description() { return short_description; }
 
     public String getImage_url() {
         return image_url;
@@ -117,7 +115,6 @@ public class Book {
     public int getBook_reading_state() { return book_reading_state; }
 
     public float getMark() { return mark; }
-
 
     public void setFinish_date(Date date){finish_date = date;}
 

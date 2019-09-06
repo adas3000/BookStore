@@ -58,10 +58,7 @@ public class SingleBookFragment extends Fragment implements IOnBackPressed {
 
 
         edit_Button.setOnClickListener(view1 -> {
-
             EditButtonEvent.HandleEditButtonClicked(view.getContext(),clicked_Book);
-
-        // getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,editBook).addToBackStack(null).commit();
         });
 
 
