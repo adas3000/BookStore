@@ -133,8 +133,7 @@ public class SqlManager {
 
 
     public int editBookFromDb(String oldTitle,String oldAuthor,String newTitle,String newAuthor,
-                               String newDesc,String newImageUrl,int readen,Date date){
-
+                               String newDesc,String newImageUrl){
 
         try(SQLiteDatabase db = sqlHelper.getWritableDatabase()){
 
@@ -143,16 +142,14 @@ public class SqlManager {
             cv.put(SqlHelper.columnssNames[2],newTitle);
             cv.put(SqlHelper.columnssNames[3],newDesc);
             cv.put(SqlHelper.columnssNames[4],newImageUrl);
-            cv.put(SqlHelper.columnssNames[5],readen);
-            cv.put(SqlHelper.columnssNames[6],date.toString());
-
-
 
             return db.update(SqlHelper.getTable_Name(),cv,SqlHelper.columnssNames[1]+" =?"
             +" AND "+SqlHelper.columnssNames[2] + " =?",new String[]{oldAuthor,oldTitle});
         }
-
     }
+
+
+
 
 
     public void deleteAllRecordsFromDb(){

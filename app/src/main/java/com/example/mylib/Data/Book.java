@@ -62,7 +62,12 @@ public class Book {
     }
 
 
-    private String title, author, short_description, image_url;
+    private String title;
+    private String author;
+    private String short_description;
+
+
+    private String image_url;
     private Date finish_date;
     private int book_reading_state ;
     private boolean user_has_book;
@@ -112,6 +117,27 @@ public class Book {
     public int getBook_reading_state() { return book_reading_state; }
 
     public float getMark() { return mark; }
+
+
+    public void setFinish_date(Date date){finish_date = date;}
+
+    public void setTitle(String title){this.title = title;}
+
+    public void setAuthor(String author){this.author = author;}
+
+    public void setShort_description(String short_description) { this.short_description = short_description; }
+
+    public void setImage_url(String image_url) { this.image_url = image_url; }
+
+    public void setBook_reading_state(int book_reading_state) { this.book_reading_state = book_reading_state; }
+
+    public void setUser_has_book(boolean user_has_book) { this.user_has_book = user_has_book; }
+
+    public void setBook_is_favorite(boolean book_is_favorite) { this.book_is_favorite = book_is_favorite; }
+
+    public void setMark(float mark) { this.mark = mark; }
+
+
 
 
     @Override

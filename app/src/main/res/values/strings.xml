@@ -45,11 +45,6 @@
         <item>3 stars</item>
         <item>4 stars</item>
         <item>5 stars</item>
-        <item>6 stars</item>
-        <item>7 stars</item>
-        <item>8 stars</item>
-        <item>9 stars</item>
-        <item>10 stars</item>
     </string-array>
 
     <string-array name="sortByArgs">
@@ -88,8 +83,6 @@
 
 
 
-
-
     <string-array name="user_book_state">
         <item>Finished</item>
         <item>Reading now</item>
@@ -106,6 +99,9 @@
     <string name="mShelfs">My shelfs:</string>
 
 
+    <string name="saveButtonText">Save</string>
+    
+    <string name="finish_readingtext">When I finished reading</string>
 
 
 </resources>
