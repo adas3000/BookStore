@@ -24,7 +24,7 @@ import android.view.Menu;
 
 
 import java.util.List;
-
+@TargetApi(23)
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     NavigationView navigationView;
@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AllBooksFragment()).commit();
@@ -105,7 +106,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
+        int itemId = item.getItemId();
+        switch (itemId) {
             case R.id.mylib_allbooks:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AllBooksFragment()).addToBackStack(null).commit();
                 navigationView.setCheckedItem(R.id.mylib_allbooks);
@@ -140,6 +142,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
         }
         //TODO navigation view not checking different items than mylib_allbooks and mylib_addbook ;fix it
+        if(itemId==R.id.mylib_addbook)
+         getSupportActionBar().hide();
+        else getSupportActionBar().show();
+
+        getSupportActionBar().hide();
+
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

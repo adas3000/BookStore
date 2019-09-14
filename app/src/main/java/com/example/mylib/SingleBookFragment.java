@@ -1,7 +1,6 @@
 package com.example.mylib;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -9,26 +8,30 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.example.mylib.BackPressed.IOnBackPressed;
 import com.example.mylib.Data.Book;
+import com.example.mylib.Data.BookEdit;
 import com.example.mylib.Helpers.EditButtonEvent;
 import com.example.mylib.sql.SqlManager;
 import com.squareup.picasso.Picasso;
 
 
-public class SingleBookFragment extends Fragment implements IOnBackPressed {
+public class SingleBookFragment extends Fragment implements IOnBackPressed, BookEdit {
 
     private Book clicked_Book;
     private SqlManager sqlManager;
+
+    private void setBookShelfs(){
+
+    }
 
     @Nullable
     @Override
@@ -48,9 +51,30 @@ public class SingleBookFragment extends Fragment implements IOnBackPressed {
 
         Picasso.with(getContext()).load(clicked_Book.getImage_url()).placeholder(R.mipmap.ic_launcher).into(imageView);
 
+        ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
 
-        String readen = "Not readen.";
 
+        String readen = "On shelfs: ";
+
+        switch(clicked_Book.getBook_reading_state()){
+            case 1:
+                readen = "Finished date:"+clicked_Book.getFinish_date()+"\n";
+                break;
+            case 2:
+                readen="Reading now";
+                break;
+            case 3:
+                readen="Wants to read";
+                break;
+        }
+        if(clicked_Book.isBook_is_favorite() || clicked_Book.isBook_is_favorite())
+                readen += "On shelfs:";
+        if(clicked_Book.isUser_has_book()){
+            readen+=" I have ";
+        }
+        if(clicked_Book.isBook_is_favorite()){
+            readen += " Favorite ";
+        }
         textView_BookReaden.setText(readen);
 
         Button edit_Button = view.findViewById(R.id.button_editBook);

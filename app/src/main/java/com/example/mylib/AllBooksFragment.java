@@ -2,11 +2,11 @@ package com.example.mylib;
 
 import android.annotation.TargetApi;
 
+import android.app.ActionBar;
 import android.app.SearchManager;
 import android.content.Context;
 import android.os.Bundle;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -22,6 +22,7 @@ import android.widget.Spinner;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.example.mylib.BackPressed.IOnBackPressed;
@@ -42,6 +43,7 @@ public class AllBooksFragment extends Fragment implements IOnBackPressed {
     private ItemAdapter itemAdapter;
     private Spinner spinner_Show, spinner_sortBy, spinner_onshelvesFrom;
     private Shelv_Type shelv_type;
+
 
     public AllBooksFragment(Shelv_Type shelv_type){
         this.shelv_type = shelv_type;
@@ -87,6 +89,9 @@ public class AllBooksFragment extends Fragment implements IOnBackPressed {
         View view = inflater.inflate(R.layout.allbooks_activity, container, false);
 
 
+        if(!((AppCompatActivity)getActivity()).getSupportActionBar().isShowing())
+        ((AppCompatActivity)getActivity()).getSupportActionBar().show();
+
         sqlManager = SqlManager.getInstance();
         bookArrayList = sqlManager.getValues(shelv_type);
 
@@ -105,7 +110,6 @@ public class AllBooksFragment extends Fragment implements IOnBackPressed {
 
 
             Book clicked_Book = bookArrayList.get(i - 1);
-
             SingleBookFragment nextFragment = new SingleBookFragment();
             nextFragment.setBook(clicked_Book);
             getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, nextFragment).addToBackStack(null).commit();
