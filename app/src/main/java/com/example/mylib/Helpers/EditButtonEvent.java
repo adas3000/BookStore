@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
@@ -190,6 +191,22 @@ public class EditButtonEvent {
 
         Chip chip_have = someView.findViewById(R.id.chip_has);
         Chip chip_favor = someView.findViewById(R.id.chip_favor);
+
+
+        chip_have.setOnCheckedChangeListener((compoundButton, b) -> {
+            if(b)
+                clickedBook.setUser_has_book(true);
+            else
+                clickedBook.setUser_has_book(false);
+        });
+
+        chip_favor.setOnCheckedChangeListener((compoundButton, b) -> {
+            if(b)
+                clickedBook.setBook_is_favorite(true);
+            else
+                clickedBook.setBook_is_favorite(false);
+        });
+
 
         ((ViewGroup)chip_have.getParent()).removeView(chip_have);
         ((ViewGroup)chip_favor.getParent()).removeView(chip_favor);
