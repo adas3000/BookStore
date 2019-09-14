@@ -7,15 +7,17 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.text.InputType;
-import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -24,9 +26,12 @@ import com.example.mylib.Data.AppData;
 import com.example.mylib.Data.Book;
 import com.example.mylib.R;
 import com.example.mylib.sql.SqlManager;
+import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
 
 import java.sql.Date;
 import java.util.Calendar;
+import java.util.zip.Inflater;
 
 import static com.example.mylib.Data.AppData.getContext;
 
@@ -178,14 +183,28 @@ public class EditButtonEvent {
 
         });
 
-       
+
+        LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
+
+        View someView = layoutInflater.inflate(R.layout.chip,null);
+
+        Chip chip_have = someView.findViewById(R.id.chip_has);
+        Chip chip_favor = someView.findViewById(R.id.chip_favor);
+
+        ((ViewGroup)chip_have.getParent()).removeView(chip_have);
+        ((ViewGroup)chip_favor.getParent()).removeView(chip_favor);
+
+        RelativeLayout relativeLayout = new RelativeLayout(context);
+        relativeLayout.addView(chip_have);
+        relativeLayout.addView(chip_favor);
 
 
         linearLayout.addView(textView_shelf);
         linearLayout.addView(spinner_shelf);
         linearLayout.addView(textView_mShelfs);
-        linearLayout.addView(spinner_mShelfs);
+        linearLayout.addView(relativeLayout);
         linearLayout.addView(save_Button);
+
 
         if (clickedBook.getBook_reading_state() == 1) {
             linearLayout.addView(textView_rate, 0);
