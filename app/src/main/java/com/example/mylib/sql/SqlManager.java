@@ -151,7 +151,7 @@ public class SqlManager {
      * @param date  -- if bookreadingstate != 1 date is null
      * @return db.update
      */
-    public int editBookFromDb(String whereTitle, String whereAuthor, float rate, int book_reading_state, boolean hasBook, boolean isFavor, Date date) {
+    private int editBookFromDb(String whereTitle, String whereAuthor, float rate, int book_reading_state, boolean hasBook, boolean isFavor, Date date) {
 
 
         if (book_reading_state != 1) date = new Date(0,0,0);

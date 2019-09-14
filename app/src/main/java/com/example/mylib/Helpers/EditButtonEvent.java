@@ -3,7 +3,6 @@ package com.example.mylib.Helpers;
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
@@ -34,10 +33,12 @@ import static com.example.mylib.Data.AppData.getContext;
 
 public class EditButtonEvent {
 
+
+
     private EditButtonEvent() {
     }
 
-    @TargetApi(26)
+    @TargetApi(23)
     public static void HandleEditButtonClicked(Context context, Book clickedBook) {
 
 
@@ -46,7 +47,7 @@ public class EditButtonEvent {
         }
         if(clickedBook.getBook_reading_state()==0) clickedBook.setBook_reading_state(3);
 
-        Log.d("STATE",String.valueOf(clickedBook.getBook_reading_state()));
+
 
         AlertDialog.Builder builder_dialog = new AlertDialog.Builder(context);
         AlertDialog dialog = builder_dialog.create();
@@ -70,16 +71,21 @@ public class EditButtonEvent {
         textView_mShelfs.setTextSize(18);
         textView_shelf.setTextSize(18);
         textView_finishDate.setTextSize(18);
+
+
+
         textView_mShelfs.setTextColor(getContext().getColor(R.color.colorBlack));
         textView_shelf.setTextColor(getContext().getColor(R.color.colorBlack));
         textView_rate.setTextColor(getContext().getColor(R.color.colorBlack));
         textView_finishDate.setTextColor(getContext().getColor(R.color.colorBlack));
 
 
+
         textView_shelf.setText(getContext().getString(R.string.Shelf));
         textView_mShelfs.setText(getContext().getString(R.string.mShelfs));
         textView_rate.setText(getContext().getString(R.string.rateText));
         textView_finishDate.setText(getContext().getString(R.string.finish_readingtext));
+
 
 
         Spinner spinner_shelf = new Spinner(context);
@@ -95,7 +101,6 @@ public class EditButtonEvent {
         spinner_mShelfs.setAdapter(adapter_mShelfs);
         spinner_shelf.setAdapter(adapter_shelf);
         spinner_shelf.setSelection(clickedBook.getBook_reading_state()-1);
-
 
 
         Button save_Button = new Button(context);
@@ -114,6 +119,7 @@ public class EditButtonEvent {
         ratingBar.setOnRatingBarChangeListener((ratingBar1, v, b) -> {
             clickedBook.setMark(v);
         });
+
 
         save_Button.setOnClickListener(view -> {
             SqlManager.getInstance().editBookFromDb(clickedBook);
@@ -172,6 +178,8 @@ public class EditButtonEvent {
 
         });
 
+       
+
 
         linearLayout.addView(textView_shelf);
         linearLayout.addView(spinner_shelf);
@@ -186,6 +194,10 @@ public class EditButtonEvent {
             linearLayout.addView(editText_date, linearLayout.getChildCount() - 1);
         }
 
+        dialog.setOnDismissListener(dialogInterface -> {
+
+           // SqlManager.getInstance().editBookFromDb(clickedBook);
+        });
 
         dialog.setView(linearLayout);
         dialog.show();

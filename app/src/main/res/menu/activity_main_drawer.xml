@@ -4,16 +4,6 @@
     tools:showIn="navigation_view">
 
 
-    <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/mylib_allbooks"
-            android:icon="@drawable/ic_books"
-            android:title="@string/menu_books" />
-        <item
-            android:id="@+id/mylib_addbook"
-            android:icon="@drawable/ic_menu_send"
-            android:title="Add Book" />
-    </group>
 
     <item android:title="Bookcase">
         <menu>
@@ -47,6 +37,18 @@
                 android:icon="@drawable/ic_star"
                 android:checkable="true"
                 android:title="@string/shelvesFavors" />
+        </menu>
+    </item>
+    <item android:title="Manage">
+        <menu>
+        <item
+            android:id="@+id/mylib_allbooks"
+            android:icon="@drawable/ic_books"
+            android:title="@string/menu_books" />
+        <item
+            android:id="@+id/mylib_addbook"
+            android:icon="@drawable/ic_menu_send"
+            android:title="Add Book" />
         </menu>
     </item>
 
