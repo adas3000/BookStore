@@ -17,6 +17,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertFalse;
+import static junit.framework.TestCase.assertNotSame;
+import static junit.framework.TestCase.assertTrue;
 
 public class SqlTestAfterDbChanges {
 
@@ -62,7 +65,19 @@ public class SqlTestAfterDbChanges {
         assertEquals("Hp2",bookArrayList.get(0).getTitle());
     }
 
+    @Test
+    public void getBookAfterEditing(){
 
+        ArrayList<Book> bookArrayList = sqlManager.getValues(Shelv_Type.All);
+
+        assertFalse(2==bookArrayList.get(0).getMark());
+
+        bookArrayList.get(0).setMark(2);
+
+        Book b = sqlManager.getBookByTitleAndAuthor(bookArrayList.get(0).getTitle(),bookArrayList.get(0).getAuthor());
+
+        assertTrue(2==bookArrayList.get(0).getMark());
+    }
 
 
     @After

@@ -113,7 +113,6 @@ public class SqlManager {
             contentValues.put(SqlHelper.columnssNames[3], short_desc);
             contentValues.put(SqlHelper.columnssNames[4], image_url);
 
-
             db.insert(SqlHelper.getTable_Name(), null, contentValues);
         }
     }
@@ -188,6 +187,35 @@ public class SqlManager {
         try (SQLiteDatabase db = sqlHelper.getWritableDatabase()) {
             db.execSQL("DELETE  FROM " + SqlHelper.getTable_Name());
         }
+    }
+
+    public Book getBookByTitleAndAuthor(String title,String author){
+
+        try(SQLiteDatabase sqLiteDatabase = sqlHelper.getWritableDatabase()){
+
+
+           Cursor cursor = sqLiteDatabase.query(SqlHelper.getTable_Name(),SqlHelper.columnssNames,"title=? and " +
+                   "author=?",new String[]{title,author},null,null,null);
+
+
+           if(cursor.moveToFirst()){
+               String short_desc = cursor.getString(cursor.getColumnIndex(SqlHelper.columnssNames[3]));
+               String image_url = cursor.getString(cursor.getColumnIndex(SqlHelper.columnssNames[4]));
+               float mark = cursor.getInt(cursor.getColumnIndex(SqlHelper.columnssNames[5]));
+               int book_reading_state = cursor.getInt(cursor.getColumnIndex(SqlHelper.columnssNames[6]));
+               int has_book = cursor.getInt(cursor.getColumnIndex(SqlHelper.columnssNames[7]));
+               int book_is_favorite = cursor.getInt(cursor.getColumnIndex(SqlHelper.columnssNames[8]));
+               String date = cursor.getString(cursor.getColumnIndex(SqlHelper.columnssNames[9]));
+
+               boolean _has_book = has_book > 0;
+               boolean _book_is_favor = book_is_favorite > 0;
+
+               return new Book.Builder(title,author,short_desc,image_url)
+                       .Mark(mark).book_Reading_State(book_reading_state).user_Has_Book(_has_book)
+                       .book_Is_Favorite(_book_is_favor).date(Date.valueOf(date)).build();
+           }
+        }
+       return new Book.Builder("null","null","null","null").build();
     }
 
 

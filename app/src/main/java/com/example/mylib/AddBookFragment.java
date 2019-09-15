@@ -79,8 +79,8 @@ public class AddBookFragment extends Fragment implements View.OnClickListener, I
         String desc = editText_desc.getText().toString();
         String url = editText_url.getText().toString();
 
-        if (author.isEmpty() || title.isEmpty()) {
-            Toast.makeText(getActivity(), "Fill fields author and title.", Toast.LENGTH_SHORT).show();
+        if (author.isEmpty() || title.isEmpty() || url.isEmpty()) {
+            Toast.makeText(getActivity(), "Fill all fields.", Toast.LENGTH_SHORT).show();
             return;
         }
 

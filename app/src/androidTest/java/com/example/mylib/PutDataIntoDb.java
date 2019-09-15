@@ -32,7 +32,7 @@ public class PutDataIntoDb {
                 5, 2, 1, 0, new Date(Calendar.getInstance().getTimeInMillis()));
 
         sqlManager.addBookToDb("harry potter i czara ognia", "J.K Rowling", "..",
-                "",
+                "das",
                 5, 3, 0, 0, new Date(Calendar.getInstance().getTimeInMillis()));
         //
 

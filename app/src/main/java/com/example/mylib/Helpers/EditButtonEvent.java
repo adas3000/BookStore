@@ -50,6 +50,8 @@ public class EditButtonEvent {
 
 
 
+
+
         if (clickedBook_ref.getFinish_date() == null) {
             clickedBook_ref.setFinish_date(new Date(Calendar.getInstance().getTimeInMillis()));
         }
@@ -95,18 +97,12 @@ public class EditButtonEvent {
         textView_finishDate.setText(getContext().getString(R.string.finish_readingtext));
 
 
-
         Spinner spinner_shelf = new Spinner(context);
-        Spinner spinner_mShelfs = new Spinner(context);
-
 
         ArrayAdapter<CharSequence> adapter_shelf = ArrayAdapter.createFromResource(getContext(), R.array.user_book_state, android.R.layout.simple_spinner_item);
         adapter_shelf.setDropDownViewResource(R.layout.spinner_item);
 
-        ArrayAdapter<CharSequence> adapter_mShelfs = ArrayAdapter.createFromResource(getContext(), R.array.user_book_shelfs, android.R.layout.simple_spinner_item);
-        adapter_shelf.setDropDownViewResource(R.layout.spinner_item);
 
-        spinner_mShelfs.setAdapter(adapter_mShelfs);
         spinner_shelf.setAdapter(adapter_shelf);
         spinner_shelf.setSelection(clickedBook_ref.getBook_reading_state()-1);
 
@@ -131,6 +127,11 @@ public class EditButtonEvent {
 
         save_Button.setOnClickListener(view -> {
             SqlManager.getInstance().editBookFromDb(clickedBook_ref);
+            clickedBook.setFinish_date(clickedBook_ref.getFinish_date());
+            clickedBook.setBook_reading_state(clickedBook_ref.getBook_reading_state());
+            clickedBook.setUser_has_book(clickedBook_ref.isUser_has_book());
+            clickedBook.setBook_is_favorite(clickedBook_ref.isBook_is_favorite());
+            clickedBook.setMark(clickedBook_ref.getMark());
             dialog.cancel();
         });
 
@@ -151,6 +152,7 @@ public class EditButtonEvent {
             datePickerDialog.show();
 
             datePickerDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", (dialogInterface, i) -> {
+
             });
 
         });

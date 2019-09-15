@@ -3,13 +3,13 @@ package com.example.mylib;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -84,10 +84,13 @@ public class SingleBookFragment extends Fragment implements IOnBackPressed, Book
         Button edit_Button = view.findViewById(R.id.button_editBook);
         Button delete_Button = view.findViewById(R.id.button_deleteBook);
 
+        Log.d("Something","asd");
+
 
         edit_Button.setOnClickListener(view1 -> {
             EditButtonEvent.HandleEditButtonClicked(view.getContext(),clicked_Book);
             textView_BookReaden.setText(setBookShelfs());
+
         });
 
 
