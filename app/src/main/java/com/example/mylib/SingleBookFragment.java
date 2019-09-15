@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -26,37 +27,40 @@ import com.example.mylib.sql.SqlManager;
 import com.squareup.picasso.Picasso;
 
 
-public class SingleBookFragment extends Fragment implements IOnBackPressed, BookEdit , AfterEditing {
+public class SingleBookFragment extends Fragment implements IOnBackPressed, BookEdit, AfterEditing {
 
     private Book clicked_Book;
     private SqlManager sqlManager;
+    private RatingBar ratingBar_rate;
 
-    public String setBookShelfs(){
+    public String setBookShelfs() {
         String readen = "On shelfs: ";
 
-        switch(clicked_Book.getBook_reading_state()){
+        switch (clicked_Book.getBook_reading_state()) {
             case 1:
-                readen = "Finished date:"+clicked_Book.getFinish_date()+"\n";
+                readen = "Finished date:" + clicked_Book.getFinish_date() + "\n";
                 break;
             case 2:
-                readen="Reading now";
+                readen = "Reading now";
                 break;
             case 3:
-                readen="Wants to read";
+                readen = "Wants to read";
                 break;
         }
-        if(clicked_Book.isBook_is_favorite() || clicked_Book.isUser_has_book())
+        if (clicked_Book.isBook_is_favorite() || clicked_Book.isUser_has_book())
             readen += "On shelfs:";
 
-        if(clicked_Book.isUser_has_book()){
-            readen+=" I Have ";
+        if (clicked_Book.isUser_has_book()) {
+            readen += " I Have ";
         }
-        if(clicked_Book.isBook_is_favorite()){
-            if(clicked_Book.isUser_has_book())
-                readen+="and";
+        if (clicked_Book.isBook_is_favorite()) {
+            if (clicked_Book.isUser_has_book())
+                readen += "and";
             readen += " Favorite ";
         }
-       return readen;
+        ratingBar_rate.setRating(clicked_Book.getMark());
+
+        return readen;
     }
 
     @Nullable
@@ -67,30 +71,26 @@ public class SingleBookFragment extends Fragment implements IOnBackPressed, Book
 
         sqlManager = SqlManager.getInstance();
 
-
+        ratingBar_rate = view.findViewById(R.id.ratingBar);
         TextView textView_Book = view.findViewById(R.id.textView_book);
-        TextView textView_Description = view.findViewById(R.id.textView_description);
         TextView textView_BookReaden = view.findViewById(R.id.textView_readen);
         ImageView imageView = view.findViewById(R.id.imageView_SingleBook);
         textView_Book.setGravity(Gravity.CENTER);
         textView_Book.setText(clicked_Book.getAuthor() + "\n" + clicked_Book.getTitle());
-        textView_Description.setText(clicked_Book.getShort_description());
 
         Picasso.with(getContext()).load(clicked_Book.getImage_url()).placeholder(R.mipmap.ic_launcher).into(imageView);
 
-        ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
+        ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
 
-
+        ratingBar_rate.setRating(clicked_Book.getMark());
         textView_BookReaden.setText(setBookShelfs());
 
         Button edit_Button = view.findViewById(R.id.button_editBook);
         Button delete_Button = view.findViewById(R.id.button_deleteBook);
 
-        Log.d("Something","asd");
-
 
         edit_Button.setOnClickListener(view1 -> {
-            EditButtonEvent.HandleEditButtonClicked(view.getContext(),clicked_Book,this::setBookShelfs,textView_BookReaden);
+            EditButtonEvent.HandleEditButtonClicked(view.getContext(), clicked_Book, this::setBookShelfs, textView_BookReaden);
         });
 
 
@@ -111,6 +111,14 @@ public class SingleBookFragment extends Fragment implements IOnBackPressed, Book
             builder.setMessage("Are you sure?").setPositiveButton("Yes", dialogClickListener)
                     .setNegativeButton("No", dialogClickListener).show();
 
+        });
+
+
+        imageView.setOnClickListener(view1 -> {
+
+            SingleBookFragment_Only_Book_Details singleBookFragment_only_book_details = new SingleBookFragment_Only_Book_Details();
+            singleBookFragment_only_book_details.setClickedBook(clicked_Book);
+            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, singleBookFragment_only_book_details).addToBackStack(null).commit();
         });
 
 
