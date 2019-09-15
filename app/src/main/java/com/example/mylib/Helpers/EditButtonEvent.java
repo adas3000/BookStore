@@ -38,11 +38,10 @@ public class EditButtonEvent {
 
 
 
-    private EditButtonEvent() {
-    }
+
 
     @TargetApi(23)
-    public static void HandleEditButtonClicked(Context context, Book clickedBook) {
+    public static void HandleEditButtonClicked(Context context, Book clickedBook,AfterEditing afterEditing,TextView setOn) {
 
         Book clickedBook_ref = new Book.Builder(clickedBook.getTitle(),clickedBook.getAuthor(),clickedBook.getShort_description(),clickedBook.getImage_url())
                 .book_Is_Favorite(clickedBook.isBook_is_favorite()).book_Reading_State(clickedBook.getBook_reading_state()).user_Has_Book(clickedBook.isUser_has_book())
@@ -132,6 +131,7 @@ public class EditButtonEvent {
             clickedBook.setUser_has_book(clickedBook_ref.isUser_has_book());
             clickedBook.setBook_is_favorite(clickedBook_ref.isBook_is_favorite());
             clickedBook.setMark(clickedBook_ref.getMark());
+            setOn.setText(afterEditing.setBookShelfs());
             dialog.cancel();
         });
 

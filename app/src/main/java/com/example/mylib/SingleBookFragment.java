@@ -20,16 +20,18 @@ import androidx.fragment.app.Fragment;
 import com.example.mylib.BackPressed.IOnBackPressed;
 import com.example.mylib.Data.Book;
 import com.example.mylib.Data.BookEdit;
+import com.example.mylib.Helpers.AfterEditing;
 import com.example.mylib.Helpers.EditButtonEvent;
 import com.example.mylib.sql.SqlManager;
 import com.squareup.picasso.Picasso;
 
 
-public class SingleBookFragment extends Fragment implements IOnBackPressed, BookEdit {
+public class SingleBookFragment extends Fragment implements IOnBackPressed, BookEdit , AfterEditing {
 
     private Book clicked_Book;
     private SqlManager sqlManager;
-    private String setBookShelfs(){
+
+    public String setBookShelfs(){
         String readen = "On shelfs: ";
 
         switch(clicked_Book.getBook_reading_state()){
@@ -88,9 +90,7 @@ public class SingleBookFragment extends Fragment implements IOnBackPressed, Book
 
 
         edit_Button.setOnClickListener(view1 -> {
-            EditButtonEvent.HandleEditButtonClicked(view.getContext(),clicked_Book);
-            textView_BookReaden.setText(setBookShelfs());
-
+            EditButtonEvent.HandleEditButtonClicked(view.getContext(),clicked_Book,this::setBookShelfs,textView_BookReaden);
         });
 
 
