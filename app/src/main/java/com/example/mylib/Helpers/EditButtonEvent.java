@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
@@ -28,11 +27,9 @@ import com.example.mylib.Data.Book;
 import com.example.mylib.R;
 import com.example.mylib.sql.SqlManager;
 import com.google.android.material.chip.Chip;
-import com.google.android.material.chip.ChipGroup;
 
 import java.sql.Date;
 import java.util.Calendar;
-import java.util.zip.Inflater;
 
 import static com.example.mylib.Data.AppData.getContext;
 
@@ -192,6 +189,10 @@ public class EditButtonEvent {
         Chip chip_have = someView.findViewById(R.id.chip_has);
         Chip chip_favor = someView.findViewById(R.id.chip_favor);
 
+        if(clickedBook.isUser_has_book())
+            chip_have.setChecked(true);
+        if(clickedBook.isBook_is_favorite())
+            chip_favor.setChecked(true);
 
         chip_have.setOnCheckedChangeListener((compoundButton, b) -> {
             if(b)

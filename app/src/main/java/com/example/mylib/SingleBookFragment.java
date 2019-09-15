@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -28,9 +29,32 @@ public class SingleBookFragment extends Fragment implements IOnBackPressed, Book
 
     private Book clicked_Book;
     private SqlManager sqlManager;
+    private String setBookShelfs(){
+        String readen = "On shelfs: ";
 
-    private void setBookShelfs(){
+        switch(clicked_Book.getBook_reading_state()){
+            case 1:
+                readen = "Finished date:"+clicked_Book.getFinish_date()+"\n";
+                break;
+            case 2:
+                readen="Reading now";
+                break;
+            case 3:
+                readen="Wants to read";
+                break;
+        }
+        if(clicked_Book.isBook_is_favorite() || clicked_Book.isUser_has_book())
+            readen += "On shelfs:";
 
+        if(clicked_Book.isUser_has_book()){
+            readen+=" I Have ";
+        }
+        if(clicked_Book.isBook_is_favorite()){
+            if(clicked_Book.isUser_has_book())
+                readen+="and";
+            readen += " Favorite ";
+        }
+       return readen;
     }
 
     @Nullable
@@ -40,6 +64,7 @@ public class SingleBookFragment extends Fragment implements IOnBackPressed, Book
         View view = inflater.inflate(R.layout.singlebook_fragment, container, false);
 
         sqlManager = SqlManager.getInstance();
+
 
         TextView textView_Book = view.findViewById(R.id.textView_book);
         TextView textView_Description = view.findViewById(R.id.textView_description);
@@ -54,28 +79,7 @@ public class SingleBookFragment extends Fragment implements IOnBackPressed, Book
         ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
 
 
-        String readen = "On shelfs: ";
-
-        switch(clicked_Book.getBook_reading_state()){
-            case 1:
-                readen = "Finished date:"+clicked_Book.getFinish_date()+"\n";
-                break;
-            case 2:
-                readen="Reading now";
-                break;
-            case 3:
-                readen="Wants to read";
-                break;
-        }
-        if(clicked_Book.isBook_is_favorite() || clicked_Book.isBook_is_favorite())
-                readen += "On shelfs:";
-        if(clicked_Book.isUser_has_book()){
-            readen+=" I have ";
-        }
-        if(clicked_Book.isBook_is_favorite()){
-            readen += " Favorite ";
-        }
-        textView_BookReaden.setText(readen);
+        textView_BookReaden.setText(setBookShelfs());
 
         Button edit_Button = view.findViewById(R.id.button_editBook);
         Button delete_Button = view.findViewById(R.id.button_deleteBook);
@@ -83,6 +87,7 @@ public class SingleBookFragment extends Fragment implements IOnBackPressed, Book
 
         edit_Button.setOnClickListener(view1 -> {
             EditButtonEvent.HandleEditButtonClicked(view.getContext(),clicked_Book);
+            textView_BookReaden.setText(setBookShelfs());
         });
 
 

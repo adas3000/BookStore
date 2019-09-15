@@ -12,6 +12,7 @@ import android.view.MenuItem;
 
 import com.example.mylib.Data.Shelv_Type;
 import com.example.mylib.sql.SqlManager;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -21,6 +22,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import android.view.Menu;
+import android.view.View;
 
 
 import java.util.List;
@@ -52,9 +54,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
 
 
+        FloatingActionButton fab = findViewById(R.id.floatingActionButton3);
+
+        fab.setOnClickListener(view->{
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AddBookFragment()).addToBackStack(null).commit();
+            getSupportActionBar().hide();
+        });
+
+
+
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AllBooksFragment()).commit();
-            navigationView.setCheckedItem(R.id.mylib_allbooks);
+            navigationView.setCheckedItem(R.id.AllUserBooks);
         }
     }
 
@@ -93,10 +104,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        else if(id==R.id.action_search){
+         if(id==R.id.action_search){
             return true;
         }
 
@@ -108,14 +116,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(MenuItem item) {
         int itemId = item.getItemId();
         switch (itemId) {
-            case R.id.mylib_allbooks:
+       /*     case R.id.mylib_allbooks:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AllBooksFragment()).addToBackStack(null).commit();
                 navigationView.setCheckedItem(R.id.mylib_allbooks);
-                break;
-            case R.id.mylib_addbook:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AddBookFragment()).addToBackStack(null).commit();
-                navigationView.setCheckedItem(R.id.mylib_addbook);
-                break;
+                break;*/
             case R.id.AllUserBooks:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AllBooksFragment(Shelv_Type.All)).addToBackStack(null).commit();
                 navigationView.setCheckedItem(R.id.AllUserBooks);
@@ -142,11 +146,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
         }
         //TODO navigation view not checking different items than mylib_allbooks and mylib_addbook ;fix it
-        if(itemId==R.id.mylib_addbook)
-         getSupportActionBar().hide();
-        else getSupportActionBar().show();
-
-        getSupportActionBar().hide();
 
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
