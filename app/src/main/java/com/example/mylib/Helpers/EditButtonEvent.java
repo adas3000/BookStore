@@ -44,17 +44,22 @@ public class EditButtonEvent {
     @TargetApi(23)
     public static void HandleEditButtonClicked(Context context, Book clickedBook) {
 
+        Book clickedBook_ref = new Book.Builder(clickedBook.getTitle(),clickedBook.getAuthor(),clickedBook.getShort_description(),clickedBook.getImage_url())
+                .book_Is_Favorite(clickedBook.isBook_is_favorite()).book_Reading_State(clickedBook.getBook_reading_state()).user_Has_Book(clickedBook.isUser_has_book())
+                .date(clickedBook.getFinish_date()).Mark(clickedBook.getMark()).build();
 
-        if (clickedBook.getFinish_date() == null) {
-            clickedBook.setFinish_date(new Date(Calendar.getInstance().getTimeInMillis()));
+
+
+        if (clickedBook_ref.getFinish_date() == null) {
+            clickedBook_ref.setFinish_date(new Date(Calendar.getInstance().getTimeInMillis()));
         }
-        if(clickedBook.getBook_reading_state()==0) clickedBook.setBook_reading_state(3);
+        if(clickedBook_ref.getBook_reading_state()==0) clickedBook_ref.setBook_reading_state(3);
 
 
 
         AlertDialog.Builder builder_dialog = new AlertDialog.Builder(context);
         AlertDialog dialog = builder_dialog.create();
-        dialog.setMessage(clickedBook.getTitle());
+        dialog.setMessage(clickedBook_ref.getTitle());
 
 
         LinearLayout linearLayout = new LinearLayout(context);
@@ -62,7 +67,7 @@ public class EditButtonEvent {
 
         EditText editText_date = new EditText(context);
         editText_date.setInputType(InputType.TYPE_NULL);
-        editText_date.setText(clickedBook.getFinish_date().toString());
+        editText_date.setText(clickedBook_ref.getFinish_date().toString());
 
         TextView textView_rate = new TextView(context);
         TextView textView_shelf = new TextView(context);
@@ -103,7 +108,7 @@ public class EditButtonEvent {
 
         spinner_mShelfs.setAdapter(adapter_mShelfs);
         spinner_shelf.setAdapter(adapter_shelf);
-        spinner_shelf.setSelection(clickedBook.getBook_reading_state()-1);
+        spinner_shelf.setSelection(clickedBook_ref.getBook_reading_state()-1);
 
 
         Button save_Button = new Button(context);
@@ -116,16 +121,16 @@ public class EditButtonEvent {
         ratingBar.setForegroundGravity(Gravity.CENTER);
         ratingBar.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT));
         ratingBar.setNumStars(AppData.rateMaxNum);
-        ratingBar.setRating(clickedBook.getMark());
+        ratingBar.setRating(clickedBook_ref.getMark());
 
 
         ratingBar.setOnRatingBarChangeListener((ratingBar1, v, b) -> {
-            clickedBook.setMark(v);
+            clickedBook_ref.setMark(v);
         });
 
 
         save_Button.setOnClickListener(view -> {
-            SqlManager.getInstance().editBookFromDb(clickedBook);
+            SqlManager.getInstance().editBookFromDb(clickedBook_ref);
             dialog.cancel();
         });
 
@@ -135,17 +140,21 @@ public class EditButtonEvent {
             int month = calendar.get(Calendar.MONTH);
             int year = calendar.get(Calendar.YEAR);
 
+
             DatePickerDialog datePickerDialog = new DatePickerDialog(context, (datePicker, year1, month1, day1) -> {
+
                 Date date = new Date(year1 - 1900, month1, day1);
                 editText_date.setText(date.toString());
-                clickedBook.setFinish_date(date);
+                clickedBook_ref.setFinish_date(date);
             }, year, month, day);
+            datePickerDialog.getDatePicker().setBackgroundColor(getContext().getResources().getColor(R.color.colorPrimary));
             datePickerDialog.show();
 
             datePickerDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", (dialogInterface, i) -> {
             });
 
         });
+
 
         spinner_shelf.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -171,7 +180,7 @@ public class EditButtonEvent {
                     linearLayout.removeView(editText_date);
                 }
 
-                clickedBook.setBook_reading_state(position + 1);
+                clickedBook_ref.setBook_reading_state(position + 1);
             }
 
             @Override
@@ -189,23 +198,23 @@ public class EditButtonEvent {
         Chip chip_have = someView.findViewById(R.id.chip_has);
         Chip chip_favor = someView.findViewById(R.id.chip_favor);
 
-        if(clickedBook.isUser_has_book())
+        if(clickedBook_ref.isUser_has_book())
             chip_have.setChecked(true);
-        if(clickedBook.isBook_is_favorite())
+        if(clickedBook_ref.isBook_is_favorite())
             chip_favor.setChecked(true);
 
         chip_have.setOnCheckedChangeListener((compoundButton, b) -> {
             if(b)
-                clickedBook.setUser_has_book(true);
+                clickedBook_ref.setUser_has_book(true);
             else
-                clickedBook.setUser_has_book(false);
+                clickedBook_ref.setUser_has_book(false);
         });
 
         chip_favor.setOnCheckedChangeListener((compoundButton, b) -> {
             if(b)
-                clickedBook.setBook_is_favorite(true);
+                clickedBook_ref.setBook_is_favorite(true);
             else
-                clickedBook.setBook_is_favorite(false);
+                clickedBook_ref.setBook_is_favorite(false);
         });
 
 
@@ -224,7 +233,7 @@ public class EditButtonEvent {
         linearLayout.addView(save_Button);
 
 
-        if (clickedBook.getBook_reading_state() == 1) {
+        if (clickedBook_ref.getBook_reading_state() == 1) {
             linearLayout.addView(textView_rate, 0);
             linearLayout.addView(ratingBar, 1);
             linearLayout.addView(textView_finishDate, linearLayout.getChildCount() - 1);
