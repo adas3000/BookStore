@@ -18,7 +18,9 @@ import android.widget.TextView;
 import com.example.mylib.R;
 import com.squareup.picasso.Picasso;
 
+import java.util.List;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -26,8 +28,8 @@ import java.util.stream.Stream;
 public class ItemAdapter extends BaseAdapter implements Filterable {
 
     private LayoutInflater layoutInflater;
-    private ArrayList<Book> bookArrayList_originalData;
-    private ArrayList<Book> bookArrayList_filteredData;
+    private List<Book> bookArrayList_originalData;
+    private List<Book> bookArrayList_filteredData;
     private ItemFilter itemFilter = new ItemFilter();
 
     public ItemAdapter(Context context, ArrayList<Book> bookArrayList) {
@@ -64,6 +66,21 @@ public class ItemAdapter extends BaseAdapter implements Filterable {
                     Stream<Book> bookStream = bookArrayList_originalData.stream();
                     bookArrayList_filteredData = bookStream.filter(b -> b.getMark() == rate).collect(Collectors.toCollection(ArrayList::new));
                 }
+                notifyDataSetChanged();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        spinner_sortBy.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+
+
                 notifyDataSetChanged();
             }
 
