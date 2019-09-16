@@ -21,7 +21,7 @@ public class Book {
         private int book_reading_state = -1;
         private boolean user_has_book = false;
         private boolean book_is_favorite = false;
-        private float mark = 0;
+        private float mark = 0.f;
 
         public Builder(String title, String author, String short_description, String img_url) {
             this.title = title;
@@ -135,7 +135,18 @@ public class Book {
     public void setMark(float mark) { this.mark = mark; }
 
 
-
+    @Override
+    public String toString() {
+        return "Book{" +
+                "title='" + title + '\'' +
+                ", author='" + author + '\'' +
+                ", finish_date=" + finish_date +
+                ", book_reading_state=" + book_reading_state +
+                ", user_has_book=" + user_has_book +
+                ", book_is_favorite=" + book_is_favorite +
+                ", mark=" + mark +
+                '}';
+    }
 
     @Override
     public boolean equals(Object o) {

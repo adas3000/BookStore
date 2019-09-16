@@ -87,6 +87,7 @@
         <item>Finished</item>
         <item>Reading now</item>
         <item>Wants to read</item>
+        <item>Not added</item>
     </string-array>
 
     <string-array name="user_book_shelfs">

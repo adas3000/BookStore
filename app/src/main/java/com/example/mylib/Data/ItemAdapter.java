@@ -6,10 +6,13 @@ import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.mylib.R;
@@ -31,6 +34,47 @@ public class ItemAdapter extends BaseAdapter implements Filterable {
         this.layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.bookArrayList_originalData = bookArrayList;
         this.bookArrayList_filteredData = bookArrayList;
+
+        //handle spinners
+    }
+
+    public void setSpinners(Spinner spinner_Show,Spinner spinner_sortBy){
+        ArrayAdapter<CharSequence> spinner_ShowAdapter = ArrayAdapter.createFromResource(AppData.getContext(), R.array.showArgs,
+                android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> spinner_sortAdapter = ArrayAdapter.createFromResource(AppData.getContext(), R.array.sortByArgs,
+                android.R.layout.simple_spinner_item);
+
+        spinner_ShowAdapter.setDropDownViewResource(R.layout.spinner_item);
+        spinner_sortAdapter.setDropDownViewResource(R.layout.spinner_item);
+        spinner_Show.setAdapter(spinner_ShowAdapter);
+        spinner_sortBy.setAdapter(spinner_sortAdapter);
+
+
+
+
+        spinner_Show.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                float rate = i-1;
+
+                if(rate==0 || rate==-1)
+                    bookArrayList_filteredData = bookArrayList_originalData;
+
+                else {
+                    Stream<Book> bookStream = bookArrayList_originalData.stream();
+                    bookArrayList_filteredData = bookStream.filter(b -> b.getMark() == rate).collect(Collectors.toCollection(ArrayList::new));
+                }
+                notifyDataSetChanged();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+
+
     }
 
 

@@ -22,14 +22,13 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import android.view.Menu;
-import android.view.View;
 
 
 import java.util.List;
 @TargetApi(23)
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    NavigationView navigationView;
+    private NavigationView navigationView;
 
 
     @Override

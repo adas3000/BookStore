@@ -34,11 +34,11 @@ public class SingleBookFragment extends Fragment implements IOnBackPressed, Book
     private RatingBar ratingBar_rate;
 
     public String setBookShelfs() {
-        String readen = "On shelfs: ";
+        String readen;
 
         switch (clicked_Book.getBook_reading_state()) {
             case 1:
-                readen = "Finished date:" + clicked_Book.getFinish_date() + "\n";
+                readen = "Finished date:" + clicked_Book.getFinish_date() ;
                 break;
             case 2:
                 readen = "Reading now";
@@ -46,9 +46,12 @@ public class SingleBookFragment extends Fragment implements IOnBackPressed, Book
             case 3:
                 readen = "Wants to read";
                 break;
+            default:
+                readen = "Not added.";
+                break;
         }
         if (clicked_Book.isBook_is_favorite() || clicked_Book.isUser_has_book())
-            readen += "On shelfs:";
+            readen += "\nOn shelfs:";
 
         if (clicked_Book.isUser_has_book()) {
             readen += " I Have ";
@@ -82,7 +85,11 @@ public class SingleBookFragment extends Fragment implements IOnBackPressed, Book
 
         ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
 
+
         ratingBar_rate.setRating(clicked_Book.getMark());
+
+        if(clicked_Book.getBook_reading_state()!=1) ratingBar_rate.setVisibility(View.INVISIBLE);
+
         textView_BookReaden.setText(setBookShelfs());
 
         Button edit_Button = view.findViewById(R.id.button_editBook);
@@ -90,7 +97,7 @@ public class SingleBookFragment extends Fragment implements IOnBackPressed, Book
 
 
         edit_Button.setOnClickListener(view1 -> {
-            EditButtonEvent.HandleEditButtonClicked(view.getContext(), clicked_Book, this::setBookShelfs, textView_BookReaden);
+            EditButtonEvent.HandleEditButtonClicked(view.getContext(), clicked_Book, this::setBookShelfs, textView_BookReaden,ratingBar_rate);
         });
 
 

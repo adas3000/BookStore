@@ -2,11 +2,9 @@ package com.example.mylib;
 
 import android.annotation.TargetApi;
 
-import android.app.ActionBar;
 import android.app.SearchManager;
 import android.content.Context;
 import android.os.Bundle;
-
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -15,6 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Spinner;
@@ -27,18 +27,20 @@ import androidx.fragment.app.Fragment;
 
 import com.example.mylib.BackPressed.IOnBackPressed;
 
+import com.example.mylib.Data.AppData;
 import com.example.mylib.Data.Book;
 import com.example.mylib.Data.ItemAdapter;
 import com.example.mylib.Data.Shelv_Type;
-import com.example.mylib.Helpers.SetSpinnerHelper;
 import com.example.mylib.sql.SqlManager;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class AllBooksFragment extends Fragment implements IOnBackPressed {
 
     private SqlManager sqlManager;
-    private ArrayList<Book> bookArrayList;
+    private ArrayList<Book> bookArrayList,allbookArrayList;
     private ListView listView;
     private ItemAdapter itemAdapter;
     private Spinner spinner_Show, spinner_sortBy, spinner_onshelvesFrom;
@@ -94,6 +96,8 @@ public class AllBooksFragment extends Fragment implements IOnBackPressed {
 
         sqlManager = SqlManager.getInstance();
         bookArrayList = sqlManager.getValues(shelv_type);
+        allbookArrayList = sqlManager.getValues(shelv_type);
+
 
         listView = view.findViewById(R.id.myListViewEmails);
         itemAdapter = new ItemAdapter(view.getContext(), bookArrayList);
@@ -107,8 +111,6 @@ public class AllBooksFragment extends Fragment implements IOnBackPressed {
 
 
         listView.setOnItemClickListener((adapterView, view1, i, l) -> {
-
-
             Book clicked_Book = bookArrayList.get(i - 1);
             SingleBookFragment nextFragment = new SingleBookFragment();
             nextFragment.setBook(clicked_Book);
@@ -116,14 +118,11 @@ public class AllBooksFragment extends Fragment implements IOnBackPressed {
         });
 
 
-
+        //spinners
         spinner_Show = view.findViewById(R.id.spinner_Show);
         spinner_sortBy = view.findViewById(R.id.spinner_Sort);
-        spinner_onshelvesFrom = view.findViewById(R.id.spinner_onshelvesText);
 
-        SetSpinnerHelper.SetSpinner(spinner_Show, R.array.showArgs);
-        SetSpinnerHelper.SetSpinner(spinner_sortBy, R.array.sortByArgs);
-        SetSpinnerHelper.SetSpinner(spinner_onshelvesFrom, R.array.onshelvesFromArgs);
+        itemAdapter.setSpinners(spinner_Show,spinner_sortBy);
 
         return view;
     }

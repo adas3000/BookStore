@@ -41,13 +41,11 @@ public class EditButtonEvent {
 
 
     @TargetApi(23)
-    public static void HandleEditButtonClicked(Context context, Book clickedBook,AfterEditing afterEditing,TextView setOn) {
+    public static void HandleEditButtonClicked(Context context, Book clickedBook,AfterEditing afterEditing,TextView setOn,RatingBar parentRatingBar) {
 
         Book clickedBook_ref = new Book.Builder(clickedBook.getTitle(),clickedBook.getAuthor(),clickedBook.getShort_description(),clickedBook.getImage_url())
                 .book_Is_Favorite(clickedBook.isBook_is_favorite()).book_Reading_State(clickedBook.getBook_reading_state()).user_Has_Book(clickedBook.isUser_has_book())
                 .date(clickedBook.getFinish_date()).Mark(clickedBook.getMark()).build();
-
-
 
 
 
@@ -132,6 +130,8 @@ public class EditButtonEvent {
             clickedBook.setBook_is_favorite(clickedBook_ref.isBook_is_favorite());
             clickedBook.setMark(clickedBook_ref.getMark());
             setOn.setText(afterEditing.setBookShelfs());
+            if(clickedBook.getBook_reading_state()!=1) parentRatingBar.setVisibility(View.INVISIBLE);
+            else parentRatingBar.setVisibility(View.VISIBLE);
             dialog.cancel();
         });
 
@@ -169,7 +169,7 @@ public class EditButtonEvent {
                 if (selected_item.equals(args[0])) {
 
                     if (!(textView_rate.getParent() == null)) return;
-
+                    ratingBar.setRating(0.f);
                     linearLayout.addView(textView_rate, 0);
                     linearLayout.addView(ratingBar, 1);
                     linearLayout.addView(textView_finishDate, linearLayout.getChildCount() - 1); // TODO idk why in two lines is -1 but it's working because of that ....
