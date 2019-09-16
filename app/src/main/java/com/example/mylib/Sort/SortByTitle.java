@@ -5,7 +5,7 @@ import com.example.mylib.Data.Book;
 import java.util.Collection;
 import java.util.Comparator;
 
-public class SortByDate implements Comparator<Book> {
+public class SortByTitle implements Comparator<Book> {
 
 
     @Override

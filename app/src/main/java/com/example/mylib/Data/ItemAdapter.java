@@ -44,7 +44,7 @@ public class ItemAdapter extends BaseAdapter implements Filterable {
         return bookArrayList_filteredData.get(i);
     }
 
-    public void setSpinners(Spinner spinner_Show,Spinner spinner_sortBy,Shelv_Type shelv_type){
+    public void setSpinners(Spinner spinner_Show,Spinner spinner_sortBy){
 
 
         ArrayAdapter<CharSequence> spinner_ShowAdapter = ArrayAdapter.createFromResource(AppData.getContext(), R.array.showArgs,
@@ -56,8 +56,6 @@ public class ItemAdapter extends BaseAdapter implements Filterable {
         spinner_sortAdapter.setDropDownViewResource(R.layout.spinner_item);
         spinner_Show.setAdapter(spinner_ShowAdapter);
         spinner_sortBy.setAdapter(spinner_sortAdapter);
-
-
 
 
         spinner_Show.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -84,6 +82,21 @@ public class ItemAdapter extends BaseAdapter implements Filterable {
         spinner_sortBy.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                switch(i){
+                    case 1:
+
+                        break;
+                    case 2:
+
+                        break;
+                    case 3:
+
+                        break;
+                    case 4:
+
+                        break;
+                }
 
 
 

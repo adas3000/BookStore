@@ -120,7 +120,7 @@ public class AllBooksFragment extends Fragment implements IOnBackPressed {
         spinner_Show = view.findViewById(R.id.spinner_Show);
         spinner_sortBy = view.findViewById(R.id.spinner_Sort);
 
-        itemAdapter.setSpinners(spinner_Show,spinner_sortBy,shelv_type);
+        itemAdapter.setSpinners(spinner_Show,spinner_sortBy);
 
         return view;
     }
