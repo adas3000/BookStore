@@ -176,6 +176,7 @@ public class EditButtonEvent {
                     linearLayout.addView(editText_date, linearLayout.getChildCount() - 1);
 
                 } else {
+                    clickedBook_ref.setMark(0.f);
                     linearLayout.removeView(textView_rate);
                     linearLayout.removeView(ratingBar);
                     linearLayout.removeView(textView_finishDate);

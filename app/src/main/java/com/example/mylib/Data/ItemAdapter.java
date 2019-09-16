@@ -40,6 +40,10 @@ public class ItemAdapter extends BaseAdapter implements Filterable {
         //handle spinners
     }
 
+    public Book getClickedBook(int i){
+        return bookArrayList_filteredData.get(i);
+    }
+
     public void setSpinners(Spinner spinner_Show,Spinner spinner_sortBy){
         ArrayAdapter<CharSequence> spinner_ShowAdapter = ArrayAdapter.createFromResource(AppData.getContext(), R.array.showArgs,
                 android.R.layout.simple_spinner_item);
@@ -114,7 +118,6 @@ public class ItemAdapter extends BaseAdapter implements Filterable {
     public View getView(int i, View view, ViewGroup viewGroup) {
 
         View v = layoutInflater.inflate(R.layout.my_listview_detail, null);
-
 
         ImageView imageView_Cover = v.findViewById(R.id.imageView_Cover);
 

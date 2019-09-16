@@ -13,8 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Spinner;
@@ -27,7 +25,6 @@ import androidx.fragment.app.Fragment;
 
 import com.example.mylib.BackPressed.IOnBackPressed;
 
-import com.example.mylib.Data.AppData;
 import com.example.mylib.Data.Book;
 import com.example.mylib.Data.ItemAdapter;
 import com.example.mylib.Data.Shelv_Type;
@@ -111,7 +108,8 @@ public class AllBooksFragment extends Fragment implements IOnBackPressed {
 
 
         listView.setOnItemClickListener((adapterView, view1, i, l) -> {
-            Book clicked_Book = bookArrayList.get(i - 1);
+           /// Book clicked_Book = bookArrayList.get(i - 1);
+            Book clicked_Book = itemAdapter.getClickedBook(i-1);
             SingleBookFragment nextFragment = new SingleBookFragment();
             nextFragment.setBook(clicked_Book);
             getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, nextFragment).addToBackStack(null).commit();
