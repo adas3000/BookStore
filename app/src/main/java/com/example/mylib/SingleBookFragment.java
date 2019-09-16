@@ -16,14 +16,17 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
 
 import com.example.mylib.BackPressed.IOnBackPressed;
+import com.example.mylib.Data.AppData;
 import com.example.mylib.Data.Book;
 import com.example.mylib.Data.BookEdit;
 import com.example.mylib.Helpers.AfterEditing;
 import com.example.mylib.Helpers.EditButtonEvent;
 import com.example.mylib.sql.SqlManager;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.squareup.picasso.Picasso;
 
 
@@ -71,6 +74,8 @@ public class SingleBookFragment extends Fragment implements IOnBackPressed, Book
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.singlebook_fragment, container, false);
+
+        AppData.getFab().hide();
 
         sqlManager = SqlManager.getInstance();
 

@@ -48,6 +48,7 @@ public class AddBookFragment extends Fragment implements View.OnClickListener, I
 
         LinearLayout view = (LinearLayout) inflater.inflate(R.layout.addbook_activity, container, false);
 
+        AppData.getFab().hide();
 
         setEditTexts(view);
 

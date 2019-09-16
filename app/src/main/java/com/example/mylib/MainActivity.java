@@ -10,6 +10,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 
 import android.view.MenuItem;
 
+import com.example.mylib.Data.AppData;
 import com.example.mylib.Data.Shelv_Type;
 import com.example.mylib.sql.SqlManager;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -54,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         FloatingActionButton fab = findViewById(R.id.floatingActionButton3);
+        AppData.setFab(fab);
 
         fab.setOnClickListener(view->{
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AddBookFragment()).addToBackStack(null).commit();

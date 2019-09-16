@@ -25,6 +25,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.mylib.BackPressed.IOnBackPressed;
 
+import com.example.mylib.Data.AppData;
 import com.example.mylib.Data.Book;
 import com.example.mylib.Data.ItemAdapter;
 import com.example.mylib.Data.Shelv_Type;
@@ -87,6 +88,7 @@ public class AllBooksFragment extends Fragment implements IOnBackPressed {
 
         View view = inflater.inflate(R.layout.allbooks_activity, container, false);
 
+        AppData.getFab().show();
 
         if(!((AppCompatActivity)getActivity()).getSupportActionBar().isShowing())
         ((AppCompatActivity)getActivity()).getSupportActionBar().show();
