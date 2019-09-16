@@ -114,6 +114,7 @@ public class EditButtonEvent {
         ratingBar.setForegroundGravity(Gravity.CENTER);
         ratingBar.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT));
         ratingBar.setNumStars(AppData.rateMaxNum);
+        ratingBar.setStepSize(1.0f);
         ratingBar.setRating(clickedBook_ref.getMark());
 
 
