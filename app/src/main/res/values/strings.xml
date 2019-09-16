@@ -49,6 +49,12 @@
 
     <string-array name="sortByArgs">
         <item>Sort By</item>
+        <item>Alphabetical title</item>
+        <item>Alphabetical author</item>
+    </string-array>
+
+    <string-array name="sortByOnlyFinished">
+        <item>Sort By</item>
         <item>Date read</item>
         <item>Alphabetical title</item>
         <item>Alphabetical author</item>

@@ -17,7 +17,7 @@ public class Book {
         private final String short_description;
         private final String img_url;
 
-        private Date date = null;
+        private Date date = new Date(0);
         private int book_reading_state = -1;
         private boolean user_has_book = false;
         private boolean book_is_favorite = false;

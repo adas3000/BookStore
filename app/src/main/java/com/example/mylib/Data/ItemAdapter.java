@@ -44,7 +44,9 @@ public class ItemAdapter extends BaseAdapter implements Filterable {
         return bookArrayList_filteredData.get(i);
     }
 
-    public void setSpinners(Spinner spinner_Show,Spinner spinner_sortBy){
+    public void setSpinners(Spinner spinner_Show,Spinner spinner_sortBy,Shelv_Type shelv_type){
+
+
         ArrayAdapter<CharSequence> spinner_ShowAdapter = ArrayAdapter.createFromResource(AppData.getContext(), R.array.showArgs,
                 android.R.layout.simple_spinner_item);
         ArrayAdapter<CharSequence> spinner_sortAdapter = ArrayAdapter.createFromResource(AppData.getContext(), R.array.sortByArgs,
