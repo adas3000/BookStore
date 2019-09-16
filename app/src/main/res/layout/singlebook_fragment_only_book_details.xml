@@ -6,6 +6,8 @@
     android:layout_height="match_parent">
 
 
+
+
     <TextView
         android:id="@+id/textView_book_sfobd"
         android:layout_width="match_parent"
@@ -22,11 +24,17 @@
         android:layout_height="350dp"
         tools:srcCompat="@tools:sample/avatars" />
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
     <TextView
         android:id="@+id/textView_description_sfobd"
         android:layout_width="match_parent"
         android:layout_height="215dp"
         android:hint="Description..."
         android:textSize="18dp" />
+
+    </ScrollView>
 
 </LinearLayout>

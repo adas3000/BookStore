@@ -49,7 +49,7 @@ public class ItemAdapter extends BaseAdapter implements Filterable {
 
         ArrayAdapter<CharSequence> spinner_ShowAdapter = ArrayAdapter.createFromResource(AppData.getContext(), R.array.showArgs,
                 android.R.layout.simple_spinner_item);
-        ArrayAdapter<CharSequence> spinner_sortAdapter = ArrayAdapter.createFromResource(AppData.getContext(), R.array.sortByArgs,
+        ArrayAdapter<CharSequence> spinner_sortAdapter = ArrayAdapter.createFromResource(AppData.getContext(), R.array.sortByOnlyFinished,
                 android.R.layout.simple_spinner_item);
 
         spinner_ShowAdapter.setDropDownViewResource(R.layout.spinner_item);
