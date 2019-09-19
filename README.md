@@ -5,7 +5,7 @@ Book rate can be between 1-5 and rate type is int.When user check the book is fi
  Also can add book to additional shelfs like "I have" and "Favorites"
 </p>
 
-![book1](https://user-images.githubusercontent.com/38322422/65241386-af994680-dae3-11e9-8911-e3c56e0d6c6e.png)
+![book1](https://user-images.githubusercontent.com/38322422/65242041-60ecac00-dae5-11e9-8f67-8e6f81f444d0.png)
 
 
 ![book2](https://user-images.githubusercontent.com/38322422/65241962-3a2e7580-dae5-11e9-9b68-c1fe667a5451.png)
