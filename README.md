@@ -8,6 +8,6 @@ Book rate can be between 1-5 and rate type is int.When user check the book is fi
 ![book1](https://user-images.githubusercontent.com/38322422/65241386-af994680-dae3-11e9-8911-e3c56e0d6c6e.png)
 
 
-![book2](https://user-images.githubusercontent.com/38322422/65241457-d6577d00-dae3-11e9-814b-638007e87348.png)
+![book2](https://user-images.githubusercontent.com/38322422/65241962-3a2e7580-dae5-11e9-9b68-c1fe667a5451.png)
+![book3](https://user-images.githubusercontent.com/38322422/65241967-3c90cf80-dae5-11e9-9f04-4e3c7b98219d.png)
 
-![book3](https://user-images.githubusercontent.com/38322422/65241459-d8214080-dae3-11e9-998d-dec127e83802.png)
